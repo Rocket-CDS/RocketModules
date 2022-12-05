@@ -1,0 +1,110 @@
+﻿<dotnetnuke type="Package" version="5.0">
+	<packages>
+		<package name="RocketContentMod" type="Module" version="1.0.0">
+			<friendlyName>RocketContentMod</friendlyName>
+			<description>RocketContentMod</description>
+			<iconFile />
+			<owner>
+				<name></name>
+				<organization>RocketContentMod</organization>
+				<url></url>
+				<email></email>
+			</owner>
+			<license>
+        Copyright (c) 2020, www.rocket-cds.org
+        All rights reserved.
+
+        THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+      </license>
+			<releaseNotes>
+			</releaseNotes>
+      <dependencies>
+        <dependency type="CoreVersion">09.00.00</dependency>
+      </dependencies>
+      <components>
+        
+        <component type="ResourceFile">
+			<resourceFiles>
+				<basePath>DesktopModules\RocketContentMod</basePath>
+				<resourceFile>
+					<name>Resource.zip</name>
+				</resourceFile>
+			</resourceFiles>
+		</component>
+
+        <component type="Assembly">
+			<assemblies>
+				<assembly>
+					<path>bin</path>
+					<name>RocketContentMod.dll</name>
+					<sourceFileName>RocketContentMod.dll</sourceFileName>
+				</assembly>
+			</assemblies>
+		</component>
+        
+
+		  <component type="Module">
+					<desktopModule>
+						<moduleName>RocketContentMod</moduleName>
+						<foldername>RocketContentMod</foldername>
+						<businessControllerClass>DNNrocketAPI.Components.DNNrocketModuleController,DNNrocketAPI</businessControllerClass>
+						<supportedFeatures>
+							<supportedFeature type="Portable" />
+              <supportedFeature type="Upgradeable" />
+            </supportedFeatures>
+						<moduleDefinitions>
+							<moduleDefinition>
+								<friendlyName>RocketContentMod</friendlyName>
+								<defaultCacheTime>0</defaultCacheTime>
+								<moduleControls>
+									<moduleControl>
+										<controlKey />
+										<controlSrc>DesktopModules/RocketContentMod/View.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle />
+										<controlType>View</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+										<viewOrder>0</viewOrder>
+									</moduleControl>
+									<moduleControl>
+										<controlKey>Edit</controlKey>
+										<controlSrc>DesktopModules/RocketContentMod/Edit.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle>Edit</controlTitle>
+										<controlType>Edit</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+									</moduleControl>
+									<moduleControl>
+										<controlKey>Settings</controlKey>
+										<controlSrc>DesktopModules/RocketContentMod/Settings.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle>Settings</controlTitle>
+										<controlType>Admin</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+									</moduleControl>
+									<moduleControl>
+										<controlKey>ThemeManager</controlKey>
+										<controlSrc>desktopmodules/RocketContentMod/ThemeManager.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle>ThemeManager</controlTitle>
+										<controlType>Admin</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+									</moduleControl>
+								</moduleControls>
+							</moduleDefinition>
+						</moduleDefinitions>
+					</desktopModule>
+				</component>
+
+			</components>
+		</package>	
+	</packages>
+</dotnetnuke>
