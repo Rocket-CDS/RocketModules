@@ -46,7 +46,7 @@
 		  <component type="Module">
 					<desktopModule>
 						<moduleName>RocketContentMod</moduleName>
-						<foldername>RocketContentMod</foldername>
+						<foldername>RocketModulesDNN/ContentMod</foldername>
 						<businessControllerClass>DNNrocketAPI.Components.DNNrocketModuleController,DNNrocketAPI</businessControllerClass>
 						<supportedFeatures>
 							<supportedFeature type="Portable" />
@@ -54,7 +54,7 @@
             </supportedFeatures>
 						<moduleDefinitions>
 							<moduleDefinition>
-								<friendlyName>RocketContentMod</friendlyName>
+								<friendlyName>ContentMod</friendlyName>
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>
 									<moduleControl>

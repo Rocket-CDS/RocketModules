@@ -1,4 +1,5 @@
 ﻿using DNNrocketAPI.Components;
+using DotNetNuke.Common;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Framework.JavaScriptLibraries;
@@ -39,10 +40,10 @@ namespace RocketContentMod
                 if (UserId > 0) _hasEditAccess = DotNetNuke.Security.Permissions.ModulePermissionController.CanEditModuleContent(this.ModuleConfiguration);
 
                 var strHeader1 = RocketContentUtils.DisplayView(PortalId, _moduleRef, "viewfirstheader.cshtml");
-                PageIncludes.IncludeTextInHeader(Page, strHeader1);
+                //PageIncludes.IncludeTextInHeader(Page, strHeader1);
 
                 var strHeader2 = RocketContentUtils.DisplayView(PortalId, _moduleRef, "viewlastheader.cshtml");
-                PageIncludes.IncludeTextInHeaderAt(Page, strHeader2, 0);
+                //PageIncludes.IncludeTextInHeaderAt(Page, strHeader2, 0);
 
             }
             catch (Exception ex)
@@ -52,10 +53,17 @@ namespace RocketContentMod
         }
         protected override void OnPreRender(EventArgs e)
         {
-            var strOut = RocketContentUtils.DisplayView(PortalId, _moduleRef, "view.cshtml");
-            if (strOut == "loadsettings") Response.Redirect(EditUrl("ModuleId",ModuleId.ToString(),"Module") + "#msSpecificSettings", true);
-            //inject jQuery from DNN, to stop conflict with header.
             JavaScript.RequestRegistration(CommonJs.jQuery);
+
+            var strOut = RocketContentUtils.DisplayView(PortalId, _moduleRef, "view.cshtml");
+            if (strOut == "loadsettings")
+            {
+                string[] parameters;
+                parameters = new string[1];
+                parameters[0] = string.Format("{0}={1}", "ModuleId", ModuleId.ToString());
+                var redirectUrl = Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", parameters).ToString() + "#msSpecificSettings";
+                Response.Redirect(redirectUrl, true);
+            }
 
             var lit = new Literal();
             lit.Text = strOut;
