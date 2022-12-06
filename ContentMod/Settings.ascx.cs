@@ -2,6 +2,7 @@
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.UI.UserControls;
 using Newtonsoft.Json;
+using RocketContent.Components;
 using RocketPortal.Components;
 using Simplisity;
 using System;
@@ -47,8 +48,10 @@ namespace RocketContentMod
         {
             try
             {
+                var strOut = RocketContentUtils.DisplaySystemView(PortalId, _moduleRef, "remotesettings.cshtml");
+
                 var lit = new Literal();
-                lit.Text = "Settings TEST";
+                lit.Text = strOut;
                 phData.Controls.Add(lit);
             }
             catch (Exception exc)

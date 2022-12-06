@@ -25,7 +25,6 @@ namespace RocketContentMod
     {
         private const string _systemkey = "rocketcontent";
         private bool _hasEditAccess;
-        private PortalLimpet _portalData;
         private string _moduleRef;
         protected override void OnInit(EventArgs e)
         {
@@ -35,29 +34,15 @@ namespace RocketContentMod
                 base.OnInit(e);
 
                 _moduleRef = PortalId + "_ModuleID:" + ModuleId;
-                _portalData = new PortalLimpet(PortalId);
-
-                var sRec = new SimplisityRecord();
-                sRec.SetXmlProperty("postdata/sfield/moduleref", _moduleRef);
-                sRec.SetXmlProperty("postdata/sfield/projectname", "AppTheme-W3-CSS");
-                sRec.SetXmlProperty("postdata/sfield/appthemeview", "HtmlContent");
-                sRec.SetXmlProperty("postdata/sfield/appthemeviewversion", "");
-                sRec.SetXmlProperty("postdata/sfield/modulename", ModuleId.ToString());
-                sRec.SetXmlProperty("postdata/sfield/securitykeyedit", _portalData.SecurityKeyEdit);
-
-                var jsonParam = JsonConvert.SerializeXmlNode(sRec.XMLDoc, Formatting.None, true);
-
-
-                //_commReturn = CommUtils.CallRedirect("remote_publicview", "rocketcontent", "", jsonParam);
 
                 _hasEditAccess = false;
                 if (UserId > 0) _hasEditAccess = DotNetNuke.Security.Permissions.ModulePermissionController.CanEditModuleContent(this.ModuleConfiguration);
 
-                //var strHeader1 = _commReturn.FirstHeader;
-                //PageIncludes.IncludeTextInHeader(Page, strHeader1);
+                var strHeader1 = RocketContentUtils.DisplayView(PortalId, _moduleRef, "viewfirstheader.cshtml");
+                PageIncludes.IncludeTextInHeader(Page, strHeader1);
 
-                //var strHeader = _commReturn.LastHeader;
-                //PageIncludes.IncludeTextInHeaderAt(Page, strHeader, 0);
+                var strHeader2 = RocketContentUtils.DisplayView(PortalId, _moduleRef, "viewlastheader.cshtml");
+                PageIncludes.IncludeTextInHeaderAt(Page, strHeader2, 0);
 
             }
             catch (Exception ex)
@@ -67,7 +52,7 @@ namespace RocketContentMod
         }
         protected override void OnPreRender(EventArgs e)
         {
-            var strOut = RocketContentUtils.DisplayView(PortalId, _moduleRef);
+            var strOut = RocketContentUtils.DisplayView(PortalId, _moduleRef, "view.cshtml");
             if (strOut == "loadsettings") Response.Redirect(EditUrl("ModuleId",ModuleId.ToString(),"Module") + "#msSpecificSettings", true);
             //inject jQuery from DNN, to stop conflict with header.
             JavaScript.RequestRegistration(CommonJs.jQuery);
