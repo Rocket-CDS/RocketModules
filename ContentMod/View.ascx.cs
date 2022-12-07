@@ -19,6 +19,8 @@ using System.Runtime.Serialization.Json;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Microsoft.Extensions.DependencyInjection;
+using DotNetNuke.Abstractions;
 
 namespace RocketContentMod
 {
@@ -27,6 +29,7 @@ namespace RocketContentMod
         private const string _systemkey = "rocketcontent";
         private bool _hasEditAccess;
         private string _moduleRef;
+
         protected override void OnInit(EventArgs e)
         {
             try
@@ -61,7 +64,11 @@ namespace RocketContentMod
                 string[] parameters;
                 parameters = new string[1];
                 parameters[0] = string.Format("{0}={1}", "ModuleId", ModuleId.ToString());
-                var redirectUrl = Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", parameters).ToString() + "#msSpecificSettings";
+                //var redirectUrl = Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", parameters).ToString() + "#msSpecificSettings";
+
+                var navigationManager = DependencyProvider?.GetRequiredService<INavigationManager>();
+                var redirectUrl = navigationManager.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", parameters);
+
                 Response.Redirect(redirectUrl, true);
             }
 
