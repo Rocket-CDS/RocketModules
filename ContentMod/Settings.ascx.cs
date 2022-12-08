@@ -48,7 +48,7 @@ namespace RocketContentMod
         {
             try
             {
-                var strOut = RocketContentUtils.DisplaySystemView(PortalId, _moduleRef, "remotesettings.cshtml");
+                var strOut = RocketContentUtils.DisplaySystemView(PortalId, _moduleRef, "ModuleSettingsLoad.cshtml");
 
                 var lit = new Literal();
                 lit.Text = strOut;
