@@ -44,7 +44,7 @@ namespace RocketContentMod
         {
             try
             {
-                var strOut = RocketContentUtils.DisplayAdminView(PortalId, _moduleRef, "");
+                var strOut = RocketContentUtils.DisplaySystemView(PortalId, _moduleRef, "AdminDetailLoad.cshtml");
                 var lit = new Literal();
                 lit.Text = strOut;
                 phData.Controls.Add(lit);

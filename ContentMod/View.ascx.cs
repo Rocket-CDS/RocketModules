@@ -61,15 +61,12 @@ namespace RocketContentMod
             var strOut = RocketContentUtils.DisplayView(PortalId, _moduleRef, "");
             if (strOut == "loadsettings")
             {
+                strOut = RocketContentUtils.DisplaySystemView(PortalId, _moduleRef, "ModuleSettingsMsg.cshtml");
                 string[] parameters;
                 parameters = new string[1];
                 parameters[0] = string.Format("{0}={1}", "ModuleId", ModuleId.ToString());
-                //var redirectUrl = Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", parameters).ToString() + "#msSpecificSettings";
-
-                var navigationManager = DependencyProvider?.GetRequiredService<INavigationManager>();
-                var redirectUrl = navigationManager.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", parameters);
-
-                Response.Redirect(redirectUrl, true);
+                var redirectUrl = Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", parameters).ToString() + "#msSpecificSettings";
+                strOut = strOut.Replace("{redirecturl}", redirectUrl);
             }
 
             var lit = new Literal();
