@@ -15,3 +15,5 @@
 <div id="simplisity_startpanel" class="simplisity_panel">
 <asp:PlaceHolder ID="phData" runat="server"></asp:PlaceHolder>
 </div>
+
+<div class=" simplisity_loader " style="display: none;"><div class="simplisity_loader_inner"></div></div>
