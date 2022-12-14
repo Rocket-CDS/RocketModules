@@ -1,4 +1,5 @@
-﻿using DotNetNuke.Entities.Modules;
+﻿using DNNrocketAPI.Components;
+using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Exceptions;
 using RocketContent.Components;
 using Simplisity;
@@ -15,12 +16,25 @@ namespace RocketContentMod
     public partial class Edit : ModuleSettingsBase
     {
         private string _moduleRef;
+        private SessionParams _sessionParam;
         protected override void OnInit(EventArgs e)
         {
             try
             {
                 base.OnInit(e);
                 _moduleRef = PortalId + "_ModuleID:" + ModuleId;
+
+                _sessionParam = new SessionParams(new SimplisityInfo());
+                _sessionParam.TabId = TabId;
+                _sessionParam.ModuleId = ModuleId;
+                _sessionParam.ModuleRef = _moduleRef;
+
+                var strHeader1 = RocketContentUtils.DisplayAdminView(PortalId, _moduleRef, "", _sessionParam, "adminfirstheader.cshtml");
+                PageIncludes.IncludeTextInHeader(Page, strHeader1);
+
+                var strHeader2 = RocketContentUtils.DisplayAdminView(PortalId, _moduleRef, "", _sessionParam, "adminlastheader.cshtml");
+                PageIncludes.IncludeTextInHeaderAt(Page, strHeader2, 0);
+
             }
             catch (Exception ex)
             {
@@ -45,11 +59,7 @@ namespace RocketContentMod
         {
             try
             {
-                var sessionParam = new SessionParams(new SimplisityInfo());
-                sessionParam.TabId = TabId;
-                sessionParam.ModuleId = ModuleId;
-                sessionParam.ModuleRef = _moduleRef;
-                var strOut = RocketContentUtils.DisplaySystemView(PortalId, _moduleRef, sessionParam, "AdminDetailLoad.cshtml");
+                var strOut = RocketContentUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "AdminDetailLoad.cshtml");
                 var lit = new Literal();
                 lit.Text = strOut;
                 phData.Controls.Add(lit);

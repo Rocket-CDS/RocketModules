@@ -49,10 +49,10 @@ namespace RocketContentMod
                 _sessionParam.ModuleRef = _moduleRef;
 
                 var strHeader1 = RocketContentUtils.DisplayView(PortalId, _moduleRef, "", _sessionParam, "viewfirstheader.cshtml");
-                //PageIncludes.IncludeTextInHeader(Page, strHeader1);
+                PageIncludes.IncludeTextInHeader(Page, strHeader1);
 
                 var strHeader2 = RocketContentUtils.DisplayView(PortalId, _moduleRef, "", _sessionParam, "viewlastheader.cshtml");
-                //PageIncludes.IncludeTextInHeaderAt(Page, strHeader2, 0);
+                PageIncludes.IncludeTextInHeaderAt(Page, strHeader2, 0);
 
             }
             catch (Exception ex)
