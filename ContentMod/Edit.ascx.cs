@@ -1,6 +1,7 @@
 ﻿using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Exceptions;
 using RocketContent.Components;
+using Simplisity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +45,11 @@ namespace RocketContentMod
         {
             try
             {
-                var strOut = RocketContentUtils.DisplaySystemView(PortalId, _moduleRef, "AdminDetailLoad.cshtml");
+                var sessionParam = new SessionParams(new SimplisityInfo());
+                sessionParam.TabId = TabId;
+                sessionParam.ModuleId = ModuleId;
+                sessionParam.ModuleRef = _moduleRef;
+                var strOut = RocketContentUtils.DisplaySystemView(PortalId, _moduleRef, sessionParam, "AdminDetailLoad.cshtml");
                 var lit = new Literal();
                 lit.Text = strOut;
                 phData.Controls.Add(lit);

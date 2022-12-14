@@ -48,7 +48,12 @@ namespace RocketContentMod
         {
             try
             {
-                var strOut = RocketContentUtils.DisplaySystemView(PortalId, _moduleRef, "ModuleSettingsLoad.cshtml");
+                var sessionParam = new SessionParams(new SimplisityInfo());
+                sessionParam.TabId = TabId;
+                sessionParam.ModuleId = ModuleId;
+                sessionParam.ModuleRef = _moduleRef;
+
+                var strOut = RocketContentUtils.DisplaySystemView(PortalId, _moduleRef, sessionParam, "ModuleSettingsLoad.cshtml");
 
                 var lit = new Literal();
                 lit.Text = strOut;

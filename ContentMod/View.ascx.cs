@@ -29,6 +29,7 @@ namespace RocketContentMod
         private const string _systemkey = "rocketcontent";
         private bool _hasEditAccess;
         private string _moduleRef;
+        private SessionParams _sessionParam;
 
         protected override void OnInit(EventArgs e)
         {
@@ -42,10 +43,15 @@ namespace RocketContentMod
                 _hasEditAccess = false;
                 if (UserId > 0) _hasEditAccess = DotNetNuke.Security.Permissions.ModulePermissionController.CanEditModuleContent(this.ModuleConfiguration);
 
-                var strHeader1 = RocketContentUtils.DisplayView(PortalId, _moduleRef, "viewfirstheader.cshtml");
+                _sessionParam = new SessionParams(new SimplisityInfo());
+                _sessionParam.TabId = TabId;
+                _sessionParam.ModuleId = ModuleId;
+                _sessionParam.ModuleRef = _moduleRef;
+
+                var strHeader1 = RocketContentUtils.DisplayView(PortalId, _moduleRef, "", _sessionParam, "viewfirstheader.cshtml");
                 //PageIncludes.IncludeTextInHeader(Page, strHeader1);
 
-                var strHeader2 = RocketContentUtils.DisplayView(PortalId, _moduleRef, "viewlastheader.cshtml");
+                var strHeader2 = RocketContentUtils.DisplayView(PortalId, _moduleRef, "", _sessionParam, "viewlastheader.cshtml");
                 //PageIncludes.IncludeTextInHeaderAt(Page, strHeader2, 0);
 
             }
@@ -58,10 +64,10 @@ namespace RocketContentMod
         {
             JavaScript.RequestRegistration(CommonJs.jQuery);
 
-            var strOut = RocketContentUtils.DisplayView(PortalId, _moduleRef, "");
+            var strOut = RocketContentUtils.DisplayView(PortalId, _moduleRef, "", _sessionParam);
             if (strOut == "loadsettings")
             {
-                strOut = RocketContentUtils.DisplaySystemView(PortalId, _moduleRef, "ModuleSettingsMsg.cshtml");
+                strOut = RocketContentUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "ModuleSettingsMsg.cshtml");
                 string[] parameters;
                 parameters = new string[1];
                 parameters[0] = string.Format("{0}={1}", "ModuleId", ModuleId.ToString());
