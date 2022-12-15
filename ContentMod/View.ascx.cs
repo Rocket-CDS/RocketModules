@@ -47,6 +47,7 @@ namespace RocketContentMod
                 _sessionParam.TabId = TabId;
                 _sessionParam.ModuleId = ModuleId;
                 _sessionParam.ModuleRef = _moduleRef;
+                _sessionParam.CultureCode = DNNrocketUtils.GetCurrentCulture();
 
                 var strHeader1 = RocketContentUtils.DisplayView(PortalId, _moduleRef, "", _sessionParam, "viewfirstheader.cshtml");
                 PageIncludes.IncludeTextInHeader(Page, strHeader1);
