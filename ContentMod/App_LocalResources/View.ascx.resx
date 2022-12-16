@@ -117,7 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="apptheme.Text" xml:space="preserve">
+    <value>Edit AppTheme</value>
+  </data>
+  <data name="clearcache.Text" xml:space="preserve">
+    <value>Clear Cache</value>
+  </data>
   <data name="EditModule.Text" xml:space="preserve">
     <value>Edit</value>
+  </data>
+  <data name="recycleapppool.Text" xml:space="preserve">
+    <value>Recycle AppPool</value>
   </data>
 </root>

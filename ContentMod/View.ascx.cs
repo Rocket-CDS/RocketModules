@@ -39,6 +39,8 @@ namespace RocketContentMod
                 base.OnInit(e);
 
                 _moduleRef = PortalId + "_ModuleID:" + ModuleId;
+                
+                if (Request.QueryString.AllKeys.Contains("refresh")) CacheUtils.ClearAllCache(_moduleRef);
 
                 _hasEditAccess = false;
                 if (UserId > 0) _hasEditAccess = DotNetNuke.Security.Permissions.ModulePermissionController.CanEditModuleContent(this.ModuleConfiguration);
@@ -74,12 +76,11 @@ namespace RocketContentMod
                 parameters[0] = string.Format("{0}={1}", "ModuleId", ModuleId.ToString());
                 var redirectUrl = Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", parameters).ToString() + "#msSpecificSettings";
                 strOut = strOut.Replace("{redirecturl}", redirectUrl);
+                CacheUtils.ClearAllCache(_moduleRef);
             }
-
             var lit = new Literal();
             lit.Text = strOut;
             phData.Controls.Add(lit);
-
         }
         #region Optional Interfaces
 
@@ -92,6 +93,11 @@ namespace RocketContentMod
             {
                 var actions = new ModuleActionCollection();
                 actions.Add(GetNextActionID(), Localization.GetString("EditModule", this.LocalResourceFile), "", "", "", EditUrl(), false, SecurityAccessLevel.Edit, true, false);
+
+                actions.Add(GetNextActionID(), Localization.GetString("apptheme", this.LocalResourceFile), "", "", "register.gif", EditUrl("AppTheme"), false, SecurityAccessLevel.Admin, true, false);
+                actions.Add(GetNextActionID(), Localization.GetString("clearcache", this.LocalResourceFile), "", "", "action_refresh.gif", "?refresh=1", false, SecurityAccessLevel.Host, true, false);
+                actions.Add(GetNextActionID(), Localization.GetString("recycleapppool", this.LocalResourceFile), "", "", "restore.gif", EditUrl("cmd", "recycleapppool", "Reload"), false, SecurityAccessLevel.Host, true, false);
+
                 return actions;
             }
         }
