@@ -22,7 +22,7 @@ namespace RocketContentMod
             try
             {
                 base.OnInit(e);
-                _moduleRef = PortalId + "_ModuleID:" + ModuleId;
+                _moduleRef = PortalId + "_ModuleID_" + ModuleId;
 
                 _sessionParam = new SessionParams(new SimplisityInfo());
                 _sessionParam.TabId = TabId;

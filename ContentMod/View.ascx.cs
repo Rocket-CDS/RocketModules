@@ -21,6 +21,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.Extensions.DependencyInjection;
 using DotNetNuke.Abstractions;
+using RazorEngine.Text;
 
 namespace RocketContentMod
 {
@@ -38,9 +39,11 @@ namespace RocketContentMod
 
                 base.OnInit(e);
 
-                _moduleRef = PortalId + "_ModuleID:" + ModuleId;
-                
-                if (Request.QueryString.AllKeys.Contains("refresh")) CacheUtils.ClearAllCache(_moduleRef);
+                _moduleRef = PortalId + "_ModuleID_" + ModuleId;
+
+                var cmd = RequestParam(Context, "cmd");
+                if (cmd == "clearcache" && UserUtils.IsAdministrator()) CacheUtils.ClearAllCache(_moduleRef);
+                if (cmd == "recycleapppool" && UserUtils.IsSuperUser()) DNNrocketUtils.RecycleApplicationPool();
 
                 _hasEditAccess = false;
                 if (UserId > 0) _hasEditAccess = DotNetNuke.Security.Permissions.ModulePermissionController.CanEditModuleContent(this.ModuleConfiguration);
@@ -78,10 +81,40 @@ namespace RocketContentMod
                 strOut = strOut.Replace("{redirecturl}", redirectUrl);
                 CacheUtils.ClearAllCache(_moduleRef);
             }
+            if (_hasEditAccess)
+            {
+                PageIncludes.IncludeCssFile(Page, "w3css", "/DesktopModules/DNNrocket/css/w3.css");
+                PageIncludes.IncludeCssFile(Page, "w3csstheme", "/DesktopModules/DNNrocket/API/Themes/config-w3/1.0/css/rocketcds-theme.css");
+                PageIncludes.IncludeCssFile(Page, "fontsroboto", "https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium");
+                PageIncludes.IncludeCssFile(Page, "materialicons", "https://fonts.googleapis.com/icon?family=Material+Icons");
+                _sessionParam.Set("editurl", EditUrl());
+                strOut = RocketContentUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "ViewEditButtons.cshtml") + strOut;
+            }
             var lit = new Literal();
             lit.Text = strOut;
             phData.Controls.Add(lit);
         }
+
+        private static string RequestParam(HttpContext context, string paramName)
+        {
+            string result = null;
+
+            if (context.Request.Form.Count != 0)
+            {
+                result = Convert.ToString(context.Request.Form[paramName]);
+            }
+
+            if (result == null)
+            {
+                if (context.Request.QueryString.Count != 0)
+                {
+                    result = Convert.ToString(context.Request.QueryString[paramName]);
+                }
+            }
+
+            return (result == null) ? String.Empty : result.Trim();
+        }
+
         #region Optional Interfaces
 
         /// <summary>
@@ -94,9 +127,9 @@ namespace RocketContentMod
                 var actions = new ModuleActionCollection();
                 actions.Add(GetNextActionID(), Localization.GetString("EditModule", this.LocalResourceFile), "", "", "", EditUrl(), false, SecurityAccessLevel.Edit, true, false);
 
-                actions.Add(GetNextActionID(), Localization.GetString("apptheme", this.LocalResourceFile), "", "", "register.gif", EditUrl("AppTheme"), false, SecurityAccessLevel.Admin, true, false);
-                actions.Add(GetNextActionID(), Localization.GetString("clearcache", this.LocalResourceFile), "", "", "action_refresh.gif", "?refresh=1", false, SecurityAccessLevel.Host, true, false);
-                actions.Add(GetNextActionID(), Localization.GetString("recycleapppool", this.LocalResourceFile), "", "", "restore.gif", EditUrl("cmd", "recycleapppool", "Reload"), false, SecurityAccessLevel.Host, true, false);
+                actions.Add(GetNextActionID(), Localization.GetString("apptheme", this.LocalResourceFile), "", "", "register.gif", "/SysAdmin/rocketapptheme?moduleref=1_ModuleID_747&appthemefolder=rocketcontent.HtmlContent&appversionfolder=1.0&project=AppThemes-W3-CSS&rtn=" + HttpUtility.UrlEncode(Context.Request.Url.ToString()), false, SecurityAccessLevel.Admin, true, false);
+                actions.Add(GetNextActionID(), Localization.GetString("clearcache", this.LocalResourceFile), "", "", "action_refresh.gif", "?cmd=clearcache", false, SecurityAccessLevel.Admin, true, false);
+                actions.Add(GetNextActionID(), Localization.GetString("recycleapppool", this.LocalResourceFile), "", "", "restore.gif", "?cmd=recycleapppool", false, SecurityAccessLevel.Host, true, false);
 
                 return actions;
             }

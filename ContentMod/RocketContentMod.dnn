@@ -88,16 +88,6 @@
 										<helpUrl />
 										<supportsPopUps>False</supportsPopUps>
 									</moduleControl>
-									<moduleControl>
-										<controlKey>ThemeManager</controlKey>
-										<controlSrc>DesktopModules/RocketModulesDNN/ContentMod/ThemeManager.ascx</controlSrc>
-										<supportsPartialRendering>False</supportsPartialRendering>
-										<controlTitle>ThemeManager</controlTitle>
-										<controlType>Admin</controlType>
-										<iconFile />
-										<helpUrl />
-										<supportsPopUps>False</supportsPopUps>
-									</moduleControl>
 								</moduleControls>
 							</moduleDefinition>
 						</moduleDefinitions>

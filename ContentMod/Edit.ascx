@@ -8,7 +8,11 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 <style>
+    #editBarContainer { display: none !important }
+    .personalBarContainer { display: none !important }
+    #Body { margin-left: 0px !important }
     .material-icons { vertical-align: middle; }
+    iframe.editBar-iframe{ display: none !important; }
 </style>
 
 <div id="simplisity_startpanel" class="simplisity_panel">

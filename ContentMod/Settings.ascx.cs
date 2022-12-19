@@ -23,7 +23,7 @@ namespace RocketContentMod
             try
             {
                 base.OnInit(e);
-                _moduleRef = PortalId + "_ModuleID:" + ModuleId;
+                _moduleRef = PortalId + "_ModuleID_" + ModuleId;
             }
             catch (Exception ex)
             {
