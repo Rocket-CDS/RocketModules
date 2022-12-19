@@ -88,6 +88,7 @@ namespace RocketContentMod
                 PageIncludes.IncludeCssFile(Page, "fontsroboto", "https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium");
                 PageIncludes.IncludeCssFile(Page, "materialicons", "https://fonts.googleapis.com/icon?family=Material+Icons");
                 _sessionParam.Set("editurl", EditUrl());
+                _sessionParam.Set("returnurl", @GeneralUtils.EnCode(HttpUtility.UrlEncode(Context.Request.Url.ToString())));
                 strOut = RocketContentUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "ViewEditButtons.cshtml") + strOut;
             }
             var lit = new Literal();
@@ -124,10 +125,15 @@ namespace RocketContentMod
         {
             get
             {
+                var moduleSettings = new ModuleContentLimpet(PortalId, _moduleRef, ModuleId, TabId);
+
                 var actions = new ModuleActionCollection();
                 actions.Add(GetNextActionID(), Localization.GetString("EditModule", this.LocalResourceFile), "", "", "", EditUrl(), false, SecurityAccessLevel.Edit, true, false);
-
-                actions.Add(GetNextActionID(), Localization.GetString("apptheme", this.LocalResourceFile), "", "", "register.gif", "/SysAdmin/rocketapptheme?moduleref=1_ModuleID_747&appthemefolder=rocketcontent.HtmlContent&appversionfolder=1.0&project=AppThemes-W3-CSS&rtn=" + HttpUtility.UrlEncode(Context.Request.Url.ToString()), false, SecurityAccessLevel.Admin, true, false);
+                actions.Add(GetNextActionID(), Localization.GetString("apptheme", this.LocalResourceFile), "", "", "register.gif", "/SysAdmin/rocketapptheme?moduleref=" + moduleSettings.ModuleRef + "&appthemefolder=" + moduleSettings.AppThemeAdminFolder + "&appversionfolder=" + moduleSettings.AppThemeAdminVersion + "&project=" + moduleSettings.ProjectName + "&rtn=" + @GeneralUtils.EnCode(HttpUtility.UrlEncode(Context.Request.Url.ToString())), false, SecurityAccessLevel.Admin, true, false);
+                if (moduleSettings.AppThemeAdminFolder != moduleSettings.AppThemeViewFolder || moduleSettings.AppThemeAdminVersion != moduleSettings.AppThemeViewVersion)
+                {
+                    actions.Add(GetNextActionID(), Localization.GetString("appthemeview", this.LocalResourceFile), "", "", "register.gif", "/SysAdmin/rocketapptheme?moduleref=" + moduleSettings.ModuleRef + "&appthemefolder=" + moduleSettings.AppThemeViewFolder + "&appversionfolder=" + moduleSettings.AppThemeViewVersion + "&project=" + moduleSettings.ProjectName + "&rtn=" + @GeneralUtils.EnCode(HttpUtility.UrlEncode(Context.Request.Url.ToString())), false, SecurityAccessLevel.Admin, true, false);
+                }
                 actions.Add(GetNextActionID(), Localization.GetString("clearcache", this.LocalResourceFile), "", "", "action_refresh.gif", "?cmd=clearcache", false, SecurityAccessLevel.Admin, true, false);
                 actions.Add(GetNextActionID(), Localization.GetString("recycleapppool", this.LocalResourceFile), "", "", "restore.gif", "?cmd=recycleapppool", false, SecurityAccessLevel.Host, true, false);
 

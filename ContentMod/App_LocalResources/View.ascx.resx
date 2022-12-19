@@ -120,6 +120,9 @@
   <data name="apptheme.Text" xml:space="preserve">
     <value>Edit AppTheme</value>
   </data>
+  <data name="appthemeview.Text" xml:space="preserve">
+    <value>Edit View AppTheme</value>
+  </data>
   <data name="clearcache.Text" xml:space="preserve">
     <value>Clear Cache</value>
   </data>
