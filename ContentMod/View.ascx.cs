@@ -44,7 +44,12 @@ namespace RocketContentMod
 
                 var cmd = RequestParam(Context, "cmd");
                 if (cmd == "clearcache" && UserUtils.IsAdministrator()) CacheUtils.ClearAllCache(_moduleRef);
-                if (cmd == "recycleapppool" && UserUtils.IsSuperUser()) DNNrocketUtils.RecycleApplicationPool();
+                if (cmd == "recycleapppool" && UserUtils.IsSuperUser())
+                {
+                    DNNrocketUtils.RecycleApplicationPool();
+                    Response.Redirect(Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID).ToString(), false);
+                    Context.ApplicationInstance.CompleteRequest(); // do this to stop iis throwing error
+                }
 
                 _hasEditAccess = false;
                 if (UserId > 0) _hasEditAccess = DotNetNuke.Security.Permissions.ModulePermissionController.CanEditModuleContent(this.ModuleConfiguration);
