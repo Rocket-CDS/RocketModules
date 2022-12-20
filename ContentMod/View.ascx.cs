@@ -22,6 +22,7 @@ using System.Web.UI.WebControls;
 using Microsoft.Extensions.DependencyInjection;
 using DotNetNuke.Abstractions;
 using RazorEngine.Text;
+using System.Security.Cryptography;
 
 namespace RocketContentMod
 {
@@ -142,8 +143,8 @@ namespace RocketContentMod
                 {
                     actions.Add(GetNextActionID(), Localization.GetString("appthemeview", this.LocalResourceFile), "", "", "register.gif", "/SysAdmin/rocketapptheme?moduleref=" + moduleSettings.ModuleRef + "&appthemefolder=" + moduleSettings.AppThemeViewFolder + "&appversionfolder=" + moduleSettings.AppThemeViewVersion + "&project=" + moduleSettings.ProjectName + "&rtn=" + @GeneralUtils.EnCode(HttpUtility.UrlEncode(Context.Request.Url.ToString())), false, SecurityAccessLevel.Admin, true, false);
                 }
-                actions.Add(GetNextActionID(), Localization.GetString("clearcache", this.LocalResourceFile), "", "", "action_refresh.gif", "?cmd=clearcache", false, SecurityAccessLevel.Admin, true, false);
-                actions.Add(GetNextActionID(), Localization.GetString("recycleapppool", this.LocalResourceFile), "", "", "restore.gif", "?cmd=recycleapppool", false, SecurityAccessLevel.Host, true, false);
+                actions.Add(GetNextActionID(), Localization.GetString("clearcache", this.LocalResourceFile), "", "", "action_refresh.gif", Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID).ToString() + "?cmd=clearcache", false, SecurityAccessLevel.Admin, true, false);
+                actions.Add(GetNextActionID(), Localization.GetString("recycleapppool", this.LocalResourceFile), "", "", "restore.gif", Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID).ToString() + "?cmd=recycleapppool", false, SecurityAccessLevel.Host, true, false);
 
                 return actions;
             }
