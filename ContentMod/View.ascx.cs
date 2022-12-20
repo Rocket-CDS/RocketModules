@@ -130,7 +130,15 @@ namespace RocketContentMod
                 var actions = new ModuleActionCollection();
                 actions.Add(GetNextActionID(), Localization.GetString("EditModule", this.LocalResourceFile), "", "", "", EditUrl(), false, SecurityAccessLevel.Edit, true, false);
                 actions.Add(GetNextActionID(), Localization.GetString("apptheme", this.LocalResourceFile), "", "", "register.gif", "/SysAdmin/rocketapptheme?moduleref=" + moduleSettings.ModuleRef + "&appthemefolder=" + moduleSettings.AppThemeAdminFolder + "&appversionfolder=" + moduleSettings.AppThemeAdminVersion + "&project=" + moduleSettings.ProjectName + "&rtn=" + @GeneralUtils.EnCode(HttpUtility.UrlEncode(Context.Request.Url.ToString())), false, SecurityAccessLevel.Admin, true, false);
-                if (moduleSettings.AppThemeAdminFolder != moduleSettings.AppThemeViewFolder || moduleSettings.AppThemeAdminVersion != moduleSettings.AppThemeViewVersion)
+                var editappthemeview = false;
+                if (moduleSettings.HasAppThemeView)
+                {
+                    if (moduleSettings.AppThemeAdminFolder != moduleSettings.AppThemeViewFolder || moduleSettings.AppThemeAdminVersion != moduleSettings.AppThemeViewVersion)
+                    {
+                        editappthemeview = true;
+                    }
+                }
+                if (editappthemeview)
                 {
                     actions.Add(GetNextActionID(), Localization.GetString("appthemeview", this.LocalResourceFile), "", "", "register.gif", "/SysAdmin/rocketapptheme?moduleref=" + moduleSettings.ModuleRef + "&appthemefolder=" + moduleSettings.AppThemeViewFolder + "&appversionfolder=" + moduleSettings.AppThemeViewVersion + "&project=" + moduleSettings.ProjectName + "&rtn=" + @GeneralUtils.EnCode(HttpUtility.UrlEncode(Context.Request.Url.ToString())), false, SecurityAccessLevel.Admin, true, false);
                 }

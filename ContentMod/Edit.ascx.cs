@@ -2,6 +2,7 @@
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Exceptions;
 using RocketContent.Components;
+using RocketPortal.Components;
 using Simplisity;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,14 @@ namespace RocketContentMod
             try
             {
                 base.OnInit(e);
+
+                string skinSrcAdmin = "?SkinSrc=%2fDesktopModules%2fDNNrocket%2fRocketPortal%2fSkins%2frocketportal%2frocketedit";
+                if (DNNrocketUtils.RequestParam(Context, "SkinSrc") == "")
+                {
+                    Response.Redirect(EditUrl() + skinSrcAdmin, false);
+                    Context.ApplicationInstance.CompleteRequest(); // do this to stop iis throwing error
+                }
+
                 _moduleRef = PortalId + "_ModuleID_" + ModuleId;
 
                 _sessionParam = new SessionParams(new SimplisityInfo());
