@@ -134,8 +134,8 @@ namespace RocketContentMod
                 var moduleSettings = new ModuleContentLimpet(PortalId, _moduleRef, ModuleId, TabId);
 
                 var actions = new ModuleActionCollection();
-                actions.Add(GetNextActionID(), Localization.GetString("EditModule", this.LocalResourceFile), "", "", "", EditUrl(), false, SecurityAccessLevel.Edit, true, false);
-                actions.Add(GetNextActionID(), Localization.GetString("apptheme", this.LocalResourceFile), "", "", "register.gif", "/SysAdmin/rocketapptheme?moduleref=" + moduleSettings.ModuleRef + "&appthemefolder=" + moduleSettings.AppThemeAdminFolder + "&appversionfolder=" + moduleSettings.AppThemeAdminVersion + "&project=" + moduleSettings.ProjectName + "&rtn=" + @GeneralUtils.EnCode(HttpUtility.UrlEncode(Context.Request.Url.ToString())), false, SecurityAccessLevel.Admin, true, false);
+                actions.Add(GetNextActionID(), Localization.GetString("EditModule", this.LocalResourceFile), "", "", "edit.svg", EditUrl(), false, SecurityAccessLevel.Edit, true, false);
+                actions.Add(GetNextActionID(), Localization.GetString("apptheme", this.LocalResourceFile), "", "", "edit-app.svg", "/SysAdmin/rocketapptheme?moduleref=" + moduleSettings.ModuleRef + "&appthemefolder=" + moduleSettings.AppThemeAdminFolder + "&appversionfolder=" + moduleSettings.AppThemeAdminVersion + "&project=" + moduleSettings.ProjectName + "&rtn=" + @GeneralUtils.EnCode(HttpUtility.UrlEncode(Context.Request.Url.ToString())), false, SecurityAccessLevel.Admin, true, false);
                 var editappthemeview = false;
                 if (moduleSettings.HasAppThemeView)
                 {
@@ -146,10 +146,10 @@ namespace RocketContentMod
                 }
                 if (editappthemeview)
                 {
-                    actions.Add(GetNextActionID(), Localization.GetString("appthemeview", this.LocalResourceFile), "", "", "register.gif", "/SysAdmin/rocketapptheme?moduleref=" + moduleSettings.ModuleRef + "&appthemefolder=" + moduleSettings.AppThemeViewFolder + "&appversionfolder=" + moduleSettings.AppThemeViewVersion + "&project=" + moduleSettings.ProjectName + "&rtn=" + @GeneralUtils.EnCode(HttpUtility.UrlEncode(Context.Request.Url.ToString())), false, SecurityAccessLevel.Admin, true, false);
+                    actions.Add(GetNextActionID(), Localization.GetString("appthemeview", this.LocalResourceFile), "", "", "edit-app.svg", "/SysAdmin/rocketapptheme?moduleref=" + moduleSettings.ModuleRef + "&appthemefolder=" + moduleSettings.AppThemeViewFolder + "&appversionfolder=" + moduleSettings.AppThemeViewVersion + "&project=" + moduleSettings.ProjectName + "&rtn=" + @GeneralUtils.EnCode(HttpUtility.UrlEncode(Context.Request.Url.ToString())), false, SecurityAccessLevel.Admin, true, false);
                 }
-                actions.Add(GetNextActionID(), Localization.GetString("clearcache", this.LocalResourceFile), "", "", "action_refresh.gif", Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID).ToString() + "?cmd=clearcache", false, SecurityAccessLevel.Admin, true, false);
-                actions.Add(GetNextActionID(), Localization.GetString("recycleapppool", this.LocalResourceFile), "", "", "restore.gif", Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID).ToString() + "?cmd=recycleapppool", false, SecurityAccessLevel.Host, true, false);
+                actions.Add(GetNextActionID(), Localization.GetString("clearcache", this.LocalResourceFile), "", "", "clear-cache.svg", Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID).ToString() + "?cmd=clearcache", false, SecurityAccessLevel.Admin, true, false);
+                actions.Add(GetNextActionID(), Localization.GetString("recycleapppool", this.LocalResourceFile), "", "", "restart-app.svg", Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID).ToString() + "?cmd=recycleapppool", false, SecurityAccessLevel.Host, true, false);
 
                 return actions;
             }
