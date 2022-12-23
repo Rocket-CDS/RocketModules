@@ -76,7 +76,7 @@ namespace RocketContentMod
         {
             JavaScript.RequestRegistration(CommonJs.jQuery);
 
-            var strOut = RocketContentUtils.DisplayView(PortalId, _moduleRef, "", _sessionParam);
+            var strOut = RocketContentUtils.DisplayView(PortalId, _moduleRef, "", _sessionParam, "view.cshtml", "loadsettings");
             if (strOut == "loadsettings")
             {
                 strOut = RocketContentUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "ModuleSettingsMsg.cshtml");
