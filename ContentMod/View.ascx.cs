@@ -42,7 +42,7 @@ namespace RocketContentMod
 
                 _moduleRef = PortalId + "_ModuleID_" + ModuleId;
 
-                var cmd = RequestParam(Context, "cmd");
+                var cmd = RequestParam(Context, "action");
                 if (cmd == "clearcache" && UserUtils.IsAdministrator()) CacheUtils.ClearAllCache(_moduleRef);
                 if (cmd == "recycleapppool" && UserUtils.IsSuperUser())
                 {
@@ -148,8 +148,8 @@ namespace RocketContentMod
                 {
                     actions.Add(GetNextActionID(), Localization.GetString("appthemeview", this.LocalResourceFile), "", "", "edit_app.svg", "/SysAdmin/rocketapptheme?moduleref=" + moduleSettings.ModuleRef + "&appthemefolder=" + moduleSettings.AppThemeViewFolder + "&appversionfolder=" + moduleSettings.AppThemeViewVersion + "&project=" + moduleSettings.ProjectName + "&rtn=" + @GeneralUtils.EnCode(HttpUtility.UrlEncode(Context.Request.Url.ToString())), false, SecurityAccessLevel.Admin, true, false);
                 }
-                actions.Add(GetNextActionID(), Localization.GetString("clearcache", this.LocalResourceFile), "", "", "clear_cache.svg", Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID).ToString() + "?cmd=clearcache", false, SecurityAccessLevel.Admin, true, false);
-                actions.Add(GetNextActionID(), Localization.GetString("recycleapppool", this.LocalResourceFile), "", "", "restart_app.svg", Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID).ToString() + "?cmd=recycleapppool", false, SecurityAccessLevel.Host, true, false);
+                actions.Add(GetNextActionID(), Localization.GetString("clearcache", this.LocalResourceFile), "", "", "clear_cache.svg", Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID).ToString() + "?action=clearcache", false, SecurityAccessLevel.Admin, true, false);
+                actions.Add(GetNextActionID(), Localization.GetString("recycleapppool", this.LocalResourceFile), "", "", "restart_app.svg", Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID).ToString() + "?action=recycleapppool", false, SecurityAccessLevel.Host, true, false);
 
                 return actions;
             }
