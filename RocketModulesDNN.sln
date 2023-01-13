@@ -11,9 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppThemes", "..\DNNrocket\R
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RocketPortal", "..\DNNrocket\RocketPortal\RocketPortal.csproj", "{722BC7CD-3D90-41B4-87B1-B8750DEAF4C9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RocketContent", "..\DNNRocketModules\RocketContent\RocketContent.csproj", "{98F09FF3-79C3-4359-8568-4D159BC87724}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RocketContentMod", "ContentMod\RocketContentMod.csproj", "{7C4AEBB2-2E36-476E-95FE-F52854C40A02}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RocketContentAPI", "..\DNNrocketModules\RocketContentAPI\RocketContentAPI.csproj", "{F21C301C-6F9B-44D2-8FDD-EF8D4C95065C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,13 +52,6 @@ Global
 		{722BC7CD-3D90-41B4-87B1-B8750DEAF4C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{722BC7CD-3D90-41B4-87B1-B8750DEAF4C9}.Razor|Any CPU.ActiveCfg = Release|Any CPU
 		{722BC7CD-3D90-41B4-87B1-B8750DEAF4C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{98F09FF3-79C3-4359-8568-4D159BC87724}.Comp All|Any CPU.ActiveCfg = Debug|Any CPU
-		{98F09FF3-79C3-4359-8568-4D159BC87724}.Comp All|Any CPU.Build.0 = Debug|Any CPU
-		{98F09FF3-79C3-4359-8568-4D159BC87724}.CompAll|Any CPU.ActiveCfg = Debug|Any CPU
-		{98F09FF3-79C3-4359-8568-4D159BC87724}.CompAll|Any CPU.Build.0 = Debug|Any CPU
-		{98F09FF3-79C3-4359-8568-4D159BC87724}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{98F09FF3-79C3-4359-8568-4D159BC87724}.Razor|Any CPU.ActiveCfg = Release|Any CPU
-		{98F09FF3-79C3-4359-8568-4D159BC87724}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C4AEBB2-2E36-476E-95FE-F52854C40A02}.Comp All|Any CPU.ActiveCfg = Debug|Any CPU
 		{7C4AEBB2-2E36-476E-95FE-F52854C40A02}.Comp All|Any CPU.Build.0 = Debug|Any CPU
 		{7C4AEBB2-2E36-476E-95FE-F52854C40A02}.CompAll|Any CPU.ActiveCfg = Debug|Any CPU
@@ -68,6 +61,16 @@ Global
 		{7C4AEBB2-2E36-476E-95FE-F52854C40A02}.Razor|Any CPU.ActiveCfg = Release|Any CPU
 		{7C4AEBB2-2E36-476E-95FE-F52854C40A02}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C4AEBB2-2E36-476E-95FE-F52854C40A02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F21C301C-6F9B-44D2-8FDD-EF8D4C95065C}.Comp All|Any CPU.ActiveCfg = Debug|Any CPU
+		{F21C301C-6F9B-44D2-8FDD-EF8D4C95065C}.Comp All|Any CPU.Build.0 = Debug|Any CPU
+		{F21C301C-6F9B-44D2-8FDD-EF8D4C95065C}.CompAll|Any CPU.ActiveCfg = Debug|Any CPU
+		{F21C301C-6F9B-44D2-8FDD-EF8D4C95065C}.CompAll|Any CPU.Build.0 = Debug|Any CPU
+		{F21C301C-6F9B-44D2-8FDD-EF8D4C95065C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F21C301C-6F9B-44D2-8FDD-EF8D4C95065C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F21C301C-6F9B-44D2-8FDD-EF8D4C95065C}.Razor|Any CPU.ActiveCfg = Release|Any CPU
+		{F21C301C-6F9B-44D2-8FDD-EF8D4C95065C}.Razor|Any CPU.Build.0 = Release|Any CPU
+		{F21C301C-6F9B-44D2-8FDD-EF8D4C95065C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F21C301C-6F9B-44D2-8FDD-EF8D4C95065C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

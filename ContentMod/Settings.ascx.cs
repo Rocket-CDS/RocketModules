@@ -2,7 +2,7 @@
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.UI.UserControls;
 using Newtonsoft.Json;
-using RocketContent.Components;
+using RocketContentAPI.Components;
 using RocketPortal.Components;
 using Simplisity;
 using System;
@@ -53,7 +53,7 @@ namespace RocketContentMod
                 sessionParam.ModuleId = ModuleId;
                 sessionParam.ModuleRef = _moduleRef;
 
-                var strOut = RocketContentUtils.DisplaySystemView(PortalId, _moduleRef, sessionParam, "ModuleSettingsLoad.cshtml");
+                var strOut = RocketContentAPIUtils.DisplaySystemView(PortalId, _moduleRef, sessionParam, "ModuleSettingsLoad.cshtml");
 
                 var lit = new Literal();
                 lit.Text = strOut;

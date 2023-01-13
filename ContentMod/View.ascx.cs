@@ -7,7 +7,7 @@ using DotNetNuke.Security;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Localization;
 using Newtonsoft.Json;
-using RocketContent.Components;
+using RocketContentAPI.Components;
 using RocketPortal.Components;
 using Simplisity;
 using System;
@@ -60,10 +60,10 @@ namespace RocketContentMod
                 _sessionParam.ModuleRef = _moduleRef;
                 _sessionParam.CultureCode = DNNrocketUtils.GetCurrentCulture();
 
-                var strHeader1 = RocketContentUtils.DisplayView(PortalId, _moduleRef, "", _sessionParam, "viewfirstheader.cshtml");
+                var strHeader1 = RocketContentAPIUtils.DisplayView(PortalId, _moduleRef, "", _sessionParam, "viewfirstheader.cshtml");
                 PageIncludes.IncludeTextInHeader(Page, strHeader1);
 
-                var strHeader2 = RocketContentUtils.DisplayView(PortalId, _moduleRef, "", _sessionParam, "viewlastheader.cshtml");
+                var strHeader2 = RocketContentAPIUtils.DisplayView(PortalId, _moduleRef, "", _sessionParam, "viewlastheader.cshtml");
                 PageIncludes.IncludeTextInHeaderAt(Page, strHeader2, 0);
 
             }
@@ -76,10 +76,10 @@ namespace RocketContentMod
         {
             JavaScript.RequestRegistration(CommonJs.jQuery);
 
-            var strOut = RocketContentUtils.DisplayView(PortalId, _moduleRef, "", _sessionParam, "view.cshtml", "loadsettings");
+            var strOut = RocketContentAPIUtils.DisplayView(PortalId, _moduleRef, "", _sessionParam, "view.cshtml", "loadsettings");
             if (strOut == "loadsettings")
             {
-                strOut = RocketContentUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "ModuleSettingsMsg.cshtml");
+                strOut = RocketContentAPIUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "ModuleSettingsMsg.cshtml");
                 string[] parameters;
                 parameters = new string[1];
                 parameters[0] = string.Format("{0}={1}", "ModuleId", ModuleId.ToString());
@@ -100,7 +100,7 @@ namespace RocketContentMod
                 var settingsurl = Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", parameters).ToString() + "#msSpecificSettings";
                 _sessionParam.Set("settingsurl", settingsurl);                
                 _sessionParam.Set("returnurl", @GeneralUtils.EnCode(HttpUtility.UrlEncode(Context.Request.Url.ToString())));
-                strOut = RocketContentUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "ViewEditButtons.cshtml") + strOut;
+                strOut = RocketContentAPIUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "ViewEditButtons.cshtml") + strOut;
             }
             var lit = new Literal();
             lit.Text = strOut;

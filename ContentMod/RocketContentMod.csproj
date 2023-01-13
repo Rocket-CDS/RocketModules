@@ -72,9 +72,9 @@
     <Content Include="View.ascx" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\DNNRocketModules\RocketContent\RocketContent.csproj">
-      <Project>{98f09ff3-79c3-4359-8568-4d159bc87724}</Project>
-      <Name>RocketContent</Name>
+    <ProjectReference Include="..\..\DNNrocketModules\RocketContentAPI\RocketContentAPI.csproj">
+      <Project>{f21c301c-6f9b-44d2-8fdd-ef8d4c95065c}</Project>
+      <Name>RocketContentAPI</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\DNNrocket\API\DNNrocketAPI.csproj">
       <Project>{2200f6c3-7d4b-4cdf-908f-dca37adfb121}</Project>
