@@ -94,6 +94,11 @@ namespace RocketContentMod
                 PageIncludes.IncludeCssFile(Page, "fontsroboto", "https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium");
                 PageIncludes.IncludeCssFile(Page, "materialicons", "https://fonts.googleapis.com/icon?family=Material+Icons");
                 _sessionParam.Set("editurl", EditUrl());
+                string[] parameters;
+                parameters = new string[1];
+                parameters[0] = string.Format("{0}={1}", "ModuleId", ModuleId.ToString());
+                var settingsurl = Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", parameters).ToString() + "#msSpecificSettings";
+                _sessionParam.Set("settingsurl", settingsurl);                
                 _sessionParam.Set("returnurl", @GeneralUtils.EnCode(HttpUtility.UrlEncode(Context.Request.Url.ToString())));
                 strOut = RocketContentUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "ViewEditButtons.cshtml") + strOut;
             }
