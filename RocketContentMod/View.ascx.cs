@@ -28,7 +28,7 @@ namespace RocketContentMod
 {
     public partial class View : PortalModuleBase, IActionable
     {
-        private const string _systemkey = "rocketcontent";
+        private const string _systemkey = "rocketcontentapi";
         private bool _hasEditAccess;
         private string _moduleRef;
         private SessionParams _sessionParam;
@@ -60,10 +60,10 @@ namespace RocketContentMod
                 _sessionParam.ModuleRef = _moduleRef;
                 _sessionParam.CultureCode = DNNrocketUtils.GetCurrentCulture();
 
-                var strHeader1 = RocketContentAPIUtils.DisplayView(PortalId, _moduleRef, "", _sessionParam, "viewfirstheader.cshtml");
+                var strHeader1 = RocketContentAPIUtils.DisplayView(PortalId, _systemkey, _moduleRef, "", _sessionParam, "viewfirstheader.cshtml");
                 PageIncludes.IncludeTextInHeader(Page, strHeader1);
 
-                var strHeader2 = RocketContentAPIUtils.DisplayView(PortalId, _moduleRef, "", _sessionParam, "viewlastheader.cshtml");
+                var strHeader2 = RocketContentAPIUtils.DisplayView(PortalId, _systemkey, _moduleRef, "", _sessionParam, "viewlastheader.cshtml");
                 PageIncludes.IncludeTextInHeaderAt(Page, strHeader2, 0);
 
             }
@@ -76,7 +76,7 @@ namespace RocketContentMod
         {
             JavaScript.RequestRegistration(CommonJs.jQuery);
 
-            var strOut = RocketContentAPIUtils.DisplayView(PortalId, _moduleRef, "", _sessionParam, "view.cshtml", "loadsettings");
+            var strOut = RocketContentAPIUtils.DisplayView(PortalId, _systemkey, _moduleRef, "", _sessionParam, "view.cshtml", "loadsettings");
             if (strOut == "loadsettings")
             {
                 strOut = RocketContentAPIUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "ModuleSettingsMsg.cshtml");
@@ -136,7 +136,7 @@ namespace RocketContentMod
         {
             get
             {
-                var moduleSettings = new ModuleContentLimpet(PortalId, _moduleRef, ModuleId, TabId);
+                var moduleSettings = new ModuleContentLimpet(PortalId, _systemkey, _moduleRef, ModuleId, TabId);
 
                 var actions = new ModuleActionCollection();
                 actions.Add(GetNextActionID(), Localization.GetString("EditModule", this.LocalResourceFile), "", "", "edit.svg", EditUrl(), false, SecurityAccessLevel.Edit, true, false);
