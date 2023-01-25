@@ -66,6 +66,15 @@ namespace RocketContentMod
                 var strHeader2 = RocketContentAPIUtils.DisplayView(PortalId, _systemkey, _moduleRef, "", _sessionParam, "viewlastheader.cshtml");
                 PageIncludes.IncludeTextInHeaderAt(Page, strHeader2, 0);
 
+                foreach (var dep in RocketContentAPIUtils.DependanciesList(PortalId, _moduleRef, _sessionParam))
+                {
+                    var ctrltype = dep.GetXmlProperty("genxml/ctrltype");
+                    var id = dep.GetXmlProperty("genxml/id");
+                    var urlstr = dep.GetXmlProperty("genxml/url");
+                    if (ctrltype == "css") PageIncludes.IncludeCssFile(Page, id, urlstr);
+                    if (ctrltype == "js") PageIncludes.IncludeJsFile(Page, id, urlstr);
+                }
+
             }
             catch (Exception ex)
             {
