@@ -1,8 +1,8 @@
 ﻿<dotnetnuke type="Package" version="5.0">
 	<packages>
-		<package name="RocketContentMod" type="Module" version="1.0.0">
-			<friendlyName>RocketContent</friendlyName>
-			<description>Rocket Content Module</description>
+		<package name="RocketDirectoryMod" type="Module" version="1.0.0">
+			<friendlyName>RocketDirectory</friendlyName>
+			<description>Rocket Directory Module</description>
 			<iconFile />
 			<owner>
 				<name></name>
@@ -25,7 +25,7 @@
         
         <component type="ResourceFile">
 			<resourceFiles>
-				<basePath>DesktopModules\RocketModules\RocketContentMod</basePath>
+				<basePath>DesktopModules\RocketModules\RocketDirectoryMod</basePath>
 				<resourceFile>
 					<name>Resource.zip</name>
 				</resourceFile>
@@ -36,8 +36,8 @@
 			<assemblies>
 				<assembly>
 					<path>bin</path>
-					<name>RocketContentMod.dll</name>
-					<sourceFileName>RocketContentMod.dll</sourceFileName>
+					<name>RocketDirectoryMod.dll</name>
+					<sourceFileName>RocketDirectoryMod.dll</sourceFileName>
 				</assembly>
 			</assemblies>
 		</component>
@@ -45,8 +45,8 @@
 
 		  <component type="Module">
 					<desktopModule>
-						<moduleName>RocketContentMod</moduleName>
-						<foldername>RocketModules/RocketContentMod</foldername>
+						<moduleName>RocketDirectoryMod</moduleName>
+						<foldername>RocketModules/RocketDirectoryMod</foldername>
 						<businessControllerClass>DNNrocketAPI.Components.DNNrocketModuleController,DNNrocketAPI</businessControllerClass>
 						<supportedFeatures>
 							<supportedFeature type="Portable" />
@@ -54,12 +54,12 @@
             </supportedFeatures>
 						<moduleDefinitions>
 							<moduleDefinition>
-								<friendlyName>RocketContent</friendlyName>
+								<friendlyName>RocketDirectory</friendlyName>
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>
 									<moduleControl>
 										<controlKey />
-										<controlSrc>DesktopModules/RocketModules/RocketContentMod/View.ascx</controlSrc>
+										<controlSrc>DesktopModules/RocketModules/RocketDirectoryMod/View.ascx</controlSrc>
 										<supportsPartialRendering>False</supportsPartialRendering>
 										<controlTitle />
 										<controlType>View</controlType>
@@ -70,7 +70,7 @@
 									</moduleControl>
 									<moduleControl>
 										<controlKey>Edit</controlKey>
-										<controlSrc>DesktopModules/RocketModules/RocketContentMod/Edit.ascx</controlSrc>
+										<controlSrc>DesktopModules/RocketModules/RocketDirectoryMod/Edit.ascx</controlSrc>
 										<supportsPartialRendering>False</supportsPartialRendering>
 										<controlTitle>Edit</controlTitle>
 										<controlType>Edit</controlType>
@@ -80,7 +80,7 @@
 									</moduleControl>
 									<moduleControl>
 										<controlKey>Settings</controlKey>
-										<controlSrc>DesktopModules/RocketModules/RocketContentMod/Settings.ascx</controlSrc>
+										<controlSrc>DesktopModules/RocketModules/RocketDirectoryMod/Settings.ascx</controlSrc>
 										<supportsPartialRendering>False</supportsPartialRendering>
 										<controlTitle>Settings</controlTitle>
 										<controlType>Admin</controlType>
