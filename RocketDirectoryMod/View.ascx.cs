@@ -44,7 +44,7 @@ namespace RocketDirectoryMod
                 _moduleRef = PortalId + "_ModuleID_" + ModuleId;
 
                 var cmd = RequestParam(Context, "action");
-                if (cmd == "clearcache" && UserUtils.IsAdministrator()) CacheUtils.ClearAllCache(_moduleRef);
+                if (cmd == "clearcache" && UserUtils.IsAdministrator()) CacheUtils.ClearAllCache("portal" + PortalId);
                 if (cmd == "recycleapppool" && UserUtils.IsSuperUser())
                 {
                     DNNrocketUtils.RecycleApplicationPool();
@@ -92,11 +92,11 @@ namespace RocketDirectoryMod
                 _sessionParam.UrlReferrer = context.Request.UrlReferrer.ToString();
 
 
-                //var strHeader1 = RocketDirectoryAPIUtils.DisplayView(PortalId, _systemkey, _moduleRef, _sessionParam, "viewfirstheader.cshtml");
-                //PageIncludes.IncludeTextInHeader(Page, strHeader1);
+                var strHeader1 = RocketDirectoryAPIUtils.ViewHeader(PortalId, _systemkey, _moduleRef, _sessionParam, "viewfirstheader.cshtml");
+                PageIncludes.IncludeTextInHeader(Page, strHeader1);
 
-                //var strHeader2 = RocketDirectoryAPIUtils.DisplayView(PortalId, _systemkey, _moduleRef, _sessionParam, "viewlastheader.cshtml");
-                //PageIncludes.IncludeTextInHeaderAt(Page, strHeader2, 0);
+                var strHeader2 = RocketDirectoryAPIUtils.ViewHeader(PortalId, _systemkey, _moduleRef, _sessionParam, "viewlastheader.cshtml");
+                PageIncludes.IncludeTextInHeaderAt(Page, strHeader2, 0);
 
                 foreach (var dep in RocketDirectoryAPIUtils.DependanciesList(PortalId, _systemkey, _moduleRef, _sessionParam))
                 {
