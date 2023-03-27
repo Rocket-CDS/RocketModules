@@ -89,8 +89,6 @@ namespace RocketDirectoryMod
                 _sessionParam.CultureCode = DNNrocketUtils.GetCurrentCulture();
                 _sessionParam.Url = context.Request.Url.ToString();
                 _sessionParam.UrlFriendly = DNNrocketUtils.NavigateURL(TabId, urlparams);
-                _sessionParam.UrlReferrer = context.Request.UrlReferrer.ToString();
-
 
                 var strHeader1 = RocketDirectoryAPIUtils.ViewHeader(PortalId, _systemkey, _moduleRef, _sessionParam, "viewfirstheader.cshtml");
                 PageIncludes.IncludeTextInHeader(Page, strHeader1);
