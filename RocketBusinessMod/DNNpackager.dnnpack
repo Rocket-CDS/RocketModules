@@ -1,0 +1,28 @@
+<root>
+	<version>1.0.0</version>
+  <websitedestrelpath>\DesktopModules\RocketModules\RocketBusinessMod</websitedestrelpath>
+  <websitedestbinrelpath>\bin</websitedestbinrelpath>
+  <!-- Include only files that match the regular expression -->
+	<regexpr>(\.cshtml|\.html|\.resx|\.dnn|\.png|\.jpg|\.gif|\.css|.\svg|\.js|\.xml|\.txt|\.md|\.aspx|\.ascx|\.ashx|\.woff|\.woff2|\.ttf)$</regexpr>
+  <directory include='false'>
+	<!-- All paths should be from the source root (project root) -->
+	<value>\.git</value>
+	<value>\.vs</value>
+	<value>\bin</value>
+    <value>\obj</value>
+    <value>\Components</value>
+    <value>\Installation\Dist</value>
+    <value>\Documentation</value>
+	<value>\packages</value>
+    <value>\Render</value>
+    <value>\SQL</value>
+    <value>\_external</value>
+  </directory>
+  <file include='false'>
+  </file>
+  <file include='true'>
+    <value>RocketBusinessMod.dnn</value>
+  </file>
+  <assembly>
+  </assembly>
+</root>

@@ -1,0 +1,84 @@
+﻿<dotnetnuke type="Package" version="5.0">
+
+	<packages>
+		<package name="RocketBusinessMod" type="Module" version="1.0.0">
+			<friendlyName>RocketBusiness</friendlyName>
+			<description>Rocket Business Module</description>
+			<iconFile />
+			<owner>
+				<name></name>
+				<organization>RocketCDS</organization>
+				<url></url>
+				<email></email>
+			</owner>
+			<license>
+				Copyright (c) 2020, www.rocket-cds.org
+				All rights reserved.
+
+				THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+			</license>
+			<releaseNotes>
+			</releaseNotes>
+			<dependencies>
+				<dependency type="CoreVersion">09.00.00</dependency>
+				<dependency type="managedPackage" version="1.0.0">RocketDirectoryMod</dependency>
+			</dependencies>
+			<components>
+
+				<component type="Module">
+					<desktopModule>
+						<moduleName>RocketBusinessMod</moduleName>
+						<foldername>RocketModules/RocketDirectoryMod</foldername>
+						<businessControllerClass>DNNrocketAPI.Components.DNNrocketModuleController,DNNrocketAPI</businessControllerClass>
+						<supportedFeatures>
+							<supportedFeature type="Portable" />
+							<supportedFeature type="Upgradeable" />
+						</supportedFeatures>
+						<moduleDefinitions>
+							<moduleDefinition>
+								<friendlyName>RocketBusiness</friendlyName>
+								<defaultCacheTime>0</defaultCacheTime>
+								<moduleControls>
+									<moduleControl>
+										<controlKey />
+										<controlSrc>DesktopModules/RocketModules/RocketDirectoryMod/View.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle />
+										<controlType>View</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+										<viewOrder>0</viewOrder>
+									</moduleControl>
+									<moduleControl>
+										<controlKey>Edit</controlKey>
+										<controlSrc>DesktopModules/RocketModules/RocketDirectoryMod/Edit.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle>Edit</controlTitle>
+										<controlType>Edit</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+									</moduleControl>
+									<moduleControl>
+										<controlKey>Settings</controlKey>
+										<controlSrc>DesktopModules/RocketModules/RocketDirectoryMod/Settings.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle>Settings</controlTitle>
+										<controlType>Admin</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+									</moduleControl>
+								</moduleControls>
+							</moduleDefinition>
+						</moduleDefinitions>
+					</desktopModule>
+				</component>
+
+			</components>
+		</package>
+	</packages>
+
+</dotnetnuke>
+
