@@ -30,6 +30,7 @@ namespace RocketDirectoryMod
     public partial class View : PortalModuleBase, IActionable
     {
         private const string _systemkey = "rocketdirectoryapi";
+        //private const string _systemkey = "rocketbusinessapi";
         private bool _hasEditAccess;
         private string _moduleRef;
         private SessionParams _sessionParam;
@@ -122,7 +123,11 @@ namespace RocketDirectoryMod
                 PageIncludes.IncludeCssFile(Page, "w3csstheme", "/DesktopModules/DNNrocket/API/Themes/config-w3/1.0/css/rocketcds-theme.css");
                 PageIncludes.IncludeCssFile(Page, "fontsroboto", "https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium");
                 PageIncludes.IncludeCssFile(Page, "materialicons", "https://fonts.googleapis.com/icon?family=Material+Icons");
-                _sessionParam.Set("editurl", EditUrl());
+                var articleid = RequestParam(Context, "articleid");
+                if (articleid == null || articleid == "")
+                    _sessionParam.Set("editurl", EditUrl());
+                else
+                    _sessionParam.Set("editurl", EditUrl("articleid", articleid));
                 string[] parameters;
                 parameters = new string[1];
                 parameters[0] = string.Format("{0}={1}", "ModuleId", ModuleId.ToString());
