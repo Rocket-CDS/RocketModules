@@ -3,7 +3,7 @@
 		<package name="RocketDirectoryMod" type="Module" version="1.0.0">
 			<friendlyName>RocketDirectory</friendlyName>
 			<description>Rocket Directory Module</description>
-			<iconFile />
+			<iconFile>~/DesktopModules/RocketModules/RocketDirectoryMod/icon.png</iconFile>
 			<owner>
 				<name></name>
 				<organization>RocketCDS</organization>

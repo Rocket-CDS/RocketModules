@@ -17,13 +17,17 @@ namespace RocketDirectoryMod
 {
     public partial class Settings : ModuleSettingsBase
     {
-        private const string _systemkey = "rocketdirectoryapi";
+        private string _systemkey;
         private string _moduleRef;
         protected override void OnInit(EventArgs e)
         {
             try
             {
                 base.OnInit(e);
+                // Get systemkey from module name. (remove mod, add "API")
+                var moduleName = base.ModuleConfiguration.DesktopModule.ModuleName;
+                _systemkey = moduleName.ToLower().Substring(0, moduleName.Length - 3) + "api";
+
                 _moduleRef = PortalId + "_ModuleID_" + ModuleId;
             }
             catch (Exception ex)

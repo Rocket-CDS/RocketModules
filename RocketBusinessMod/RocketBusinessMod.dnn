@@ -3,8 +3,9 @@
 	<packages>
 		<package name="RocketBusinessMod" type="Module" version="1.0.0">
 			<friendlyName>RocketBusiness</friendlyName>
+			<DefinitionName>rocketbusinessapi</DefinitionName>
 			<description>Rocket Business Module</description>
-			<iconFile />
+			<iconFile>~/DesktopModules/RocketModules/RocketBusinessMod/icon.png</iconFile>
 			<owner>
 				<name></name>
 				<organization>RocketCDS</organization>

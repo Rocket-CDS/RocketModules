@@ -29,7 +29,7 @@ namespace RocketDirectoryMod
 {
     public partial class View : PortalModuleBase, IActionable
     {
-        private const string _systemkey = "rocketdirectoryapi";
+        private string _systemkey;
         //private const string _systemkey = "rocketbusinessapi";
         private bool _hasEditAccess;
         private string _moduleRef;
@@ -41,6 +41,10 @@ namespace RocketDirectoryMod
             {
 
                 base.OnInit(e);
+
+                // Get systemkey from module name. (remove mod, add "API")
+                var moduleName = base.ModuleConfiguration.DesktopModule.ModuleName;
+                _systemkey = moduleName.ToLower().Substring(0, moduleName.Length - 3) + "api";
 
                 _moduleRef = PortalId + "_ModuleID_" + ModuleId;
 
@@ -170,7 +174,7 @@ namespace RocketDirectoryMod
         {
             get
             {
-                var moduleSettings = new ModuleContentLimpet(PortalId, _systemkey, _moduleRef, ModuleId, TabId);
+                var moduleSettings = new ModuleContentLimpet(PortalId, _moduleRef, ModuleId, TabId);
 
                 var actions = new ModuleActionCollection();
                 actions.Add(GetNextActionID(), Localization.GetString("EditModule", this.LocalResourceFile), "", "", "edit.svg", EditUrl(), false, SecurityAccessLevel.Edit, true, false);

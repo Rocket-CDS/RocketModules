@@ -3,7 +3,7 @@
 		<package name="RocketContentMod" type="Module" version="1.0.0">
 			<friendlyName>RocketContent</friendlyName>
 			<description>Rocket Content Module</description>
-			<iconFile />
+			<iconFile>~/DesktopModules/RocketModules/RocketContentMod/icon.png</iconFile>
 			<owner>
 				<name></name>
 				<organization>RocketCDS</organization>

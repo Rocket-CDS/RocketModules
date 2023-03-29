@@ -22,6 +22,7 @@
   </file>
   <file include='true'>
     <value>RocketBusinessMod.dnn</value>
+	<value>icon.png</value>
   </file>
   <assembly>
   </assembly>

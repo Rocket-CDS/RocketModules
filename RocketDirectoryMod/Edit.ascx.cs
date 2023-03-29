@@ -16,7 +16,7 @@ namespace RocketDirectoryMod
 {
     public partial class Edit : ModuleSettingsBase
     {
-        private const string _systemkey = "rocketdirectoryapi";
+        private string _systemkey;
         private string _moduleRef;
         private string _articleId;
         private SessionParams _sessionParam;
@@ -25,6 +25,9 @@ namespace RocketDirectoryMod
             try
             {
                 base.OnInit(e);
+                // Get systemkey from module name. (remove mod, add "API")
+                var moduleName = base.ModuleConfiguration.DesktopModule.ModuleName;
+                _systemkey = moduleName.ToLower().Substring(0, moduleName.Length - 3) + "api";
                 _articleId = DNNrocketUtils.RequestParam(Context, "articleid");
                 string skinSrcAdmin = "?SkinSrc=%2fDesktopModules%2fDNNrocket%2fRocketPortal%2fSkins%2frocketportal%2frocketedit";
                 if (DNNrocketUtils.RequestParam(Context, "SkinSrc") == "")
