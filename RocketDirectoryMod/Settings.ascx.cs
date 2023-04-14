@@ -1,7 +1,9 @@
-﻿using DotNetNuke.Entities.Modules;
+﻿using DNNrocketAPI.Components;
+using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.UI.UserControls;
 using Newtonsoft.Json;
+using RazorEngine;
 using RocketDirectoryAPI.Components;
 using RocketPortal.Components;
 using Simplisity;
@@ -57,6 +59,9 @@ namespace RocketDirectoryMod
                 sessionParam.TabId = TabId;
                 sessionParam.ModuleId = ModuleId;
                 sessionParam.ModuleRef = _moduleRef;
+                var lang = "";
+                if (HttpContext.Current.Request.QueryString["language"] != null) lang = HttpContext.Current.Request.QueryString["language"];
+                DNNrocketUtils.SetCookieValue("simplisity_language", lang);
 
                 var strOut = RocketDirectoryAPIUtils.DisplaySystemView(PortalId, _systemkey, _moduleRef, sessionParam, "ModuleSettingsLoad.cshtml");
 
