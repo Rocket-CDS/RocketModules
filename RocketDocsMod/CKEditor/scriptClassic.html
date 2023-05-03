@@ -1,0 +1,57 @@
+
+<script>
+
+	ClassicEditor
+		.create(document.querySelector('#{textareaid}'), {
+				toolbar: {
+					items: [
+						'heading',
+						'|',
+						'bold',
+						'italic',
+						'link',
+						'bulletedList',
+						'numberedList',
+						'todoList',
+						'|',
+						'outdent',
+						'indent',
+						'alignment',
+						'fontSize',
+						'|',
+						'codeBlock',
+						'htmlEmbed',
+						'code',
+						'imageUpload',
+						'undo',
+						'redo'
+					]
+				},
+			language: '{language}',
+			image: {
+				toolbar: [
+					'imageTextAlternative',
+					'imageStyle:full',
+					'imageStyle:side'
+				]
+			},
+			language: '{language}',
+			licenseKey: '',
+		})
+		.then(editor{textareaid} => {
+			window.editor{textareaid} = editor{textareaid};
+
+		})
+		.catch(error => {
+			console.error('Oops, something went wrong!');
+			console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
+			console.warn('Build id: vwi2ciweh9em-142866l7j12v');
+			console.error(error);
+		});
+	
+		// This function needs to be called on the s-before cmd class, so the data is saved on the API post.
+		function {textareaid}Save() {
+			editor{textareaid}.updateSourceElement();
+		}
+				
+</script>
