@@ -27,9 +27,14 @@
                 <span class="w3-padding w3-button w3-green a-savebutton simplisity_click" s-before="summarykbaseSave" s-reload="true" s-cmd="remote_editsave" s-post="#a-articledata" s-fields='{"moduleref":"@Model.GetSetting("moduleid")"}' s-index="0">
                     @ButtonText(ButtonTypes.save)
                 </span>
-                <span class="w3-padding w3-button" onclick="$('#summarykbase').toggle(); $('.ck-editor').toggle();">
+                <span class="w3-padding w3-button" onclick="$('#summarykbase').toggle(); $('.ck-editor').toggle(); $('#markdowntext').toggle(); $('#htmltext').hide();">
                     <span class="material-icons editicon">
                         chrome_reader_mode
+                    </span>
+                </span>
+                <span class="w3-padding w3-button" onclick="$('#summarykbase').hide(); $('.ck-editor').hide(); $('#markdowntext').hide(); $('#htmltext').show();">
+                    <span class="material-icons editicon">
+                        html
                     </span>
                 </span>
 
@@ -45,8 +50,10 @@
                         @TextBox(info, "genxml/lang/genxml/textbox/subjectkbase", " class='w3-input w3-border' autocomplete='off' ", "", false, 0)
                     </div>
                     <div class="w3-row w3-padding-small">
+                        <div id="markdowntext" style="display:none;" class="w3-large">Markdown Text (Tables are not supported)</div>
                         @TextArea(info, "genxml/lang/genxml/textbox/summarykbase", "  style='width:100%;height: 100vh;display:none;' ")
                         @TextArea(info, "genxml/lang/genxml/textbox/summarykbasehtml", "  style='display:none;' ")
+                        @TextArea(info, "genxml/lang/genxml/textbox/htmltext", "  style='width:100%;height: 100vh;display:none;' ")
                     </div>
                 </div>
             </div>
@@ -80,6 +87,7 @@
                                     'bulletedList',
                                     'numberedList',
                                     'todoList',
+                                    'insertTable',
                                     '|',
                                     'outdent',
                                     'indent',
@@ -141,7 +149,14 @@
         {
             <h1>@info.GetXmlProperty("genxml/lang/genxml/textbox/subjectkbase")</h1>
             <div class="w3-row w3-padding-small">
-                @HtmlOf(info.GetXmlProperty("genxml/lang/genxml/textbox/summarykbasehtml"))
+                @if (info.GetXmlProperty("genxml/lang/genxml/textbox/summarykbasehtml") != "")
+                {
+                    @HtmlOf(info.GetXmlProperty("genxml/lang/genxml/textbox/summarykbasehtml"))
+                }
+                @if (info.GetXmlProperty("genxml/lang/genxml/textbox/htmltext") != "")
+                {
+                    @HtmlOf(info.GetXmlProperty("genxml/lang/genxml/textbox/htmltext"))
+                }
             </div>
         }
 
