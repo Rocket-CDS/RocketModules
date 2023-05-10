@@ -127,11 +127,11 @@ namespace RocketEcommerceMod
                 PageIncludes.IncludeCssFile(Page, "w3csstheme", "/DesktopModules/DNNrocket/API/Themes/config-w3/1.0/css/rocketcds-theme.css");
                 PageIncludes.IncludeCssFile(Page, "fontsroboto", "https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium");
                 PageIncludes.IncludeCssFile(Page, "materialicons", "https://fonts.googleapis.com/icon?family=Material+Icons");
-                var articleid = RequestParam(Context, "articleid");
+                var articleid = RequestParam(Context, "pid");
                 if (articleid == null || articleid == "")
                     _sessionParam.Set("editurl", EditUrl());
                 else
-                    _sessionParam.Set("editurl", EditUrl("articleid", articleid));
+                    _sessionParam.Set("editurl", EditUrl("pid", articleid));
                 string[] parameters;
                 parameters = new string[1];
                 parameters[0] = string.Format("{0}={1}", "ModuleId", ModuleId.ToString());

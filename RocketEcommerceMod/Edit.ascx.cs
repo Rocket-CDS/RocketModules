@@ -28,14 +28,14 @@ namespace RocketEcommerceMod
                 // Get systemkey from module name. (remove mod, add "API")
                 var moduleName = base.ModuleConfiguration.DesktopModule.ModuleName;
                 _systemkey = moduleName.ToLower().Substring(0, moduleName.Length - 3) + "api";
-                _articleId = DNNrocketUtils.RequestParam(Context, "articleid");
+                _articleId = DNNrocketUtils.RequestParam(Context, "pid");
                 string skinSrcAdmin = "?SkinSrc=%2fDesktopModules%2fDNNrocket%2fRocketPortal%2fSkins%2frocketportal%2frocketedit";
                 if (DNNrocketUtils.RequestParam(Context, "SkinSrc") == "")
                 {
                     if (_articleId == null || _articleId == "")
                         Response.Redirect(EditUrl() + skinSrcAdmin, false);
                     else
-                        Response.Redirect(EditUrl("articleid", _articleId) + skinSrcAdmin, false);
+                        Response.Redirect(EditUrl("pid", _articleId) + skinSrcAdmin, false);
                     Context.ApplicationInstance.CompleteRequest(); // do this to stop iis throwing error
                 }
 
@@ -45,7 +45,7 @@ namespace RocketEcommerceMod
                 _sessionParam.TabId = TabId;
                 _sessionParam.ModuleId = ModuleId;
                 _sessionParam.ModuleRef = _moduleRef;
-                _sessionParam.Set("articleid", _articleId);
+                _sessionParam.Set("pid", _articleId);
                 _sessionParam.Set("moduleedit", "True");
 
                 //var strHeader1 = RocketDirectoryAPIUtils.DisplayAdminView(PortalId, _moduleRef, "", _sessionParam, "adminfirstheader.cshtml");
