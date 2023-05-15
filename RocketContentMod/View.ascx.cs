@@ -83,7 +83,8 @@ namespace RocketContentMod
         }
         protected override void OnPreRender(EventArgs e)
         {
-            JavaScript.RequestRegistration(CommonJs.jQuery);
+            var moduleSettings = new ModuleContentLimpet(PortalId, _moduleRef, _systemkey, _sessionParam.ModuleId, _sessionParam.TabId);
+            if (moduleSettings.InjectJQuery) JavaScript.RequestRegistration(CommonJs.jQuery);
 
             var strOut = RocketContentAPIUtils.DisplayView(PortalId, _systemkey, _moduleRef, "", _sessionParam, "view.cshtml", "loadsettings");
             if (strOut == "loadsettings")
