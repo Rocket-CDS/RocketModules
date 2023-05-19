@@ -110,6 +110,11 @@ namespace RocketDirectoryMod
                     if (ctrltype == "js") PageIncludes.IncludeJsFile(Page, id, urlstr);
                 }
 
+                // Set langauge, so editing with simplity gets correct language
+                var lang = DNNrocketUtils.GetCurrentCulture();
+                if (HttpContext.Current.Request.QueryString["language"] != null) lang = HttpContext.Current.Request.QueryString["language"];
+                DNNrocketUtils.SetCookieValue("simplisity_language", lang);
+                DNNrocketUtils.SetCookieValue("simplisity_editlanguage", lang);
             }
             catch (Exception ex)
             {
@@ -118,7 +123,8 @@ namespace RocketDirectoryMod
         }
         protected override void OnPreRender(EventArgs e)
         {
-            JavaScript.RequestRegistration(CommonJs.jQuery);
+            var moduleSettings = new ModuleContentLimpet(PortalId, _moduleRef, _systemkey, _sessionParam.ModuleId, _sessionParam.TabId);
+            if (moduleSettings.InjectJQuery) JavaScript.RequestRegistration(CommonJs.jQuery);
 
             var strOut = RocketDirectoryAPIUtils.DisplayView(PortalId, _systemkey, _moduleRef,  _sessionParam);
             if (_hasEditAccess)
@@ -129,7 +135,7 @@ namespace RocketDirectoryMod
                 PageIncludes.IncludeCssFile(Page, "materialicons", "https://fonts.googleapis.com/icon?family=Material+Icons");
                 var articleid = RequestParam(Context, "articleid");
                 if (articleid == null || articleid == "")
-                    _sessionParam.Set("editurl", EditUrl());
+                    _sessionParam.Set("editurl", EditUrl("articleid", "-1"));
                 else
                     _sessionParam.Set("editurl", EditUrl("articleid", articleid));
                 string[] parameters;
@@ -174,7 +180,7 @@ namespace RocketDirectoryMod
         {
             get
             {
-                var moduleSettings = new ModuleContentLimpet(PortalId, _moduleRef, ModuleId, TabId);
+                var moduleSettings = new ModuleContentLimpet(PortalId, _moduleRef, _systemkey, ModuleId, TabId);
 
                 var actions = new ModuleActionCollection();
                 //actions.Add(GetNextActionID(), Localization.GetString("EditModule", this.LocalResourceFile), "", "", "edit.svg", EditUrl(), false, SecurityAccessLevel.Edit, true, false);
