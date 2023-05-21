@@ -48,11 +48,8 @@ namespace RocketDirectoryMod
                 _sessionParam.Set("articleid", _articleId);
                 _sessionParam.Set("moduleedit", "True");
 
-                //var strHeader1 = RocketDirectoryAPIUtils.DisplayAdminView(PortalId, _moduleRef, "", _sessionParam, "adminfirstheader.cshtml");
-                //PageIncludes.IncludeTextInHeader(Page, strHeader1);
-
-                //var strHeader2 = RocketDirectoryAPIUtils.DisplayAdminView(PortalId, _moduleRef, "", _sessionParam, "adminlastheader.cshtml");
-                //PageIncludes.IncludeTextInHeaderAt(Page, strHeader2, 0);
+                var strHeader1 = RocketDirectoryAPIUtils.AdminHeader(PortalId, _systemkey, _moduleRef, _sessionParam, "adminheader.cshtml");
+                PageIncludes.IncludeTextInHeader(Page, strHeader1);
 
             }
             catch (Exception ex)
