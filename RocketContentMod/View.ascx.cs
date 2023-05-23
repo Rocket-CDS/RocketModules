@@ -23,6 +23,7 @@ using Microsoft.Extensions.DependencyInjection;
 using DotNetNuke.Abstractions;
 using RazorEngine.Text;
 using System.Security.Cryptography;
+using System.Runtime.Remoting.Contexts;
 
 namespace RocketContentMod
 {
@@ -54,7 +55,21 @@ namespace RocketContentMod
                 _hasEditAccess = false;
                 if (UserId > 0) _hasEditAccess = DotNetNuke.Security.Permissions.ModulePermissionController.CanEditModuleContent(this.ModuleConfiguration);
 
-                _sessionParam = new SessionParams(new SimplisityInfo());
+                var context = HttpContext.Current;
+                var urlparams = new Dictionary<string, string>();
+                var paramInfo = new SimplisityInfo();
+                // get all query string params
+                foreach (string key in context.Request.QueryString.AllKeys)
+                {
+                    if (key != null)
+                    {
+                        var keyValue = context.Request.QueryString[key];
+                        paramInfo.SetXmlProperty("genxml/urlparams/" + key.ToLower(), keyValue);
+                        urlparams.Add(key, keyValue);
+                    }
+                }
+
+                _sessionParam = new SessionParams(paramInfo);
                 _sessionParam.TabId = TabId;
                 _sessionParam.ModuleId = ModuleId;
                 _sessionParam.ModuleRef = _moduleRef;
