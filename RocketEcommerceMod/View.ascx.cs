@@ -110,6 +110,11 @@ namespace RocketEcommerceMod
                     if (ctrltype == "js") PageIncludes.IncludeJsFile(Page, id, urlstr);
                 }
 
+                // Set langauge, so editing with simplity gets correct language
+                var lang = DNNrocketUtils.GetCurrentCulture();
+                if (HttpContext.Current.Request.QueryString["language"] != null) lang = HttpContext.Current.Request.QueryString["language"];
+                DNNrocketUtils.SetCookieValue("simplisity_language", lang);
+                DNNrocketUtils.SetCookieValue("simplisity_editlanguage", lang);
             }
             catch (Exception ex)
             {
