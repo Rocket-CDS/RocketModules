@@ -45,8 +45,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RocketPayment", "..\DNNrock
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RocketPaymentMod", "RocketPaymentMod\RocketPaymentMod.csproj", "{68AD4231-AFD8-47E4-973E-DE80B1B13FF1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RocketAutoLogin", "AutoLogin\RocketAutoLogin.csproj", "{F72E8CF2-A5F8-4C8C-B221-5771EC77578E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Comp All|Any CPU = Comp All|Any CPU
@@ -196,16 +194,6 @@ Global
 		{68AD4231-AFD8-47E4-973E-DE80B1B13FF1}.Razor|Any CPU.ActiveCfg = Release|Any CPU
 		{68AD4231-AFD8-47E4-973E-DE80B1B13FF1}.Razor|Any CPU.Build.0 = Release|Any CPU
 		{68AD4231-AFD8-47E4-973E-DE80B1B13FF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F72E8CF2-A5F8-4C8C-B221-5771EC77578E}.Comp All|Any CPU.ActiveCfg = Debug|Any CPU
-		{F72E8CF2-A5F8-4C8C-B221-5771EC77578E}.Comp All|Any CPU.Build.0 = Debug|Any CPU
-		{F72E8CF2-A5F8-4C8C-B221-5771EC77578E}.CompAll|Any CPU.ActiveCfg = Debug|Any CPU
-		{F72E8CF2-A5F8-4C8C-B221-5771EC77578E}.CompAll|Any CPU.Build.0 = Debug|Any CPU
-		{F72E8CF2-A5F8-4C8C-B221-5771EC77578E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F72E8CF2-A5F8-4C8C-B221-5771EC77578E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F72E8CF2-A5F8-4C8C-B221-5771EC77578E}.Razor|Any CPU.ActiveCfg = Release|Any CPU
-		{F72E8CF2-A5F8-4C8C-B221-5771EC77578E}.Razor|Any CPU.Build.0 = Release|Any CPU
-		{F72E8CF2-A5F8-4C8C-B221-5771EC77578E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F72E8CF2-A5F8-4C8C-B221-5771EC77578E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
