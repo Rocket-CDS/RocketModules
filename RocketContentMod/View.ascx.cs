@@ -76,10 +76,7 @@ namespace RocketContentMod
                 _sessionParam.CultureCode = DNNrocketUtils.GetCurrentCulture();
 
                 var strHeader1 = RocketContentAPIUtils.DisplayView(PortalId, _systemkey, _moduleRef, "", _sessionParam, "viewfirstheader.cshtml");
-                PageIncludes.IncludeTextInHeader(Page, strHeader1);
-
-                var strHeader2 = RocketContentAPIUtils.DisplayView(PortalId, _systemkey, _moduleRef, "", _sessionParam, "viewlastheader.cshtml");
-                PageIncludes.IncludeTextInHeaderAt(Page, strHeader2, 0);
+                PageIncludes.IncludeTextInHeaderAt(Page, strHeader1, 0);
 
                 foreach (var dep in RocketContentAPIUtils.DependanciesList(PortalId, _moduleRef, _sessionParam))
                 {
@@ -89,6 +86,9 @@ namespace RocketContentMod
                     if (ctrltype == "css") PageIncludes.IncludeCssFile(Page, id, urlstr);
                     if (ctrltype == "js") PageIncludes.IncludeJsFile(Page, id, urlstr);
                 }
+
+                var strHeader2 = RocketContentAPIUtils.DisplayView(PortalId, _systemkey, _moduleRef, "", _sessionParam, "viewlastheader.cshtml");
+                PageIncludes.IncludeTextInHeader(Page, strHeader2);
 
             }
             catch (Exception ex)

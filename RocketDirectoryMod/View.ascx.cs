@@ -98,10 +98,7 @@ namespace RocketDirectoryMod
 
 
                 var strHeader1 = RocketDirectoryAPIUtils.ViewHeader(PortalId, _systemkey, _moduleRef, _sessionParam, "viewfirstheader.cshtml");
-                PageIncludes.IncludeTextInHeader(Page, strHeader1);
-
-                var strHeader2 = RocketDirectoryAPIUtils.ViewHeader(PortalId, _systemkey, _moduleRef, _sessionParam, "viewlastheader.cshtml");
-                PageIncludes.IncludeTextInHeaderAt(Page, strHeader2, 0);
+                PageIncludes.IncludeTextInHeaderAt(Page, strHeader1, 0);
 
                 foreach (var dep in RocketDirectoryAPIUtils.DependanciesList(PortalId, _systemkey, _moduleRef, _sessionParam))
                 {
@@ -111,6 +108,9 @@ namespace RocketDirectoryMod
                     if (ctrltype == "css") PageIncludes.IncludeCssFile(Page, id, urlstr);
                     if (ctrltype == "js") PageIncludes.IncludeJsFile(Page, id, urlstr);
                 }
+
+                var strHeader2 = RocketDirectoryAPIUtils.ViewHeader(PortalId, _systemkey, _moduleRef, _sessionParam, "viewlastheader.cshtml");
+                PageIncludes.IncludeTextInHeader(Page, strHeader2);
 
                 // Set langauge, so editing with simplity gets correct language
                 var lang = DNNrocketUtils.GetCurrentCulture();

@@ -41,10 +41,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RocketNewsMod", "RocketNews
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RocketNewsAPI", "..\DNNrocketModules\RocketNewsAPI\RocketNewsAPI.csproj", "{1484B7FE-2669-44A3-9614-CE863EBF46B2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RocketPayment", "..\DNNrocketModules\RocketPayment\RocketPayment.csproj", "{8A1F8C3E-77EE-48F2-A820-C08EB080D884}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RocketPaymentMod", "RocketPaymentMod\RocketPaymentMod.csproj", "{68AD4231-AFD8-47E4-973E-DE80B1B13FF1}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Comp All|Any CPU = Comp All|Any CPU
@@ -178,22 +174,6 @@ Global
 		{1484B7FE-2669-44A3-9614-CE863EBF46B2}.Razor|Any CPU.ActiveCfg = Release|Any CPU
 		{1484B7FE-2669-44A3-9614-CE863EBF46B2}.Razor|Any CPU.Build.0 = Release|Any CPU
 		{1484B7FE-2669-44A3-9614-CE863EBF46B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8A1F8C3E-77EE-48F2-A820-C08EB080D884}.Comp All|Any CPU.ActiveCfg = Debug|Any CPU
-		{8A1F8C3E-77EE-48F2-A820-C08EB080D884}.Comp All|Any CPU.Build.0 = Debug|Any CPU
-		{8A1F8C3E-77EE-48F2-A820-C08EB080D884}.CompAll|Any CPU.ActiveCfg = Debug|Any CPU
-		{8A1F8C3E-77EE-48F2-A820-C08EB080D884}.CompAll|Any CPU.Build.0 = Debug|Any CPU
-		{8A1F8C3E-77EE-48F2-A820-C08EB080D884}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8A1F8C3E-77EE-48F2-A820-C08EB080D884}.Razor|Any CPU.ActiveCfg = Release|Any CPU
-		{8A1F8C3E-77EE-48F2-A820-C08EB080D884}.Razor|Any CPU.Build.0 = Release|Any CPU
-		{8A1F8C3E-77EE-48F2-A820-C08EB080D884}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{68AD4231-AFD8-47E4-973E-DE80B1B13FF1}.Comp All|Any CPU.ActiveCfg = Debug|Any CPU
-		{68AD4231-AFD8-47E4-973E-DE80B1B13FF1}.Comp All|Any CPU.Build.0 = Debug|Any CPU
-		{68AD4231-AFD8-47E4-973E-DE80B1B13FF1}.CompAll|Any CPU.ActiveCfg = Debug|Any CPU
-		{68AD4231-AFD8-47E4-973E-DE80B1B13FF1}.CompAll|Any CPU.Build.0 = Debug|Any CPU
-		{68AD4231-AFD8-47E4-973E-DE80B1B13FF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{68AD4231-AFD8-47E4-973E-DE80B1B13FF1}.Razor|Any CPU.ActiveCfg = Release|Any CPU
-		{68AD4231-AFD8-47E4-973E-DE80B1B13FF1}.Razor|Any CPU.Build.0 = Release|Any CPU
-		{68AD4231-AFD8-47E4-973E-DE80B1B13FF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

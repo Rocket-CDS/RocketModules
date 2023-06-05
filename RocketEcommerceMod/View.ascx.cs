@@ -96,10 +96,7 @@ namespace RocketEcommerceMod
                 _sessionParam.UrlFriendly = DNNrocketUtils.NavigateURL(TabId, urlparams);
 
                 var strHeader1 = RocketEcommerceAPIUtils.ViewHeader(PortalId, _systemkey, _moduleRef, _sessionParam, "viewfirstheader.cshtml");
-                PageIncludes.IncludeTextInHeader(Page, strHeader1);
-
-                var strHeader2 = RocketEcommerceAPIUtils.ViewHeader(PortalId, _systemkey, _moduleRef, _sessionParam, "viewlastheader.cshtml");
-                PageIncludes.IncludeTextInHeaderAt(Page, strHeader2, 0);
+                PageIncludes.IncludeTextInHeaderAt(Page, strHeader1, 0);
 
                 foreach (var dep in RocketEcommerceAPIUtils.DependanciesList(PortalId, _moduleRef, _sessionParam))
                 {
@@ -109,6 +106,9 @@ namespace RocketEcommerceMod
                     if (ctrltype == "css") PageIncludes.IncludeCssFile(Page, id, urlstr);
                     if (ctrltype == "js") PageIncludes.IncludeJsFile(Page, id, urlstr);
                 }
+
+                var strHeader2 = RocketEcommerceAPIUtils.ViewHeader(PortalId, _systemkey, _moduleRef, _sessionParam, "viewlastheader.cshtml");
+                PageIncludes.IncludeTextInHeader(Page, strHeader2);
 
                 // Set langauge, so editing with simplity gets correct language
                 var lang = DNNrocketUtils.GetCurrentCulture();
@@ -123,7 +123,8 @@ namespace RocketEcommerceMod
         }
         protected override void OnPreRender(EventArgs e)
         {
-            JavaScript.RequestRegistration(CommonJs.jQuery);
+            var moduleSettings = new ModuleContentLimpet(PortalId, _moduleRef, _sessionParam.ModuleId, _sessionParam.TabId);
+            if (moduleSettings.InjectJQuery) JavaScript.RequestRegistration(CommonJs.jQuery);
 
             var strOut = RocketEcommerceAPIUtils.DisplayView(PortalId, _systemkey, _moduleRef,  _sessionParam);
             if (_hasEditAccess)
