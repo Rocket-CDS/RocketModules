@@ -37,6 +37,8 @@ namespace RocketContentMod
                 _sessionParam.TabId = TabId;
                 _sessionParam.ModuleId = ModuleId;
                 _sessionParam.ModuleRef = _moduleRef;
+                _sessionParam.CultureCode = DNNrocketUtils.GetCurrentCulture();
+                DNNrocketUtils.SetCookieValue("simplisity_language", _sessionParam.CultureCode);
 
                 var strHeader1 = RocketContentAPIUtils.DisplayAdminView(PortalId, _moduleRef, "", _sessionParam, "adminfirstheader.cshtml");
                 PageIncludes.IncludeTextInHeader(Page, strHeader1);
