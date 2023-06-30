@@ -45,6 +45,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RocketLibraryAPI", "..\DNNr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RocketLibraryMod", "RocketLibraryMod\RocketLibraryMod.csproj", "{DE292B45-E8EF-408A-9F22-7B6815527E4D}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RocketTools", "..\DNNrocket\RocketTools\RocketTools.csproj", "{9AE2CACD-0340-4792-955E-5D2015A48BDA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Comp All|Any CPU = Comp All|Any CPU
@@ -183,7 +185,6 @@ Global
 		{53181D5D-E610-483B-8324-A3FBEE2FDB32}.CompAll|Any CPU.ActiveCfg = Debug|Any CPU
 		{53181D5D-E610-483B-8324-A3FBEE2FDB32}.CompAll|Any CPU.Build.0 = Debug|Any CPU
 		{53181D5D-E610-483B-8324-A3FBEE2FDB32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{53181D5D-E610-483B-8324-A3FBEE2FDB32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53181D5D-E610-483B-8324-A3FBEE2FDB32}.Razor|Any CPU.ActiveCfg = Release|Any CPU
 		{53181D5D-E610-483B-8324-A3FBEE2FDB32}.Razor|Any CPU.Build.0 = Release|Any CPU
 		{53181D5D-E610-483B-8324-A3FBEE2FDB32}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -193,11 +194,19 @@ Global
 		{DE292B45-E8EF-408A-9F22-7B6815527E4D}.CompAll|Any CPU.ActiveCfg = Debug|Any CPU
 		{DE292B45-E8EF-408A-9F22-7B6815527E4D}.CompAll|Any CPU.Build.0 = Debug|Any CPU
 		{DE292B45-E8EF-408A-9F22-7B6815527E4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DE292B45-E8EF-408A-9F22-7B6815527E4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE292B45-E8EF-408A-9F22-7B6815527E4D}.Razor|Any CPU.ActiveCfg = Release|Any CPU
 		{DE292B45-E8EF-408A-9F22-7B6815527E4D}.Razor|Any CPU.Build.0 = Release|Any CPU
 		{DE292B45-E8EF-408A-9F22-7B6815527E4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE292B45-E8EF-408A-9F22-7B6815527E4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AE2CACD-0340-4792-955E-5D2015A48BDA}.Comp All|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AE2CACD-0340-4792-955E-5D2015A48BDA}.Comp All|Any CPU.Build.0 = Debug|Any CPU
+		{9AE2CACD-0340-4792-955E-5D2015A48BDA}.CompAll|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AE2CACD-0340-4792-955E-5D2015A48BDA}.CompAll|Any CPU.Build.0 = Debug|Any CPU
+		{9AE2CACD-0340-4792-955E-5D2015A48BDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AE2CACD-0340-4792-955E-5D2015A48BDA}.Razor|Any CPU.ActiveCfg = razor|Any CPU
+		{9AE2CACD-0340-4792-955E-5D2015A48BDA}.Razor|Any CPU.Build.0 = razor|Any CPU
+		{9AE2CACD-0340-4792-955E-5D2015A48BDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AE2CACD-0340-4792-955E-5D2015A48BDA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
