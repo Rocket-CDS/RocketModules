@@ -46,7 +46,6 @@ namespace RocketDirectoryMod
                 _sessionParam.ModuleId = ModuleId;
                 _sessionParam.ModuleRef = _moduleRef;
                 _sessionParam.Set("articleid", _articleId);
-                _sessionParam.Set("moduleedit", "True");
 
                 var strHeader1 = RocketDirectoryAPIUtils.AdminHeader(PortalId, _systemkey, _moduleRef, _sessionParam, "adminheader.cshtml");
                 PageIncludes.IncludeTextInHeader(Page, strHeader1);

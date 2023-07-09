@@ -43,6 +43,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AdminPanel.ascx.cs">
+      <DependentUpon>AdminPanel.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel.ascx.designer.cs">
+      <DependentUpon>AdminPanel.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Edit.ascx.cs">
       <DependentUpon>Edit.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -67,6 +74,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdminPanel.ascx" />
     <Content Include="Edit.ascx" />
     <Content Include="Settings.ascx" />
     <Content Include="View.ascx" />

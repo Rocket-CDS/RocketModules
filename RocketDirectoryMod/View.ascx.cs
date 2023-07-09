@@ -136,10 +136,10 @@ namespace RocketDirectoryMod
                 PageIncludes.IncludeCssFile(Page, "fontsroboto", "https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium");
                 PageIncludes.IncludeCssFile(Page, "materialicons", "https://fonts.googleapis.com/icon?family=Material+Icons");
                 var articleid = RequestParam(Context, "articleid");
-                if (articleid == null || articleid == "")
-                    _sessionParam.Set("editurl", EditUrl("articleid", "-1"));
-                else
-                    _sessionParam.Set("editurl", EditUrl("articleid", articleid));
+                if (GeneralUtils.IsNumeric(articleid))
+                {
+                    _sessionParam.Set("editurl", EditUrl("articleid", articleid, "AdminPanel"));
+                }
                 string[] parameters;
                 parameters = new string[1];
                 parameters[0] = string.Format("{0}={1}", "ModuleId", ModuleId.ToString());

@@ -1,7 +1,7 @@
 ﻿using DNNrocketAPI.Components;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Exceptions;
-using RocketDirectoryAPI.Components;
+using RocketEcommerceAPI.Components;
 using RocketPortal.Components;
 using Simplisity;
 using System;
@@ -12,7 +12,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace RocketDirectoryMod
+namespace RocketEcommerceMod
 {
     public partial class AdminPanel : PortalModuleBase
     {
@@ -50,7 +50,7 @@ namespace RocketDirectoryMod
                 _sessionParam.CultureCode = DNNrocketUtils.GetCurrentCulture();
                 DNNrocketUtils.SetCookieValue("simplisity_language", _sessionParam.CultureCode);
 
-                var strHeader1 = RocketDirectoryAPIUtils.DisplaySystemView(PortalId, _systemkey, _moduleRef, _sessionParam, "AdminPanelheader.cshtml");
+                var strHeader1 = RocketEcommerceAPIUtils.DisplaySystemView(PortalId, _systemkey, _moduleRef, _sessionParam, "AdminPanelheader.cshtml");
                 PageIncludes.IncludeTextInHeader(Page, strHeader1);
             }
             catch (Exception ex)
@@ -76,7 +76,7 @@ namespace RocketDirectoryMod
         {
             try
             {
-                var strOut = RocketDirectoryAPIUtils.DisplaySystemView(PortalId, _systemkey, _moduleRef, _sessionParam, "AdminPanelLoad.cshtml");
+                var strOut = RocketEcommerceAPIUtils.DisplaySystemView(PortalId, _systemkey, _moduleRef, _sessionParam, "AdminPanelLoad.cshtml");
                 var lit = new Literal();
                 lit.Text = strOut;
                 phData.Controls.Add(lit);
