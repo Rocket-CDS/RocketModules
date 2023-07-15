@@ -7,7 +7,7 @@ using DotNetNuke.Security;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Localization;
 using Newtonsoft.Json;
-using RocketEcommerceAPI.Components;
+using RocketContentAPI.Components;
 using RocketPortal.Components;
 using Simplisity;
 using System;
@@ -23,14 +23,14 @@ using Microsoft.Extensions.DependencyInjection;
 using DotNetNuke.Abstractions;
 using RazorEngine.Text;
 using System.Security.Cryptography;
-using System.Text;
+using System.Runtime.Remoting.Contexts;
+using RocketForms.Components;
 
-namespace RocketEcommerceMod
+namespace RocketFormsMod
 {
     public partial class View : PortalModuleBase, IActionable
     {
-        private string _systemkey;
-        //private const string _systemkey = "rocketbusinessapi";
+        private const string _systemkey = "rocketcontentapi";
         private bool _hasEditAccess;
         private string _moduleRef;
         private SessionParams _sessionParam;
@@ -42,14 +42,10 @@ namespace RocketEcommerceMod
 
                 base.OnInit(e);
 
-                // Get systemkey from module name. (remove mod, add "API")
-                var moduleName = base.ModuleConfiguration.DesktopModule.ModuleName;
-                _systemkey = moduleName.ToLower().Substring(0, moduleName.Length - 3) + "api";
-
                 _moduleRef = PortalId + "_ModuleID_" + ModuleId;
 
                 var cmd = RequestParam(Context, "action");
-                if (cmd == "clearcache" && UserUtils.IsAdministrator()) CacheUtils.ClearAllCache("portal" + PortalId);
+                if (cmd == "clearcache" && UserUtils.IsAdministrator()) CacheUtils.ClearAllCache(_moduleRef);
                 if (cmd == "recycleapppool" && UserUtils.IsSuperUser())
                 {
                     DNNrocketUtils.RecycleApplicationPool();
@@ -61,7 +57,7 @@ namespace RocketEcommerceMod
                 if (UserId > 0) _hasEditAccess = DotNetNuke.Security.Permissions.ModulePermissionController.CanEditModuleContent(this.ModuleConfiguration);
 
                 var context = HttpContext.Current;
-                var urlparams = new Dictionary<string,string>();
+                var urlparams = new Dictionary<string, string>();
                 var paramInfo = new SimplisityInfo();
                 // get all query string params
                 foreach (string key in context.Request.QueryString.AllKeys)
@@ -74,31 +70,16 @@ namespace RocketEcommerceMod
                     }
                 }
 
-                var jsonparams = DNNrocketUtils.GetCookieValue("simplisity_sessionparams");
-                if (jsonparams != "")
-                {
-                    try
-                    {
-                        var simplisity_sessionparams = SimplisityJson.DeserializeJson(jsonparams, "cookie");
-                        paramInfo.AddXmlNode(simplisity_sessionparams.XMLData, "cookie", "genxml");
-                    }
-                    catch (Exception)
-                    {
-                        // ignore
-                    }
-                }
                 _sessionParam = new SessionParams(paramInfo);
                 _sessionParam.TabId = TabId;
                 _sessionParam.ModuleId = ModuleId;
                 _sessionParam.ModuleRef = _moduleRef;
                 _sessionParam.CultureCode = DNNrocketUtils.GetCurrentCulture();
-                _sessionParam.Url = context.Request.Url.ToString();
-                _sessionParam.UrlFriendly = DNNrocketUtils.NavigateURL(TabId, urlparams);
 
-                var strHeader1 = RocketEcommerceAPIUtils.ViewHeader(PortalId, _systemkey, _moduleRef, _sessionParam, "viewfirstheader.cshtml");
+                var strHeader1 = RocketFormsUtils.DisplayView(PortalId, _systemkey, _moduleRef, "", _sessionParam, "viewfirstheader.cshtml");
                 PageIncludes.IncludeTextInHeaderAt(Page, strHeader1, 0);
 
-                foreach (var dep in RocketEcommerceAPIUtils.DependanciesList(PortalId, _moduleRef, _sessionParam))
+                foreach (var dep in RocketFormsUtils.DependanciesList(PortalId, _moduleRef, _sessionParam))
                 {
                     var ctrltype = dep.GetXmlProperty("genxml/ctrltype");
                     var id = dep.GetXmlProperty("genxml/id");
@@ -107,14 +88,9 @@ namespace RocketEcommerceMod
                     if (ctrltype == "js") PageIncludes.IncludeJsFile(Page, id, urlstr);
                 }
 
-                var strHeader2 = RocketEcommerceAPIUtils.ViewHeader(PortalId, _systemkey, _moduleRef, _sessionParam, "viewlastheader.cshtml");
+                var strHeader2 = RocketFormsUtils.DisplayView(PortalId, _systemkey, _moduleRef, "", _sessionParam, "viewlastheader.cshtml");
                 PageIncludes.IncludeTextInHeader(Page, strHeader2);
 
-                // Set langauge, so editing with simplity gets correct language
-                var lang = DNNrocketUtils.GetCurrentCulture();
-                if (HttpContext.Current.Request.QueryString["language"] != null) lang = HttpContext.Current.Request.QueryString["language"];
-                DNNrocketUtils.SetCookieValue("simplisity_language", lang);
-                DNNrocketUtils.SetCookieValue("simplisity_editlanguage", lang);
             }
             catch (Exception ex)
             {
@@ -123,30 +99,35 @@ namespace RocketEcommerceMod
         }
         protected override void OnPreRender(EventArgs e)
         {
-            var moduleSettings = new ModuleContentLimpet(PortalId, _moduleRef, _sessionParam.ModuleId, _sessionParam.TabId);
+            var moduleSettings = new ModuleContentLimpet(PortalId, _moduleRef, _systemkey, _sessionParam.ModuleId, _sessionParam.TabId);
             if (moduleSettings.InjectJQuery) JavaScript.RequestRegistration(CommonJs.jQuery);
 
-            var strOut = RocketEcommerceAPIUtils.DisplayView(PortalId, _systemkey, _moduleRef,  _sessionParam);
+            var strOut = RocketFormsUtils.DisplayView(PortalId, _systemkey, _moduleRef, "", _sessionParam, "view.cshtml", "loadsettings");
+            if (strOut == "loadsettings")
+            {
+                strOut = RocketFormsUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "ModuleSettingsMsg.cshtml");
+                string[] parameters;
+                parameters = new string[1];
+                parameters[0] = string.Format("{0}={1}", "ModuleId", ModuleId.ToString());
+                var redirectUrl = Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", parameters).ToString() + "#msSpecificSettings";
+                strOut = strOut.Replace("{redirecturl}", redirectUrl);
+                CacheUtils.ClearAllCache(_moduleRef);
+            }
             if (_hasEditAccess)
             {
                 PageIncludes.IncludeCssFile(Page, "w3css", "/DesktopModules/DNNrocket/css/w3.css");
                 PageIncludes.IncludeCssFile(Page, "w3csstheme", "/DesktopModules/DNNrocket/API/Themes/config-w3/1.0/css/rocketcds-theme.css");
                 PageIncludes.IncludeCssFile(Page, "fontsroboto", "https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium");
                 PageIncludes.IncludeCssFile(Page, "materialicons", "https://fonts.googleapis.com/icon?family=Material+Icons");
-                var articleid = RequestParam(Context, "pid");
-                if (articleid == null || articleid == "")
-                    _sessionParam.Set("editurl", EditUrl());
-                else
-                    _sessionParam.Set("editurl", EditUrl("pid", articleid));
+                _sessionParam.Set("editurl", EditUrl());
                 string[] parameters;
                 parameters = new string[1];
                 parameters[0] = string.Format("{0}={1}", "ModuleId", ModuleId.ToString());
                 var settingsurl = Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", parameters).ToString() + "#msSpecificSettings";
                 _sessionParam.Set("settingsurl", settingsurl);
                 _sessionParam.Set("appthemeurl", EditUrl("AppTheme"));
-                _sessionParam.Set("adminpanelurl", EditUrl("AdminPanel"));
                 _sessionParam.Set("returnurl", @GeneralUtils.EnCode(HttpUtility.UrlEncode(Context.Request.Url.ToString())));
-                strOut = RocketEcommerceAPIUtils.DisplaySystemView(PortalId, _systemkey, _moduleRef, _sessionParam, "ViewEditButtons.cshtml") + strOut;
+                strOut = RocketFormsUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "ViewEditButtons.cshtml") + strOut;
             }
             var lit = new Literal();
             lit.Text = strOut;
@@ -182,11 +163,10 @@ namespace RocketEcommerceMod
         {
             get
             {
-                var moduleSettings = new ModuleContentLimpet(PortalId, _moduleRef, ModuleId, TabId);
+                var moduleSettings = new ModuleContentLimpet(PortalId, _systemkey, _moduleRef, ModuleId, TabId);
 
                 var actions = new ModuleActionCollection();
-                //actions.Add(GetNextActionID(), Localization.GetString("EditModule", this.LocalResourceFile), "", "", "edit.svg", EditUrl(), false, SecurityAccessLevel.Edit, true, false);
-                actions.Add(GetNextActionID(), Localization.GetString("adminpanel", this.LocalResourceFile), "", "", "edit_app.svg", EditUrl("AdminPanel"), false, SecurityAccessLevel.Edit, true, false);
+                actions.Add(GetNextActionID(), Localization.GetString("EditModule", this.LocalResourceFile), "", "", "edit.svg", EditUrl(), false, SecurityAccessLevel.Edit, true, false);
                 actions.Add(GetNextActionID(), Localization.GetString("apptheme", this.LocalResourceFile), "", "", "edit_app.svg", EditUrl("AppTheme"), false, SecurityAccessLevel.Admin, true, false);
                 actions.Add(GetNextActionID(), Localization.GetString("clearcache", this.LocalResourceFile), "", "", "clear_cache.svg", Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID).ToString() + "?action=clearcache", false, SecurityAccessLevel.Admin, true, false);
                 actions.Add(GetNextActionID(), Localization.GetString("recycleapppool", this.LocalResourceFile), "", "", "restart_app.svg", Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID).ToString() + "?action=recycleapppool", false, SecurityAccessLevel.Host, true, false);

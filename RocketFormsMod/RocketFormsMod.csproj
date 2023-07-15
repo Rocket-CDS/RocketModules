@@ -7,12 +7,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{FC860C56-53ED-47F7-9242-69E3228239AC}</ProjectGuid>
+    <ProjectGuid>{3BB4277A-A2B0-416A-9D0F-167D0DB0507C}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RocketEcommerceMod</RootNamespace>
-    <AssemblyName>RocketEcommerceMod</AssemblyName>
+    <RootNamespace>RocketFormsMod</RootNamespace>
+    <AssemblyName>RocketFormsMod</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -43,13 +43,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AdminPanel.ascx.cs">
-      <DependentUpon>AdminPanel.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AdminPanel.ascx.designer.cs">
-      <DependentUpon>AdminPanel.ascx</DependentUpon>
-    </Compile>
     <Compile Include="AppTheme.ascx.cs">
       <DependentUpon>AppTheme.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -81,16 +74,19 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AdminPanel.ascx" />
     <Content Include="AppTheme.ascx" />
     <Content Include="Edit.ascx" />
     <Content Include="Settings.ascx" />
     <Content Include="View.ascx" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\DNNrocketModules\RocketEcommerceAPI\RocketEcommerceAPI.csproj">
-      <Project>{3f0af847-a5eb-401b-ba35-7505ce6203aa}</Project>
-      <Name>RocketEcommerceAPI</Name>
+    <ProjectReference Include="..\..\DNNrocketModules\RocketContentAPI\RocketContentAPI.csproj">
+      <Project>{f21c301c-6f9b-44d2-8fdd-ef8d4c95065c}</Project>
+      <Name>RocketContentAPI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DNNrocketModules\RocketForms\RocketForms.csproj">
+      <Project>{2a672cc5-3732-4edb-a098-441cc62f1059}</Project>
+      <Name>RocketForms</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\DNNrocket\API\DNNrocketAPI.csproj">
       <Project>{2200f6c3-7d4b-4cdf-908f-dca37adfb121}</Project>
@@ -109,13 +105,15 @@
     <Content Include="DNNpackager.dnnpack" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="RocketFormsMod.dnn" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Components\" />
     <Folder Include="Installation\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="web.config" />
-    <Content Include="RocketEcommerceMod.dnn" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
