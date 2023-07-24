@@ -1,7 +1,7 @@
 ﻿using DNNrocketAPI.Components;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Exceptions;
-using RocketDirectoryAPI.Components;
+using RocketIntra.Components;
 using RocketPortal.Components;
 using Simplisity;
 using System;
@@ -12,7 +12,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace RocketDirectoryMod
+namespace RocketIntraMod
 {
     public partial class AdminPanel : PortalModuleBase
     {
@@ -27,21 +27,15 @@ namespace RocketDirectoryMod
 
                 var articleid = DNNrocketUtils.RequestParam(Context, "articleid");
                 string skinSrcAdmin = "?SkinSrc=%2fDesktopModules%2fDNNrocket%2fRocketPortal%2fSkins%2frocketportal%2frocketadmin";
-                if (DNNrocketUtils.RequestParam(Context, "SkinSrc") == "")
+                string skinparm = DNNrocketUtils.RequestParam(Context, "SkinSrc");
+                if (skinparm == "")
                 {
-                    if (articleid == "")
-                        Response.Redirect(EditUrl(DNNrocketUtils.RequestParam(Context, "ctl")) + skinSrcAdmin, false);
-                    else
-                        Response.Redirect(EditUrl("articleid", articleid, DNNrocketUtils.RequestParam(Context, "ctl")) + skinSrcAdmin, false);
+                    Response.Redirect(EditUrl(DNNrocketUtils.RequestParam(Context, "ctl")) + skinSrcAdmin, false);
                     Context.ApplicationInstance.CompleteRequest(); // do this to stop iis throwing error
                 }
 
-                // Get systemkey from module name. (remove mod, add "API")
-                var moduleName = base.ModuleConfiguration.DesktopModule.ModuleName;
-                _systemkey = moduleName.ToLower().Substring(0, moduleName.Length - 3) + "api";
-
+                _systemkey = "rocketintra";
                 _moduleRef = PortalId + "_ModuleID_" + ModuleId;
-
                 _sessionParam = new SessionParams(new SimplisityInfo());
                 _sessionParam.TabId = TabId;
                 _sessionParam.ModuleId = ModuleId;
@@ -49,9 +43,8 @@ namespace RocketDirectoryMod
                 _sessionParam.Set("articleid", articleid);
                 _sessionParam.CultureCode = DNNrocketUtils.GetCurrentCulture();
                 DNNrocketUtils.SetCookieValue("simplisity_language", _sessionParam.CultureCode);
-                DNNrocketUtils.SetCookieValue("adminpanelurl", EditUrl("AdminPanel"));
 
-                var strHeader1 = RocketDirectoryAPIUtils.DisplaySystemView(PortalId, _systemkey, _moduleRef, _sessionParam, "AdminPanelheader.cshtml");
+                var strHeader1 = RocketIntraUtils.DisplaySystemView(PortalId, _systemkey, _moduleRef, _sessionParam, "AdminPanelheader.cshtml");
                 PageIncludes.IncludeTextInHeader(Page, strHeader1);
             }
             catch (Exception ex)
@@ -77,7 +70,7 @@ namespace RocketDirectoryMod
         {
             try
             {
-                var strOut = RocketDirectoryAPIUtils.DisplaySystemView(PortalId, _systemkey, _moduleRef, _sessionParam, "AdminPanelLoad.cshtml");
+                var strOut = RocketIntraUtils.DisplaySystemView(PortalId, _systemkey, _moduleRef, _sessionParam, "AdminPanelLoad.cshtml");
                 var lit = new Literal();
                 lit.Text = strOut;
                 phData.Controls.Add(lit);

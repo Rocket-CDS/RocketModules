@@ -148,6 +148,7 @@ namespace RocketDirectoryMod
                 _sessionParam.Set("appthemeurl", EditUrl("AppTheme"));
                 _sessionParam.Set("adminpanelurl", EditUrl("AdminPanel"));
                 _sessionParam.Set("returnurl", @GeneralUtils.EnCode(HttpUtility.UrlEncode(Context.Request.Url.ToString())));
+
                 strOut = RocketDirectoryAPIUtils.DisplaySystemView(PortalId, _systemkey, _moduleRef, _sessionParam, "ViewEditButtons.cshtml") + strOut;
             }
             var lit = new Literal();

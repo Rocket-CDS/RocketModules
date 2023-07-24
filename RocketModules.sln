@@ -52,6 +52,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RocketForms", "..\DNNrocket
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RocketFormsMod", "RocketFormsMod\RocketFormsMod.csproj", "{3BB4277A-A2B0-416A-9D0F-167D0DB0507C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RocketIntraMod", "RocketIntraMod\RocketIntraMod.csproj", "{A2196AB0-98F7-47F5-9587-888F638FD2C8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RocketIntra", "..\DNNrocketModules\RocketIntra\RocketIntra.csproj", "{96B7304C-D82A-42B7-BE31-DAFE12BC7872}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Comp All|Any CPU = Comp All|Any CPU
@@ -225,6 +229,22 @@ Global
 		{3BB4277A-A2B0-416A-9D0F-167D0DB0507C}.Razor|Any CPU.ActiveCfg = Release|Any CPU
 		{3BB4277A-A2B0-416A-9D0F-167D0DB0507C}.Razor|Any CPU.Build.0 = Release|Any CPU
 		{3BB4277A-A2B0-416A-9D0F-167D0DB0507C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2196AB0-98F7-47F5-9587-888F638FD2C8}.Comp All|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2196AB0-98F7-47F5-9587-888F638FD2C8}.Comp All|Any CPU.Build.0 = Debug|Any CPU
+		{A2196AB0-98F7-47F5-9587-888F638FD2C8}.CompAll|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2196AB0-98F7-47F5-9587-888F638FD2C8}.CompAll|Any CPU.Build.0 = Debug|Any CPU
+		{A2196AB0-98F7-47F5-9587-888F638FD2C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2196AB0-98F7-47F5-9587-888F638FD2C8}.Razor|Any CPU.ActiveCfg = Release|Any CPU
+		{A2196AB0-98F7-47F5-9587-888F638FD2C8}.Razor|Any CPU.Build.0 = Release|Any CPU
+		{A2196AB0-98F7-47F5-9587-888F638FD2C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96B7304C-D82A-42B7-BE31-DAFE12BC7872}.Comp All|Any CPU.ActiveCfg = Debug|Any CPU
+		{96B7304C-D82A-42B7-BE31-DAFE12BC7872}.Comp All|Any CPU.Build.0 = Debug|Any CPU
+		{96B7304C-D82A-42B7-BE31-DAFE12BC7872}.CompAll|Any CPU.ActiveCfg = Debug|Any CPU
+		{96B7304C-D82A-42B7-BE31-DAFE12BC7872}.CompAll|Any CPU.Build.0 = Debug|Any CPU
+		{96B7304C-D82A-42B7-BE31-DAFE12BC7872}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96B7304C-D82A-42B7-BE31-DAFE12BC7872}.Razor|Any CPU.ActiveCfg = Release|Any CPU
+		{96B7304C-D82A-42B7-BE31-DAFE12BC7872}.Razor|Any CPU.Build.0 = Release|Any CPU
+		{96B7304C-D82A-42B7-BE31-DAFE12BC7872}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
