@@ -19,14 +19,14 @@ namespace RocketIntraMod
         private string _systemkey;
         private string _moduleRef;
         private SessionParams _sessionParam;
+
         protected override void OnInit(EventArgs e)
         {
             try
             {
                 base.OnInit(e);
-
                 var articleid = DNNrocketUtils.RequestParam(Context, "articleid");
-                string skinSrcAdmin = "?SkinSrc=%2fDesktopModules%2fDNNrocket%2fRocketPortal%2fSkins%2frocketportal%2frocketadmin";
+                string skinSrcAdmin = "?SkinSrc=rocketadmin";
                 string skinparm = DNNrocketUtils.RequestParam(Context, "SkinSrc");
                 if (skinparm == "")
                 {

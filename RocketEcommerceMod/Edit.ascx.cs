@@ -29,7 +29,7 @@ namespace RocketEcommerceMod
                 var moduleName = base.ModuleConfiguration.DesktopModule.ModuleName;
                 _systemkey = moduleName.ToLower().Substring(0, moduleName.Length - 3) + "api";
                 _articleId = DNNrocketUtils.RequestParam(Context, "pid");
-                string skinSrcAdmin = "?SkinSrc=%2fDesktopModules%2fDNNrocket%2fRocketPortal%2fSkins%2frocketportal%2frocketedit";
+                string skinSrcAdmin = "?SkinSrc=rocketadmin";
                 if (DNNrocketUtils.RequestParam(Context, "SkinSrc") == "")
                 {
                     if (_articleId == null || _articleId == "")
