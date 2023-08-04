@@ -127,6 +127,10 @@ namespace RocketContentMod
                 _sessionParam.Set("appthemeurl", EditUrl("AppTheme"));
                 _sessionParam.Set("returnurl", @GeneralUtils.EnCode(HttpUtility.UrlEncode(Context.Request.Url.ToString())));
                 strOut = RocketContentAPIUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "ViewEditButtons.cshtml") + strOut;
+
+                var userParams = new UserParams(0);
+                userParams.Set("viewurl", Context.Request.Url.ToString());
+
             }
             var lit = new Literal();
             lit.Text = strOut;

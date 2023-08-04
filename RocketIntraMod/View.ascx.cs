@@ -30,7 +30,6 @@ namespace RocketIntraMod
     public partial class View : PortalModuleBase, IActionable
     {
         private string _systemkey;
-        //private const string _systemkey = "rocketbusinessapi";
         private string _moduleRef;
         private SessionParams _sessionParam;
 
@@ -69,6 +68,7 @@ namespace RocketIntraMod
                 if (HttpContext.Current.Request.QueryString["language"] != null) lang = HttpContext.Current.Request.QueryString["language"];
                 DNNrocketUtils.SetCookieValue("simplisity_language", lang);
                 DNNrocketUtils.SetCookieValue("simplisity_editlanguage", lang);
+
             }
             catch (Exception ex)
             {
@@ -77,7 +77,16 @@ namespace RocketIntraMod
         }
         protected override void OnPreRender(EventArgs e)
         {
-            _sessionParam.Set("adminpanelurl", EditUrl("AdminPanel"));
+
+            var hasEditAccess = false;
+            if (UserId > 0) hasEditAccess = DotNetNuke.Security.Permissions.ModulePermissionController.CanEditModuleContent(this.ModuleConfiguration);
+            if (hasEditAccess)
+            {
+                var userParams = new UserParams(0);
+                userParams.Set("adminpanelurl", EditUrl("AdminPanel"));
+                userParams.Set("viewurl", Context.Request.Url.ToString());
+            }
+
             var strOut = RocketIntraUtils.DisplaySystemView(PortalId, _systemkey, _moduleRef,  _sessionParam, "modulewelcome.cshtml");
             var lit = new Literal();
             lit.Text = strOut;

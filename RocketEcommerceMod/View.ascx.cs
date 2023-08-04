@@ -144,7 +144,6 @@ namespace RocketEcommerceMod
                 var settingsurl = Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", parameters).ToString() + "#msSpecificSettings";
                 _sessionParam.Set("settingsurl", settingsurl);
                 _sessionParam.Set("appthemeurl", EditUrl("AppTheme"));
-                _sessionParam.Set("adminpanelurl", EditUrl("AdminPanel"));
                 _sessionParam.Set("returnurl", @GeneralUtils.EnCode(HttpUtility.UrlEncode(Context.Request.Url.ToString())));
                 strOut = RocketEcommerceAPIUtils.DisplaySystemView(PortalId, _systemkey, _moduleRef, _sessionParam, "ViewEditButtons.cshtml") + strOut;
             }

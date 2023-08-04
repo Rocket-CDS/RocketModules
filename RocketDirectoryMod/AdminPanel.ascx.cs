@@ -47,12 +47,14 @@ namespace RocketDirectoryMod
                 _sessionParam.ModuleId = ModuleId;
                 _sessionParam.ModuleRef = _moduleRef;
                 _sessionParam.Set("articleid", articleid);
+
                 _sessionParam.CultureCode = DNNrocketUtils.GetCurrentCulture();
                 DNNrocketUtils.SetCookieValue("simplisity_language", _sessionParam.CultureCode);
-                DNNrocketUtils.SetCookieValue("adminpanelurl", EditUrl("AdminPanel"));
 
+                PageIncludes.RemoveCssFile(Page, "skin.css"); //DNN always tries to load a skin.css, even if it does not exists.
                 var strHeader1 = RocketDirectoryAPIUtils.DisplaySystemView(PortalId, _systemkey, _moduleRef, _sessionParam, "AdminPanelheader.cshtml");
                 PageIncludes.IncludeTextInHeader(Page, strHeader1);
+
             }
             catch (Exception ex)
             {
