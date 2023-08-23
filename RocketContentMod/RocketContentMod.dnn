@@ -1,6 +1,6 @@
 ﻿<dotnetnuke type="Package" version="5.0">
 	<packages>
-		<package name="RocketContentMod" type="Module" version="1.0.0">
+		<package name="RocketContentMod" type="Module" version="1.0.1">
 			<friendlyName>RocketContent</friendlyName>
 			<description>Rocket Content Module</description>
 			<iconFile>~/DesktopModules/RocketModules/RocketContentMod/icon.png</iconFile>
