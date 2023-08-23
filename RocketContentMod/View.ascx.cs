@@ -128,7 +128,7 @@ namespace RocketContentMod
                 _sessionParam.Set("returnurl", @GeneralUtils.EnCode(HttpUtility.UrlEncode(Context.Request.Url.ToString())));
                 strOut = RocketContentAPIUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "ViewEditButtons.cshtml") + strOut;
 
-                var userParams = new UserParams(0);
+                var userParams = new UserParams(_sessionParam.BrowserSessionId);
                 userParams.Set("viewurl", Context.Request.Url.ToString());
 
             }

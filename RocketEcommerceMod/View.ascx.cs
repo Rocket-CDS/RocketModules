@@ -147,7 +147,7 @@ namespace RocketEcommerceMod
                 _sessionParam.Set("adminpanelurl", EditUrl("AdminPanel"));
                 _sessionParam.Set("returnurl", @GeneralUtils.EnCode(HttpUtility.UrlEncode(Context.Request.Url.ToString())));
 
-                var userParams = new UserParams(UserId);
+                var userParams = new UserParams(_sessionParam.BrowserSessionId);
                 userParams.Set("adminpanelurl", EditUrl("AdminPanel"));
                 userParams.Set("viewurl", Context.Request.Url.ToString());
 
