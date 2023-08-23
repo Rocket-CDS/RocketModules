@@ -1,6 +1,6 @@
 ﻿<dotnetnuke type="Package" version="5.0">
 	<packages>
-		<package name="RocketEcommerceMod" type="Module" version="1.0.0">
+		<package name="RocketEcommerceMod" type="Module" version="1.0.1">
 			<friendlyName>RocketEcommerce</friendlyName>
 			<description>Rocket Ecommerce Module</description>
 			<iconFile>~/DesktopModules/RocketModules/RocketEcommerceMod/icon.png</iconFile>
