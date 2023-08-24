@@ -24,7 +24,7 @@ namespace RocketContentMod
             {
                 base.OnInit(e);
 
-                string skinSrcAdmin = "?SkinSrc=rocketadmin";
+                string skinSrcAdmin = "?SkinSrc=rocketedit";
                 if (DNNrocketUtils.RequestParam(Context, "SkinSrc") == "")
                 {
                     Response.Redirect(EditUrl(DNNrocketUtils.RequestParam(Context, "ctl")) + skinSrcAdmin, false);

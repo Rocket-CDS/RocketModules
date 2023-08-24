@@ -147,7 +147,7 @@ namespace RocketDirectoryMod
                 _sessionParam.Set("settingsurl", settingsurl);
                 _sessionParam.Set("appthemeurl", EditUrl("AppTheme"));
 
-                var userParams = new UserParams(_sessionParam.BrowserSessionId);
+                var userParams = new UserParams("ModuleID:" + ModuleId);
                 userParams.Set("adminpanelurl", EditUrl("AdminPanel"));
                 userParams.Set("viewurl", Context.Request.Url.ToString());
 

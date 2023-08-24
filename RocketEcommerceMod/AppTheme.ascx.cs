@@ -25,7 +25,7 @@ namespace RocketEcommerceMod
             {
                 base.OnInit(e);
 
-                string skinSrcAdmin = "?SkinSrc=rocketadmin";
+                string skinSrcAdmin = "?SkinSrc=rocketedit";
                 if (DNNrocketUtils.RequestParam(Context, "SkinSrc") == "")
                 {
                     Response.Redirect(EditUrl(DNNrocketUtils.RequestParam(Context, "ctl")) + skinSrcAdmin, false);
@@ -45,6 +45,7 @@ namespace RocketEcommerceMod
                 _sessionParam.CultureCode = DNNrocketUtils.GetCurrentCulture();
                 DNNrocketUtils.SetCookieValue("simplisity_language", _sessionParam.CultureCode);
 
+                PageIncludes.RemoveCssFile(Page, "skin.css"); //DNN always tries to load a skin.css, even if it does not exists.
                 var strHeader1 = RocketEcommerceAPIUtils.DisplaySystemView(PortalId, _systemkey, _moduleRef, _sessionParam, "appthemeheader.cshtml");
                 PageIncludes.IncludeTextInHeader(Page, strHeader1);
             }

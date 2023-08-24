@@ -5,7 +5,7 @@
 			<friendlyName>RocketBusiness</friendlyName>
 			<DefinitionName>rocketbusinessapi</DefinitionName>
 			<description>Rocket Business Module</description>
-			<iconFile>~/DesktopModules/RocketModules/RocketBusinessMod/icon.png</iconFile>
+			<iconFile>~/DesktopModules/RocketModules/RocketDirectoryMod/icon.png</iconFile>
 			<owner>
 				<name></name>
 				<organization>RocketCDS</organization>

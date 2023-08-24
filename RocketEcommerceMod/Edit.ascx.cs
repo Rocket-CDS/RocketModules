@@ -48,6 +48,7 @@ namespace RocketEcommerceMod
                 _sessionParam.Set("pid", _articleId);
                 _sessionParam.Set("moduleedit", "True");
 
+                PageIncludes.RemoveCssFile(Page, "skin.css"); //DNN always tries to load a skin.css, even if it does not exists.
                 var strHeader1 = RocketEcommerceAPIUtils.AdminHeader(PortalId, _systemkey, _moduleRef, _sessionParam, "adminheader.cshtml");
                 PageIncludes.IncludeTextInHeader(Page, strHeader1);
 

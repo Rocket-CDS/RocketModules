@@ -24,7 +24,7 @@ namespace RocketContentMod
             {
                 base.OnInit(e);
 
-                string skinSrcAdmin = "?SkinSrc=%2fDesktopModules%2fDNNrocket%2fRocketPortal%2fSkins%2frocketportal%2frocketedit";
+                string skinSrcAdmin = "?SkinSrc=rocketedit";
                 if (DNNrocketUtils.RequestParam(Context, "SkinSrc") == "")
                 {
                     Response.Redirect(EditUrl() + skinSrcAdmin, false);
@@ -39,6 +39,8 @@ namespace RocketContentMod
                 _sessionParam.ModuleRef = _moduleRef;
                 _sessionParam.CultureCode = DNNrocketUtils.GetCurrentCulture();
                 DNNrocketUtils.SetCookieValue("simplisity_language", _sessionParam.CultureCode);
+
+                PageIncludes.RemoveCssFile(Page, "skin.css"); //DNN always tries to load a skin.css, even if it does not exists.
 
                 var strHeader1 = RocketContentAPIUtils.DisplayAdminView(PortalId, _moduleRef, "", _sessionParam, "adminfirstheader.cshtml");
                 PageIncludes.IncludeTextInHeader(Page, strHeader1);

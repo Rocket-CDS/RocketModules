@@ -5,7 +5,7 @@
 			<friendlyName>RocketLibrary</friendlyName>
 			<DefinitionName>rocketlibraryapi</DefinitionName>
 			<description>Rocket Library Module</description>
-			<iconFile>~/DesktopModules/RocketModules/RocketLibraryMod/icon.png</iconFile>
+			<iconFile>~/DesktopModules/RocketModules/RocketDirectoryMod/icon.png</iconFile>
 			<owner>
 				<name></name>
 				<organization>RocketCDS</organization>

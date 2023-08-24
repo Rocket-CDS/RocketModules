@@ -47,6 +47,7 @@ namespace RocketDirectoryMod
                 _sessionParam.ModuleRef = _moduleRef;
                 _sessionParam.Set("articleid", _articleId);
 
+                PageIncludes.RemoveCssFile(Page, "skin.css"); //DNN always tries to load a skin.css, even if it does not exists.
                 var strHeader1 = RocketDirectoryAPIUtils.AdminHeader(PortalId, _systemkey, _moduleRef, _sessionParam, "adminheader.cshtml");
                 PageIncludes.IncludeTextInHeader(Page, strHeader1);
 
