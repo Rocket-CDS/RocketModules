@@ -85,7 +85,7 @@ namespace RocketIntraMod
             if (UserId > 0) hasEditAccess = DotNetNuke.Security.Permissions.ModulePermissionController.CanEditModuleContent(this.ModuleConfiguration);
             if (hasEditAccess)
             {
-                var userParams = new UserParams(0);
+                var userParams = new UserParams("ModuleID:" + ModuleId, true);
                 userParams.Set("adminpanelurl", EditUrl("AdminPanel"));
                 userParams.Set("viewurl", Context.Request.Url.ToString());
             }

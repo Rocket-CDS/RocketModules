@@ -129,25 +129,19 @@ namespace RocketEcommerceMod
             var strOut = RocketEcommerceAPIUtils.DisplayView(PortalId, _systemkey, _moduleRef,  _sessionParam);
             if (_hasEditAccess)
             {
-                PageIncludes.IncludeCssFile(Page, "w3css", "/DesktopModules/DNNrocket/css/w3.css");
-                PageIncludes.IncludeCssFile(Page, "w3csstheme", "/DesktopModules/DNNrocket/API/Themes/config-w3/1.0/css/rocketcds-theme.css");
-                PageIncludes.IncludeCssFile(Page, "fontsroboto", "https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium");
-                PageIncludes.IncludeCssFile(Page, "materialicons", "https://fonts.googleapis.com/icon?family=Material+Icons");
                 var articleid = RequestParam(Context, "pid");
-                if (articleid == null || articleid == "")
-                    _sessionParam.Set("editurl", EditUrl());
-                else
-                    _sessionParam.Set("editurl", EditUrl("pid", articleid));
                 string[] parameters;
                 parameters = new string[1];
                 parameters[0] = string.Format("{0}={1}", "ModuleId", ModuleId.ToString());
                 var settingsurl = Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", parameters).ToString() + "#msSpecificSettings";
-                _sessionParam.Set("settingsurl", settingsurl);
-                _sessionParam.Set("appthemeurl", EditUrl("AppTheme"));
-                _sessionParam.Set("adminpanelurl", EditUrl("AdminPanel"));
-                _sessionParam.Set("returnurl", @GeneralUtils.EnCode(HttpUtility.UrlEncode(Context.Request.Url.ToString())));
 
-                var userParams = new UserParams("ModuleID:" + ModuleId);
+                var userParams = new UserParams("ModuleID:" + ModuleId, true);
+                if (articleid == null || articleid == "")
+                    userParams.Set("editurl", EditUrl());
+                else
+                    userParams.Set("editurl", EditUrl("pid", articleid));
+                userParams.Set("settingsurl", settingsurl);
+                userParams.Set("appthemeurl", EditUrl("AppTheme"));
                 userParams.Set("adminpanelurl", EditUrl("AdminPanel"));
                 userParams.Set("viewurl", Context.Request.Url.ToString());
 

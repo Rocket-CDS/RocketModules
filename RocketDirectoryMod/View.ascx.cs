@@ -131,23 +131,19 @@ namespace RocketDirectoryMod
             var strOut = RocketDirectoryAPIUtils.DisplayView(PortalId, _systemkey, _moduleRef,  _sessionParam);
             if (_hasEditAccess)
             {
-                PageIncludes.IncludeCssFile(Page, "w3css", "/DesktopModules/DNNrocket/css/w3.css");
-                PageIncludes.IncludeCssFile(Page, "w3csstheme", "/DesktopModules/DNNrocket/API/Themes/config-w3/1.0/css/rocketcds-theme.css");
-                PageIncludes.IncludeCssFile(Page, "fontsroboto", "https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium");
-                PageIncludes.IncludeCssFile(Page, "materialicons", "https://fonts.googleapis.com/icon?family=Material+Icons");
                 var articleid = RequestParam(Context, "articleid");
-                if (GeneralUtils.IsNumeric(articleid))
-                {
-                    _sessionParam.Set("editurl", EditUrl("articleid", articleid, "AdminPanel"));
-                }
                 string[] parameters;
                 parameters = new string[1];
                 parameters[0] = string.Format("{0}={1}", "ModuleId", ModuleId.ToString());
                 var settingsurl = Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", parameters).ToString() + "#msSpecificSettings";
-                _sessionParam.Set("settingsurl", settingsurl);
-                _sessionParam.Set("appthemeurl", EditUrl("AppTheme"));
 
-                var userParams = new UserParams("ModuleID:" + ModuleId);
+                var userParams = new UserParams("ModuleID:" + ModuleId, true);
+                if (GeneralUtils.IsNumeric(articleid))
+                {
+                    userParams.Set("editurl", EditUrl("articleid", articleid, "AdminPanel"));
+                }
+                userParams.Set("settingsurl", settingsurl);
+                userParams.Set("appthemeurl", EditUrl("AppTheme"));
                 userParams.Set("adminpanelurl", EditUrl("AdminPanel"));
                 userParams.Set("viewurl", Context.Request.Url.ToString());
 
