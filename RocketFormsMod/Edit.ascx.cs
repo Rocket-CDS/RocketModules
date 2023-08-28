@@ -24,7 +24,7 @@ namespace RocketFormsMod
             {
                 base.OnInit(e);
 
-                string skinSrcAdmin = "?SkinSrc=rocketadmin";
+                string skinSrcAdmin = "?SkinSrc=rocketedit";
                 if (DNNrocketUtils.RequestParam(Context, "SkinSrc") == "")
                 {
                     Response.Redirect(EditUrl() + skinSrcAdmin, false);

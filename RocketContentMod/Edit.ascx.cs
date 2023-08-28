@@ -48,6 +48,9 @@ namespace RocketContentMod
                 var strHeader2 = RocketContentAPIUtils.DisplayAdminView(PortalId, _moduleRef, "", _sessionParam, "adminlastheader.cshtml");
                 PageIncludes.IncludeTextInHeaderAt(Page, strHeader2, 0);
 
+                var strHeaderAdmin = RocketContentAPIUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "AdminHeader.cshtml");
+                PageIncludes.IncludeTextInHeader(Page, strHeaderAdmin);
+
             }
             catch (Exception ex)
             {

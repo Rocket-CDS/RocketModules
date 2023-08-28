@@ -40,7 +40,7 @@ namespace RocketContentMod
                 _sessionParam.CultureCode = DNNrocketUtils.GetCurrentCulture();
                 DNNrocketUtils.SetCookieValue("simplisity_language", _sessionParam.CultureCode);
 
-                var strHeader1 = RocketContentAPIUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "appthemeheader.cshtml");
+                var strHeader1 = RocketContentAPIUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "AdminHeader.cshtml");
                 PageIncludes.IncludeTextInHeader(Page, strHeader1);
             }
             catch (Exception ex)
