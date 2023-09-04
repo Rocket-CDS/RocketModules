@@ -99,6 +99,16 @@
 										<helpUrl />
 										<supportsPopUps>False</supportsPopUps>
 									</moduleControl>
+									<moduleControl>
+										<controlKey>RecycleBin</controlKey>
+										<controlSrc>DesktopModules/RocketModules/RocketContentMod/RecycleBin.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle>RecycleBin</controlTitle>
+										<controlType>Edit</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+									</moduleControl>
 								</moduleControls>
 							</moduleDefinition>
 						</moduleDefinitions>

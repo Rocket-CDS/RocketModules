@@ -14,7 +14,7 @@ using System.Web.UI.WebControls;
 
 namespace RocketContentMod
 {
-    public partial class AppTheme : ModuleSettingsBase
+    public partial class RecycleBin : ModuleSettingsBase
     {
         private string _moduleRef;
         private SessionParams _sessionParam;
@@ -68,7 +68,7 @@ namespace RocketContentMod
         {
             try
             {
-                var strOut = RocketContentAPIUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "AppThemeAdmin.cshtml");
+                var strOut = RocketContentAPIUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "RecycleBin.cshtml");
                 var lit = new Literal();
                 lit.Text = strOut;
                 phData.Controls.Add(lit);

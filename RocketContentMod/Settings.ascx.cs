@@ -1,4 +1,5 @@
-﻿using DotNetNuke.Entities.Modules;
+﻿using DNNrocketAPI.Components;
+using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.UI.UserControls;
 using Newtonsoft.Json;
@@ -52,6 +53,7 @@ namespace RocketContentMod
                 sessionParam.TabId = TabId;
                 sessionParam.ModuleId = ModuleId;
                 sessionParam.ModuleRef = _moduleRef;
+                sessionParam.CultureCode = DNNrocketUtils.GetCurrentCulture();
 
                 var strOut = RocketContentAPIUtils.DisplaySystemView(PortalId, _moduleRef, sessionParam, "ModuleSettingsLoad.cshtml");
 

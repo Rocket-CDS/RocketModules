@@ -43,6 +43,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="RecycleBin.ascx.cs">
+      <DependentUpon>RecycleBin.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RecycleBin.ascx.designer.cs">
+      <DependentUpon>RecycleBin.ascx</DependentUpon>
+    </Compile>
     <Compile Include="AppTheme.ascx.cs">
       <DependentUpon>AppTheme.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -74,6 +81,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="RecycleBin.ascx" />
     <Content Include="AppTheme.ascx" />
     <Content Include="Edit.ascx" />
     <Content Include="Settings.ascx" />

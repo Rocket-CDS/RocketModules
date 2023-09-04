@@ -132,4 +132,7 @@
   <data name="recycleapppool.Text" xml:space="preserve">
     <value>Recycle AppPool</value>
   </data>
+  <data name="recyclebin.Text" xml:space="preserve">
+    <value>Recycle Bin</value>
+  </data>
 </root>

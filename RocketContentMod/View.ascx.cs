@@ -108,7 +108,7 @@ namespace RocketContentMod
                 string[] parameters;
                 parameters = new string[1];
                 parameters[0] = string.Format("{0}={1}", "ModuleId", ModuleId.ToString());
-                var redirectUrl = Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", parameters).ToString() + "#msSpecificSettings";
+                var redirectUrl = Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", parameters).ToString();
                 strOut = strOut.Replace("{redirecturl}", redirectUrl);
                 CacheUtils.ClearAllCache(_moduleRef);
             }
@@ -117,13 +117,14 @@ namespace RocketContentMod
                 string[] parameters;
                 parameters = new string[1];
                 parameters[0] = string.Format("{0}={1}", "ModuleId", ModuleId.ToString());
-                var settingsurl = Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", parameters).ToString() + "#msSpecificSettings";
+                var settingsurl = Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", parameters).ToString();
 
                 var userParams = new UserParams("ModuleID:" + ModuleId, true);
                 userParams.Set("editurl", EditUrl());
                 userParams.Set("settingsurl", settingsurl);
                 userParams.Set("appthemeurl", EditUrl("AppTheme"));
                 userParams.Set("adminpanelurl", EditUrl("AdminPanel"));
+                userParams.Set("recyclebinurl", EditUrl("RecycleBin"));                
                 userParams.Set("viewurl", Context.Request.Url.ToString());
 
                 strOut = RocketContentAPIUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "ViewEditButtons.cshtml") + strOut;
@@ -168,6 +169,7 @@ namespace RocketContentMod
                 var actions = new ModuleActionCollection();
                 actions.Add(GetNextActionID(), Localization.GetString("EditModule", this.LocalResourceFile), "", "", "edit.svg", EditUrl(), false, SecurityAccessLevel.Edit, true, false);
                 actions.Add(GetNextActionID(), Localization.GetString("apptheme", this.LocalResourceFile), "", "", "edit_app.svg", EditUrl("AppTheme"), false, SecurityAccessLevel.Admin, true, false);
+                actions.Add(GetNextActionID(), Localization.GetString("recyclebin", this.LocalResourceFile), "", "", "recycling.svg", EditUrl("RecycleBin"), false, SecurityAccessLevel.Admin, true, false);
                 actions.Add(GetNextActionID(), Localization.GetString("clearcache", this.LocalResourceFile), "", "", "clear_cache.svg", Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID).ToString() + "?action=clearcache", false, SecurityAccessLevel.Admin, true, false);
                 actions.Add(GetNextActionID(), Localization.GetString("recycleapppool", this.LocalResourceFile), "", "", "restart_app.svg", Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID).ToString() + "?action=recycleapppool", false, SecurityAccessLevel.Host, true, false);
 
