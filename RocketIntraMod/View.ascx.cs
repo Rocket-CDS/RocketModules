@@ -24,6 +24,8 @@ using DotNetNuke.Abstractions;
 using RazorEngine.Text;
 using System.Security.Cryptography;
 using System.Text;
+using System.Reflection;
+using DotNetNuke.Common.Lists;
 
 namespace RocketIntraMod
 {
@@ -32,6 +34,7 @@ namespace RocketIntraMod
         private string _systemkey;
         private string _moduleRef;
         private SessionParams _sessionParam;
+        private ModuleContentLimpet _moduleSettings;
 
         protected override void OnInit(EventArgs e)
         {
@@ -71,6 +74,13 @@ namespace RocketIntraMod
                 DNNrocketUtils.SetCookieValue("simplisity_language", lang);
                 DNNrocketUtils.SetCookieValue("simplisity_editlanguage", lang);
 
+                _moduleSettings = new ModuleContentLimpet(PortalId, _moduleRef, _systemkey, ModuleId, TabId);
+
+                if (_moduleSettings.GetSettingInt("displaytype") == 1 && !UserUtils.IsSuperUser())
+                {
+                    Response.Redirect(EditUrl("AdminPanel").ToString(), false);
+                    Context.ApplicationInstance.CompleteRequest(); // do this to stop iis throwing error
+                }
 
             }
             catch (Exception ex)
@@ -85,12 +95,50 @@ namespace RocketIntraMod
             if (UserId > 0) hasEditAccess = DotNetNuke.Security.Permissions.ModulePermissionController.CanEditModuleContent(this.ModuleConfiguration);
             if (hasEditAccess)
             {
+                string[] parameters;
+                parameters = new string[1];
+                parameters[0] = string.Format("{0}={1}", "ModuleId", ModuleId.ToString());
+                var settingsurl = Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", parameters).ToString();
                 var userParams = new UserParams("ModuleID:" + ModuleId, true);
                 userParams.Set("adminpanelurl", EditUrl("AdminPanel"));
+                userParams.Set("settingsurl", settingsurl);
                 userParams.Set("viewurl", Context.Request.Url.ToString());
             }
 
-            var strOut = RocketIntraUtils.DisplaySystemView(PortalId, _systemkey, _moduleRef,  _sessionParam, "modulewelcome.cshtml");
+            var strOut = "";
+            if (_moduleSettings.Record.GetXmlPropertyInt("genxml/settings/displaytype") == 0)
+            {
+                strOut = RocketIntraUtils.DisplaySystemView(PortalId, _systemkey, _moduleRef, _sessionParam, "modulewelcome.cshtml");
+            }
+            if (_moduleSettings.Record.GetXmlPropertyInt("genxml/settings/displaytype") == 1)
+            {
+                strOut = RocketIntraUtils.DisplaySystemView(PortalId, _systemkey, _moduleRef, _sessionParam, "moduleadminbutton.cshtml");
+            }
+            if (_moduleSettings.GetSettingInt("displaytype") == 2)
+            {
+                var paramCmd = _moduleSettings.GetSetting("cmd");
+                if (paramCmd.Contains("_"))
+                {
+                    var systemkey = _moduleSettings.GetSetting("systemkey");
+                    if (systemkey == "") systemkey = paramCmd.Split('_')[0];
+                    var interfacekey = _moduleSettings.GetSetting("interfacekey");
+                    if (interfacekey == "") interfacekey = paramCmd.Split('_')[0];
+
+                    var systemData = SystemSingleton.Instance(systemkey);
+                    var rocketInterface = new RocketInterface(systemData.SystemInfo, interfacekey);
+                    var paramInfo = new SimplisityInfo();
+                    paramInfo.SetXmlProperty("genxml/hidden/moduleref", _moduleRef);
+                    paramInfo.SetXmlProperty("genxml/hidden/moduleid", ModuleId.ToString());
+                    paramInfo.SetXmlProperty("genxml/hidden/tabid", TabId.ToString());
+                    var returnDictionary = DNNrocketUtils.GetProviderReturn(paramCmd, systemData.SystemInfo, rocketInterface, new SimplisityInfo(), paramInfo, ControlPath, "");
+
+                    if (returnDictionary.ContainsKey("outputhtml"))
+                    {
+                        strOut = (string)returnDictionary["outputhtml"];
+                    }
+                }
+            }
+
             var lit = new Literal();
             lit.Text = strOut;
             phData.Controls.Add(lit);

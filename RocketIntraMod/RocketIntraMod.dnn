@@ -78,6 +78,16 @@
 										<helpUrl />
 										<supportsPopUps>False</supportsPopUps>
 									</moduleControl>
+									<moduleControl>
+										<controlKey>Settings</controlKey>
+										<controlSrc>DesktopModules/RocketModules/RocketIntraMod/Settings.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle>Settings</controlTitle>
+										<controlType>Admin</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+									</moduleControl>
 								</moduleControls>
 							</moduleDefinition>
 						</moduleDefinitions>
