@@ -76,7 +76,7 @@ namespace RocketIntraMod
 
                 _moduleSettings = new ModuleContentLimpet(PortalId, _moduleRef, _systemkey, ModuleId, TabId);
 
-                if (_moduleSettings.GetSettingInt("displaytype") == 1 && !UserUtils.IsSuperUser())
+                if ((_moduleSettings.GetSettingInt("displaytype") == 0 || _moduleSettings.GetSettingInt("displaytype") == 1) && !UserUtils.IsSuperUser())
                 {
                     Response.Redirect(EditUrl("AdminPanel").ToString(), false);
                     Context.ApplicationInstance.CompleteRequest(); // do this to stop iis throwing error
