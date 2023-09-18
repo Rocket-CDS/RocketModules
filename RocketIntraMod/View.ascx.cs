@@ -117,26 +117,7 @@ namespace RocketIntraMod
             if (_moduleSettings.GetSettingInt("displaytype") == 2)
             {
                 var paramCmd = _moduleSettings.GetSetting("cmd");
-                if (paramCmd.Contains("_"))
-                {
-                    var systemkey = _moduleSettings.GetSetting("systemkey");
-                    if (systemkey == "") systemkey = paramCmd.Split('_')[0];
-                    var interfacekey = _moduleSettings.GetSetting("interfacekey");
-                    if (interfacekey == "") interfacekey = paramCmd.Split('_')[0];
-
-                    var systemData = SystemSingleton.Instance(systemkey);
-                    var rocketInterface = new RocketInterface(systemData.SystemInfo, interfacekey);
-                    var paramInfo = new SimplisityInfo();
-                    paramInfo.SetXmlProperty("genxml/hidden/moduleref", _moduleRef);
-                    paramInfo.SetXmlProperty("genxml/hidden/moduleid", ModuleId.ToString());
-                    paramInfo.SetXmlProperty("genxml/hidden/tabid", TabId.ToString());
-                    var returnDictionary = DNNrocketUtils.GetProviderReturn(paramCmd, systemData.SystemInfo, rocketInterface, new SimplisityInfo(), paramInfo, ControlPath, "");
-
-                    if (returnDictionary.ContainsKey("outputhtml"))
-                    {
-                        strOut = (string)returnDictionary["outputhtml"];
-                    }
-                }
+                strOut = RocketIntraUtils.CallProviderAPI(paramCmd, _moduleRef, ModuleId, TabId);
             }
 
             var lit = new Literal();
