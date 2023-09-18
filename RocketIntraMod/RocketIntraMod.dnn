@@ -1,6 +1,6 @@
 ﻿<dotnetnuke type="Package" version="5.0">
 	<packages>
-		<package name="RocketIntraMod" type="Module" version="1.0.0">
+		<package name="RocketIntraMod" type="Module" version="1.0.1">
 			<friendlyName>RocketIntra</friendlyName>
 			<description>Rocket Intra Module</description>
 			<iconFile>~/DesktopModules/RocketModules/RocketIntraMod/icon.png</iconFile>
