@@ -34,7 +34,7 @@ namespace RocketEcommerceMod
         private bool _hasEditAccess;
         private string _moduleRef;
         private SessionParams _sessionParam;
-
+        private SimplisityInfo _paramInfo;
         protected override void OnInit(EventArgs e)
         {
             try
@@ -62,14 +62,14 @@ namespace RocketEcommerceMod
 
                 var context = HttpContext.Current;
                 var urlparams = new Dictionary<string,string>();
-                var paramInfo = new SimplisityInfo();
+                _paramInfo = new SimplisityInfo();
                 // get all query string params
                 foreach (string key in context.Request.QueryString.AllKeys)
                 {
                     if (key != null)
                     {
                         var keyValue = context.Request.QueryString[key];
-                        paramInfo.SetXmlProperty("genxml/urlparams/" + key.ToLower(), keyValue);
+                        _paramInfo.SetXmlProperty("genxml/urlparams/" + key.ToLower(), keyValue);
                         urlparams.Add(key, keyValue);
                     }
                 }
@@ -80,14 +80,14 @@ namespace RocketEcommerceMod
                     try
                     {
                         var simplisity_sessionparams = SimplisityJson.DeserializeJson(jsonparams, "cookie");
-                        paramInfo.AddXmlNode(simplisity_sessionparams.XMLData, "cookie", "genxml");
+                        _paramInfo.AddXmlNode(simplisity_sessionparams.XMLData, "cookie", "genxml");
                     }
                     catch (Exception)
                     {
                         // ignore
                     }
                 }
-                _sessionParam = new SessionParams(paramInfo);
+                _sessionParam = new SessionParams(_paramInfo);
                 _sessionParam.TabId = TabId;
                 _sessionParam.ModuleId = ModuleId;
                 _sessionParam.ModuleRef = _moduleRef;
@@ -125,8 +125,9 @@ namespace RocketEcommerceMod
         {
             var moduleSettings = new ModuleContentLimpet(PortalId, _moduleRef, _sessionParam.ModuleId, _sessionParam.TabId);
             if (moduleSettings.InjectJQuery) JavaScript.RequestRegistration(CommonJs.jQuery);
+            _sessionParam.Set("rtncmd", RequestParam(Context, "cmd")); // check if we have a bank return
 
-            var strOut = RocketEcommerceAPIUtils.DisplayView(PortalId, _systemkey, _moduleRef,  _sessionParam);
+            var strOut = RocketEcommerceAPIUtils.DisplayView(PortalId, _systemkey, _moduleRef,  _sessionParam, _paramInfo);
             if (_hasEditAccess)
             {
                 var articleid = RequestParam(Context, "pid");
