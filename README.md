@@ -4,7 +4,7 @@ This is a collection of modules that use RocketCDS.
 
 # RocketContentAPI modules
 
-## RocketContentMod
+## RocketContentMod v1.0.1.1
 
 RocketContentMod is a module that connects to the RocketContentAPI.  AppThemes are selected in the module settings.
 
