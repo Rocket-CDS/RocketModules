@@ -52,7 +52,7 @@
 							<supportedFeature type="Portable" />
 							<supportedFeature type="Searchable" />
 							<supportedFeature type="Upgradeable" />
-            </supportedFeatures>
+			            </supportedFeatures>
 						<moduleDefinitions>
 							<moduleDefinition>
 								<friendlyName>RocketContent</friendlyName>
@@ -113,7 +113,16 @@
 							</moduleDefinition>
 						</moduleDefinitions>
 					</desktopModule>
-				</component>
+				  <eventMessage>
+					  <processorType>DotNetNuke.Entities.Modules.EventMessageProcessor, DotNetNuke</processorType>
+					  <processorCommand>UpgradeModule</processorCommand>
+					  <attributes>
+						  <businessControllerClass>DNNrocketAPI.Components.DNNrocketModuleController,DNNrocketAPI</businessControllerClass>
+						  <desktopModuleID>[DESKTOPMODULEID]</desktopModuleID>
+						  <upgradeVersionsList>01.00.00</upgradeVersionsList>
+					  </attributes>
+				  </eventMessage>
+		  </component>
 
 			</components>
 		</package>	
