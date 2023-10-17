@@ -56,6 +56,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RocketIntraMod", "RocketInt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RocketIntra", "..\DNNrocketModules\RocketIntra\RocketIntra.csproj", "{96B7304C-D82A-42B7-BE31-DAFE12BC7872}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RocketBlogMod", "RocketBlogMod\RocketBlogMod.csproj", "{BF570339-FFC6-447C-B1DA-DE095678BF82}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RocketBlogAPI", "..\DNNrocketModules\RocketBlogAPI\RocketBlogAPI.csproj", "{00A7DB56-BB68-43AE-8E74-011057B836C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Comp All|Any CPU = Comp All|Any CPU
@@ -245,6 +249,26 @@ Global
 		{96B7304C-D82A-42B7-BE31-DAFE12BC7872}.Razor|Any CPU.ActiveCfg = Release|Any CPU
 		{96B7304C-D82A-42B7-BE31-DAFE12BC7872}.Razor|Any CPU.Build.0 = Release|Any CPU
 		{96B7304C-D82A-42B7-BE31-DAFE12BC7872}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF570339-FFC6-447C-B1DA-DE095678BF82}.Comp All|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF570339-FFC6-447C-B1DA-DE095678BF82}.Comp All|Any CPU.Build.0 = Debug|Any CPU
+		{BF570339-FFC6-447C-B1DA-DE095678BF82}.CompAll|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF570339-FFC6-447C-B1DA-DE095678BF82}.CompAll|Any CPU.Build.0 = Debug|Any CPU
+		{BF570339-FFC6-447C-B1DA-DE095678BF82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF570339-FFC6-447C-B1DA-DE095678BF82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF570339-FFC6-447C-B1DA-DE095678BF82}.Razor|Any CPU.ActiveCfg = Release|Any CPU
+		{BF570339-FFC6-447C-B1DA-DE095678BF82}.Razor|Any CPU.Build.0 = Release|Any CPU
+		{BF570339-FFC6-447C-B1DA-DE095678BF82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF570339-FFC6-447C-B1DA-DE095678BF82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00A7DB56-BB68-43AE-8E74-011057B836C4}.Comp All|Any CPU.ActiveCfg = Debug|Any CPU
+		{00A7DB56-BB68-43AE-8E74-011057B836C4}.Comp All|Any CPU.Build.0 = Debug|Any CPU
+		{00A7DB56-BB68-43AE-8E74-011057B836C4}.CompAll|Any CPU.ActiveCfg = Debug|Any CPU
+		{00A7DB56-BB68-43AE-8E74-011057B836C4}.CompAll|Any CPU.Build.0 = Debug|Any CPU
+		{00A7DB56-BB68-43AE-8E74-011057B836C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00A7DB56-BB68-43AE-8E74-011057B836C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00A7DB56-BB68-43AE-8E74-011057B836C4}.Razor|Any CPU.ActiveCfg = Release|Any CPU
+		{00A7DB56-BB68-43AE-8E74-011057B836C4}.Razor|Any CPU.Build.0 = Release|Any CPU
+		{00A7DB56-BB68-43AE-8E74-011057B836C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00A7DB56-BB68-43AE-8E74-011057B836C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

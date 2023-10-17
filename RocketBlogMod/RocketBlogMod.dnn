@@ -1,11 +1,11 @@
 ﻿<dotnetnuke type="Package" version="5.0">
 
 	<packages>
-		<package name="RocketBusinessMod" type="Module" version="1.0.0">
-			<friendlyName>RocketBusiness</friendlyName>
-			<DefinitionName>rocketbusinessapi</DefinitionName>
-			<description>Rocket Business Module</description>
-			<iconFile>~/DesktopModules/RocketModules/RocketDirectoryMod/icon.png</iconFile>
+		<package name="RocketBlogMod" type="Module" version="1.0.0">
+			<friendlyName>RocketBlog</friendlyName>
+			<DefinitionName>rocketblogapi</DefinitionName>
+			<description>Rocket Blog Module</description>
+			<iconFile>~/DesktopModules/RocketModules/RocketBlogMod/icon.png</iconFile>
 			<owner>
 				<name></name>
 				<organization>RocketCDS</organization>
@@ -28,16 +28,17 @@
 
 				<component type="ResourceFile">
 					<resourceFiles>
-						<basePath>DesktopModules\RocketModules\RocketBusinessMod</basePath>
+						<basePath>DesktopModules\RocketModules\RocketBlogMod</basePath>
 						<resourceFile>
 							<name>Resource.zip</name>
 						</resourceFile>
 					</resourceFiles>
 				</component>
 
+
 				<component type="Module">
 					<desktopModule>
-						<moduleName>RocketBusinessMod</moduleName>
+						<moduleName>RocketBlogMod</moduleName>
 						<foldername>RocketModules/RocketDirectoryMod</foldername>
 						<businessControllerClass>DNNrocketAPI.Components.DNNrocketModuleController,DNNrocketAPI</businessControllerClass>
 						<supportedFeatures>
@@ -45,7 +46,7 @@
 						</supportedFeatures>
 						<moduleDefinitions>
 							<moduleDefinition>
-								<friendlyName>RocketBusiness</friendlyName>
+								<friendlyName>RocketBlog</friendlyName>
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>
 									<moduleControl>

@@ -26,6 +26,15 @@
 			</dependencies>
 			<components>
 
+				<component type="ResourceFile">
+					<resourceFiles>
+						<basePath>DesktopModules\RocketModules\RocketLibraryMod</basePath>
+						<resourceFile>
+							<name>Resource.zip</name>
+						</resourceFile>
+					</resourceFiles>
+				</component>
+
 				<component type="Module">
 					<desktopModule>
 						<moduleName>RocketLibraryMod</moduleName>
