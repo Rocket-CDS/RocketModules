@@ -47,10 +47,10 @@ namespace RocketDocsMod
                 if (UserId > 0) _hasEditAccess = DotNetNuke.Security.Permissions.ModulePermissionController.CanEditModuleContent(this.ModuleConfiguration);
 
 
-                var strHeader1 = LocalUtils.ReadTemplate("viewlastheader.cshtml");
+                var strHeader1 = RocketDocsModUtils.ReadTemplate("viewlastheader.cshtml");
                 PageIncludes.IncludeTextInHeader(Page, strHeader1);
 
-                var strHeader2 = LocalUtils.ReadTemplate("viewfirstheader.cshtml");
+                var strHeader2 = RocketDocsModUtils.ReadTemplate("viewfirstheader.cshtml");
                 PageIncludes.IncludeTextInHeaderAt(Page, strHeader2, 0); 
 
             }
@@ -90,10 +90,16 @@ namespace RocketDocsMod
             var portalContent = new PortalContentLimpet(PortalId, DNNrocketUtils.GetCurrentCulture());             
             var strOut = "";
             var articleData = new ArticleLimpet(PortalId, ModuleId.ToString(), DNNrocketUtils.GetCurrentCulture());
-            var razorTempl = LocalUtils.ReadTemplate("view.cshtml");
+            var razorTempl = RocketDocsModUtils.ReadTemplate("view.cshtml");
             var passSettings = new Dictionary<string, string>();
             passSettings.Add("hasedit", _hasEditAccess.ToString());
             passSettings.Add("moduleid", ModuleId.ToString());
+
+            if (!UserUtils.IsEditor())
+            {
+                var mdtext = articleData.Info.GetXmlProperty("genxml/lang/genxml/textbox/summarykbase");
+                articleData.Info.SetXmlProperty("genxml/lang/genxml/textbox/summarykbase", RocketDocsUtils.ReplaceInjectTokens(mdtext));
+            }
 
             var pr = RenderRazorUtils.RazorProcessData(razorTempl, articleData, null, passSettings, null, true);
             if (pr.StatusCode != "00")

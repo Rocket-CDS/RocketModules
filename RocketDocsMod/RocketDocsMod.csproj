@@ -62,7 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\LocalUtils.cs" />
+    <Compile Include="Components\RocketDocsModUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View.ascx.cs">
       <DependentUpon>View.ascx</DependentUpon>
@@ -99,6 +99,7 @@
     <None Include="app.config" />
     <None Include="DNNpackager.dnnpack" />
     <None Include="packages.config" />
+    <None Include="README.md" />
     <None Include="RocketDocsMod.dnn" />
     <None Include="Themes\config-w3\1.0\default\View.cshtml" />
     <None Include="Themes\config-w3\1.0\default\ViewLastHeader.cshtml" />

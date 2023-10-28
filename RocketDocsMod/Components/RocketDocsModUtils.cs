@@ -28,7 +28,7 @@ using System.Web.UI.WebControls;
 
 namespace RocketDocsMod
 {
-    public class LocalUtils
+    public class RocketDocsModUtils
     {
         public static void IncludeTextInHeader(Page page, string TextToInclude)
         {
@@ -53,5 +53,6 @@ namespace RocketDocsMod
             var razorTemplateFileMapPath = DNNrocketUtils.MapPath("/DesktopModules/RocketModules/RocketDocsMod/Themes/config-w3/1.0/default/" + template);
             return FileSystemUtils.ReadFile(razorTemplateFileMapPath);
         }
+
     }
 }
