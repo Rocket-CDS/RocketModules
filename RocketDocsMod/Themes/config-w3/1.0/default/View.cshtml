@@ -27,6 +27,9 @@
                 <span class="w3-padding w3-button w3-green a-savebutton simplisity_click" s-before="summarykbaseSave" s-reload="true" s-cmd="remote_editsave" s-post="#a-articledata" s-fields='{"moduleref":"@Model.GetSetting("moduleid")"}' s-index="0">
                     @ButtonText(ButtonTypes.save)
                 </span>
+                <span class="w3-padding w3-button w3-grey a-savebutton simplisity_click" s-reload="true" s-cmd="remote_clearcache" s-index="0">
+                    @ButtonIcon(ButtonTypes.refresh)
+                </span>
                 <span class="w3-padding w3-button" onclick="$('#summarykbase').toggle(); $('.ck-editor').toggle(); $('#markdowntext').toggle();">
                     <span class="material-icons editicon">
                         chrome_reader_mode
