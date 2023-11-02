@@ -104,7 +104,13 @@ namespace RocketEcommerceMod
                     var id = dep.GetXmlProperty("genxml/id");
                     var urlstr = dep.GetXmlProperty("genxml/url");
                     if (ctrltype == "css") PageIncludes.IncludeCssFile(Page, id, urlstr);
-                    if (ctrltype == "js") PageIncludes.IncludeJsFile(Page, id, urlstr);
+                    if (ctrltype == "js")
+                    {
+                        if (urlstr.ToLower() == "{jquery}")
+                            JavaScript.RequestRegistration(CommonJs.jQuery);
+                        else
+                            PageIncludes.IncludeJsFile(Page, id, urlstr);
+                    }
                 }
 
                 var strHeader2 = RocketEcommerceAPIUtils.ViewHeader(PortalId, _systemkey, _moduleRef, _sessionParam, "viewlastheader.cshtml");

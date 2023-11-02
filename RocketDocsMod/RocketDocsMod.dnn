@@ -3,7 +3,7 @@
 		<package name="RocketDocsMod" type="Module" version="1.0.0">
 			<friendlyName>RocketDocsMod</friendlyName>
 			<description>RocketDocsMod</description>
-			<iconFile />
+			<iconFile>~/DesktopModules/RocketModules/RocketContentMod/icon.png</iconFile>
 			<owner>
 				<name></name>
 				<organization>RocketDocsMod</organization>
@@ -50,8 +50,9 @@
 						<businessControllerClass>DNNrocketAPI.Components.DNNrocketModuleController,DNNrocketAPI</businessControllerClass>
 						<supportedFeatures>
 							<supportedFeature type="Portable" />
-              <supportedFeature type="Upgradeable" />
-            </supportedFeatures>
+				            <supportedFeature type="Upgradeable" />
+							<supportedFeature type="Searchable" />
+						</supportedFeatures>
 						<moduleDefinitions>
 							<moduleDefinition>
 								<friendlyName>RocketDocsMod</friendlyName>
@@ -68,7 +69,7 @@
 										<supportsPopUps>False</supportsPopUps>
 										<viewOrder>0</viewOrder>
 									</moduleControl>
-                </moduleControls>
+				                </moduleControls>
 							</moduleDefinition>
 						</moduleDefinitions>
 					</desktopModule>

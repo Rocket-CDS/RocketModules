@@ -44,8 +44,21 @@
 
             <div class="w3-padding">
                 <div class="w3-row">
-                    <div class="w3-row w3-padding-small">
-                        @TextBox(info, "genxml/lang/genxml/textbox/subjectkbase", " class='w3-input w3-border' autocomplete='off' ", "", false, 0)
+                    <div class="w3-row ">
+                        <div class="w3-threequarter w3-padding-small">
+                            @TextBox(info, "genxml/lang/genxml/textbox/subjectkbase", " class='w3-input w3-border' autocomplete='off' placeholder='" + ResourceKey("DNNrocket.title") + "....' ", "", false, 0)
+                        </div>
+                        <div class="w3-quarter w3-padding-small">
+                            @CheckBox(info, "genxml/textbox/hidesubject", "&nbsp;" + ResourceKey("DNNrocket.hidden"), " class='w3-check '")
+                        </div>
+                    </div>
+                    <div class="w3-row">
+                        <div class="w3-threequarter w3-padding-small">
+                            @TextArea(info, "genxml/lang/genxml/textbox/summarysearch", "  class='w3-input w3-border' placeholder='" + ResourceKey("DNNrocket.summary") + "...'  ")
+                        </div>
+                        <div class="w3-quarter w3-padding-small">
+                            @CheckBox(info, "genxml/textbox/hidesummary", "&nbsp;" + ResourceKey("DNNrocket.hidden"), " class='w3-check '")
+                        </div>
                     </div>
                     <div class="w3-row w3-padding-small">
                         <div id="markdowntext" style="display:none;" class="w3-large">Markdown Text (Tables are not supported)</div>
@@ -144,19 +157,26 @@
         }
         else
         {
-            <h1>@info.GetXmlProperty("genxml/lang/genxml/textbox/subjectkbase")</h1>
-            <div class="w3-row w3-padding-small">
-                <div id="summarykbasehtml">
-                </div>
-                @TextArea(info, "genxml/lang/genxml/textbox/summarykbase", "  style='width:100%;height: 100vh;display:none;' ")
-            </div>
+            if (!info.GetXmlPropertyBool("genxml/textbox/hidesubject"))
+            {
+                <h1>@info.GetXmlProperty("genxml/lang/genxml/textbox/subjectkbase")</h1>
+            }
+    <div class="w3-row w3-padding-small">
+        @if (!info.GetXmlPropertyBool("genxml/textbox/hidesummary"))
+        {
+            <p>@info.GetXmlProperty("genxml/lang/genxml/textbox/summarysearch")</p>
+        }
+        <div id="summarykbasehtml">
+        </div>
+        @TextArea(info, "genxml/lang/genxml/textbox/summarykbase", "  style='width:100%;height: 100vh;display:none;' ")
+    </div>
 
             <script>
 
                 function summarykbaseShow() {
                     var converter = new showdown.Converter(),
-                    text = $('#summarykbase').text(),
-                    html = converter.makeHtml(text);
+                        text = $('#summarykbase').text(),
+                        html = converter.makeHtml(text);
                     $('#summarykbasehtml').html(html);
                 }
                 $(document).ready(function () {

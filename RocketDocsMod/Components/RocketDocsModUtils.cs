@@ -51,7 +51,13 @@ namespace RocketDocsMod
         public static string ReadTemplate(string template)
         {
             var razorTemplateFileMapPath = DNNrocketUtils.MapPath("/DesktopModules/RocketModules/RocketDocsMod/Themes/config-w3/1.0/default/" + template);
-            return FileSystemUtils.ReadFile(razorTemplateFileMapPath);
+            var rtn = (string)CacheUtils.GetCache(razorTemplateFileMapPath);
+            if (String.IsNullOrEmpty(rtn))
+            {
+                rtn = FileSystemUtils.ReadFile(razorTemplateFileMapPath);
+                CacheUtils.SetCache(razorTemplateFileMapPath, rtn);
+            }
+            return rtn;
         }
 
     }

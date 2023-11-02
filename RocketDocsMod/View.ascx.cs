@@ -98,7 +98,10 @@ namespace RocketDocsMod
             if (!UserUtils.IsEditor())
             {
                 var mdtext = articleData.Info.GetXmlProperty("genxml/lang/genxml/textbox/summarykbase");
-                articleData.Info.SetXmlProperty("genxml/lang/genxml/textbox/summarykbase", RocketDocsUtils.ReplaceInjectTokens(mdtext));
+                mdtext = RocketDocsUtils.ReplaceInjectTokens(mdtext);
+                mdtext = RocketDocsUtils.ReplaceInjectRazorTokens(mdtext);
+                // Don't save summaykbase, only display
+                articleData.Info.SetXmlProperty("genxml/lang/genxml/textbox/summarykbase", mdtext);
             }
 
             var pr = RenderRazorUtils.RazorProcessData(razorTempl, articleData, null, passSettings, null, true);
