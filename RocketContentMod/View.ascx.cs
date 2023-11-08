@@ -118,7 +118,7 @@ namespace RocketContentMod
         {
             if (_moduleSettings.InjectJQuery) JavaScript.RequestRegistration(CommonJs.jQuery);
 
-            var strOut = RocketContentAPIUtils.DisplayView(PortalId, _systemkey, _moduleRef, _sessionParam.Get("rowkey"), _sessionParam, "view.cshtml", "loadsettings", _moduleSettings.DisableCache);
+            var strOut = RocketContentAPIUtils.DisplayView(PortalId, _systemkey, _moduleRef, "", _sessionParam, "view.cshtml", "loadsettings", _moduleSettings.DisableCache);
             if (strOut == "loadsettings")
             {
                 strOut = RocketContentAPIUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "ModuleSettingsMsg.cshtml");
