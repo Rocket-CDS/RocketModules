@@ -96,6 +96,7 @@ namespace RocketDirectoryMod
                 _sessionParam.UrlFriendly = DNNrocketUtils.NavigateURL(TabId, urlparams);
                 if (urlparams.ContainsKey("page") && GeneralUtils.IsNumeric(urlparams["page"])) _sessionParam.Page = Convert.ToInt32(urlparams["page"]);
 
+                var moduleSettings = new ModuleContentLimpet(PortalId, _moduleRef, _systemkey, _sessionParam.ModuleId, _sessionParam.TabId);
 
                 var strHeader1 = RocketDirectoryAPIUtils.ViewHeader(PortalId, _systemkey, _moduleRef, _sessionParam, "viewfirstheader.cshtml");
                 PageIncludes.IncludeTextInHeaderAt(Page, strHeader1, 0);
@@ -105,13 +106,18 @@ namespace RocketDirectoryMod
                     var ctrltype = dep.GetXmlProperty("genxml/ctrltype");
                     var id = dep.GetXmlProperty("genxml/id");
                     var urlstr = dep.GetXmlProperty("genxml/url");
-                    if (ctrltype == "css") PageIncludes.IncludeCssFile(Page, id, urlstr);
-                    if (ctrltype == "js")
+                    var ecofriendly = dep.GetXmlPropertyBool("genxml/ecofriendly");
+                    if (dep.GetXmlProperty("genxml/ecofriendly") == "") ecofriendly = true; // inject by default.
+                    if (ecofriendly == moduleSettings.ECOMode || moduleSettings.ECOMode == false)
                     {
-                        if (urlstr.ToLower() == "{jquery}")
-                            JavaScript.RequestRegistration(CommonJs.jQuery);
-                        else
-                            PageIncludes.IncludeJsFile(Page, id, urlstr);
+                        if (ctrltype == "css") PageIncludes.IncludeCssFile(Page, id, urlstr);
+                        if (ctrltype == "js")
+                        {
+                            if (urlstr.ToLower() == "{jquery}")
+                                JavaScript.RequestRegistration(CommonJs.jQuery);
+                            else
+                                PageIncludes.IncludeJsFile(Page, id, urlstr);
+                        }
                     }
                 }
 

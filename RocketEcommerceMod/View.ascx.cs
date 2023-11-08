@@ -95,6 +95,8 @@ namespace RocketEcommerceMod
                 _sessionParam.Url = context.Request.Url.ToString();
                 _sessionParam.UrlFriendly = DNNrocketUtils.NavigateURL(TabId, urlparams);
 
+                var moduleSettings = new ModuleContentLimpet(PortalId, _moduleRef, _sessionParam.ModuleId, _sessionParam.TabId);
+
                 var strHeader1 = RocketEcommerceAPIUtils.ViewHeader(PortalId, _systemkey, _moduleRef, _sessionParam, "viewfirstheader.cshtml");
                 PageIncludes.IncludeTextInHeaderAt(Page, strHeader1, 0);
 
@@ -103,13 +105,17 @@ namespace RocketEcommerceMod
                     var ctrltype = dep.GetXmlProperty("genxml/ctrltype");
                     var id = dep.GetXmlProperty("genxml/id");
                     var urlstr = dep.GetXmlProperty("genxml/url");
-                    if (ctrltype == "css") PageIncludes.IncludeCssFile(Page, id, urlstr);
-                    if (ctrltype == "js")
+                    var ecofriendly = dep.GetXmlPropertyBool("genxml/ecofriendly");
+                    if (ecofriendly == moduleSettings.ECOMode || moduleSettings.ECOMode == false)
                     {
-                        if (urlstr.ToLower() == "{jquery}")
-                            JavaScript.RequestRegistration(CommonJs.jQuery);
-                        else
-                            PageIncludes.IncludeJsFile(Page, id, urlstr);
+                        if (ctrltype == "css") PageIncludes.IncludeCssFile(Page, id, urlstr);
+                        if (ctrltype == "js")
+                        {
+                            if (urlstr.ToLower() == "{jquery}")
+                                JavaScript.RequestRegistration(CommonJs.jQuery);
+                            else
+                                PageIncludes.IncludeJsFile(Page, id, urlstr);
+                        }
                     }
                 }
 

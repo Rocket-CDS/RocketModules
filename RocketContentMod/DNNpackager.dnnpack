@@ -1,5 +1,5 @@
 <root>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
   <websitedestrelpath>/DesktopModules/RocketModules/RocketContentMod</websitedestrelpath>
   <websitedestbinrelpath>\bin</websitedestbinrelpath>
   <!-- Include only files that match the regular expression -->

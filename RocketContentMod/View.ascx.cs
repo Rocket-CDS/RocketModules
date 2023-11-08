@@ -33,6 +33,7 @@ namespace RocketContentMod
         private bool _hasEditAccess;
         private string _moduleRef;
         private SessionParams _sessionParam;
+        private ModuleContentLimpet _moduleSettings;
 
         protected override void OnInit(EventArgs e)
         {
@@ -44,7 +45,12 @@ namespace RocketContentMod
                 _moduleRef = PortalId + "_ModuleID_" + ModuleId;
 
                 var cmd = RequestParam(Context, "action");
-                if (cmd == "clearcache" && UserUtils.IsAdministrator()) CacheUtils.ClearAllCache(_moduleRef);
+                if (cmd == "clearcache" && UserUtils.IsAdministrator())
+                {
+                    CacheUtils.ClearAllCache(_moduleRef);
+                    CacheUtils.ClearAllCache("DNNrocketThumb");
+                    CacheFileUtils.ClearFileCache(PortalId);
+                }
                 if (cmd == "recycleapppool" && UserUtils.IsSuperUser())
                 {
                     DNNrocketUtils.RecycleApplicationPool();
@@ -75,7 +81,9 @@ namespace RocketContentMod
                 _sessionParam.ModuleRef = _moduleRef;
                 _sessionParam.CultureCode = DNNrocketUtils.GetCurrentCulture();
 
-                var strHeader1 = RocketContentAPIUtils.DisplayView(PortalId, _systemkey, _moduleRef, "", _sessionParam, "viewfirstheader.cshtml");
+                _moduleSettings = new ModuleContentLimpet(PortalId, _moduleRef, _systemkey, _sessionParam.ModuleId, _sessionParam.TabId);
+
+                var strHeader1 = RocketContentAPIUtils.DisplayView(PortalId, _systemkey, _moduleRef, "", _sessionParam, "viewfirstheader.cshtml","", _moduleSettings.DisableCache);
                 PageIncludes.IncludeTextInHeaderAt(Page, strHeader1, 0);
 
                 foreach (var dep in RocketContentAPIUtils.DependanciesList(PortalId, _moduleRef, _sessionParam))
@@ -83,17 +91,21 @@ namespace RocketContentMod
                     var ctrltype = dep.GetXmlProperty("genxml/ctrltype");
                     var id = dep.GetXmlProperty("genxml/id");
                     var urlstr = dep.GetXmlProperty("genxml/url");
-                    if (ctrltype == "css") PageIncludes.IncludeCssFile(Page, id, urlstr);
-                    if (ctrltype == "js")
+                    var ecofriendly = dep.GetXmlPropertyBool("genxml/ecofriendly");
+                    if (ecofriendly == _moduleSettings.ECOMode || _moduleSettings.ECOMode == false)
                     {
-                        if (urlstr.ToLower() == "{jquery}")
-                            JavaScript.RequestRegistration(CommonJs.jQuery);
-                        else
-                            PageIncludes.IncludeJsFile(Page, id, urlstr);
+                        if (ctrltype == "css") PageIncludes.IncludeCssFile(Page, id, urlstr);
+                        if (ctrltype == "js")
+                        {
+                            if (urlstr.ToLower() == "{jquery}")
+                                JavaScript.RequestRegistration(CommonJs.jQuery);
+                            else
+                                PageIncludes.IncludeJsFile(Page, id, urlstr);
+                        }
                     }
                 }
 
-                var strHeader2 = RocketContentAPIUtils.DisplayView(PortalId, _systemkey, _moduleRef, "", _sessionParam, "viewlastheader.cshtml");
+                var strHeader2 = RocketContentAPIUtils.DisplayView(PortalId, _systemkey, _moduleRef, "", _sessionParam, "viewlastheader.cshtml","", _moduleSettings.DisableCache);
                 PageIncludes.IncludeTextInHeader(Page, strHeader2);
 
             }
@@ -104,10 +116,9 @@ namespace RocketContentMod
         }
         protected override void OnPreRender(EventArgs e)
         {
-            var moduleSettings = new ModuleContentLimpet(PortalId, _moduleRef, _systemkey, _sessionParam.ModuleId, _sessionParam.TabId);
-            if (moduleSettings.InjectJQuery) JavaScript.RequestRegistration(CommonJs.jQuery);
+            if (_moduleSettings.InjectJQuery) JavaScript.RequestRegistration(CommonJs.jQuery);
 
-            var strOut = RocketContentAPIUtils.DisplayView(PortalId, _systemkey, _moduleRef, "", _sessionParam, "view.cshtml", "loadsettings");
+            var strOut = RocketContentAPIUtils.DisplayView(PortalId, _systemkey, _moduleRef, _sessionParam.Get("rowkey"), _sessionParam, "view.cshtml", "loadsettings", _moduleSettings.DisableCache);
             if (strOut == "loadsettings")
             {
                 strOut = RocketContentAPIUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "ModuleSettingsMsg.cshtml");
