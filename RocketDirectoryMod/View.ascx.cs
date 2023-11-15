@@ -30,10 +30,10 @@ namespace RocketDirectoryMod
     public partial class View : PortalModuleBase, IActionable
     {
         private string _systemkey;
-        //private const string _systemkey = "rocketbusinessapi";
         private bool _hasEditAccess;
         private string _moduleRef;
         private SessionParams _sessionParam;
+        private ModuleContentLimpet _moduleSettings;
 
         protected override void OnInit(EventArgs e)
         {
@@ -96,7 +96,7 @@ namespace RocketDirectoryMod
                 _sessionParam.UrlFriendly = DNNrocketUtils.NavigateURL(TabId, urlparams);
                 if (urlparams.ContainsKey("page") && GeneralUtils.IsNumeric(urlparams["page"])) _sessionParam.Page = Convert.ToInt32(urlparams["page"]);
 
-                var moduleSettings = new ModuleContentLimpet(PortalId, _moduleRef, _systemkey, _sessionParam.ModuleId, _sessionParam.TabId);
+                _moduleSettings = new ModuleContentLimpet(PortalId, _moduleRef, _systemkey, _sessionParam.ModuleId, _sessionParam.TabId);
 
                 var strHeader1 = RocketDirectoryAPIUtils.ViewHeader(PortalId, _systemkey, _moduleRef, _sessionParam, "viewfirstheader.cshtml");
                 PageIncludes.IncludeTextInHeaderAt(Page, strHeader1, 0);
@@ -108,7 +108,7 @@ namespace RocketDirectoryMod
                     var urlstr = dep.GetXmlProperty("genxml/url");
                     var ecofriendly = dep.GetXmlPropertyBool("genxml/ecofriendly");
                     if (dep.GetXmlProperty("genxml/ecofriendly") == "") ecofriendly = true; // inject by default.
-                    if (ecofriendly == moduleSettings.ECOMode || moduleSettings.ECOMode == false)
+                    if (dep.GetXmlProperty("genxml/ecofriendly") == "" || ecofriendly == _moduleSettings.ECOMode || _moduleSettings.ECOMode == false)
                     {
                         if (ctrltype == "css") PageIncludes.IncludeCssFile(Page, id, urlstr);
                         if (ctrltype == "js")
@@ -137,10 +137,19 @@ namespace RocketDirectoryMod
         }
         protected override void OnPreRender(EventArgs e)
         {
-            var moduleSettings = new ModuleContentLimpet(PortalId, _moduleRef, _systemkey, _sessionParam.ModuleId, _sessionParam.TabId);
-            if (moduleSettings.InjectJQuery) JavaScript.RequestRegistration(CommonJs.jQuery);
+            if (_moduleSettings.InjectJQuery) JavaScript.RequestRegistration(CommonJs.jQuery);
 
-            var strOut = RocketDirectoryAPIUtils.DisplayView(PortalId, _systemkey, _moduleRef,  _sessionParam);
+            var strOut = RocketDirectoryAPIUtils.DisplayView(PortalId, _systemkey, _moduleRef,  _sessionParam,"", "loadsettings");
+            if (strOut == "loadsettings")
+            {
+                strOut = RocketDirectoryAPIUtils.DisplaySystemView(PortalId, _systemkey, _moduleRef, _sessionParam, "ModuleSettingsMsg.cshtml", false);
+                string[] parameters;
+                parameters = new string[1];
+                parameters[0] = string.Format("{0}={1}", "ModuleId", ModuleId.ToString());
+                var redirectUrl = Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", parameters).ToString();
+                strOut = strOut.Replace("{redirecturl}", redirectUrl);
+                CacheUtils.ClearAllCache(_moduleRef);
+            }
             if (_hasEditAccess)
             {
                 var articleid = RequestParam(Context, "articleid");

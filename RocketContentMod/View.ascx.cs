@@ -92,7 +92,7 @@ namespace RocketContentMod
                     var id = dep.GetXmlProperty("genxml/id");
                     var urlstr = dep.GetXmlProperty("genxml/url");
                     var ecofriendly = dep.GetXmlPropertyBool("genxml/ecofriendly");
-                    if (ecofriendly == _moduleSettings.ECOMode || _moduleSettings.ECOMode == false)
+                    if (dep.GetXmlProperty("genxml/ecofriendly") == "" || ecofriendly == _moduleSettings.ECOMode || _moduleSettings.ECOMode == false)
                     {
                         if (ctrltype == "css") PageIncludes.IncludeCssFile(Page, id, urlstr);
                         if (ctrltype == "js")

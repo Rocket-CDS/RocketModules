@@ -71,6 +71,26 @@
 										<helpUrl />
 										<supportsPopUps>False</supportsPopUps>
 									</moduleControl>
+									<moduleControl>
+										<controlKey>AppTheme</controlKey>
+										<controlSrc>DesktopModules/RocketModules/RocketDirectoryMod/AppTheme.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle>AppTheme</controlTitle>
+										<controlType>Admin</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+									</moduleControl>
+									<moduleControl>
+										<controlKey>AdminPanel</controlKey>
+										<controlSrc>DesktopModules/RocketModules/RocketDirectoryMod/AdminPanel.ascx</controlSrc>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle>AdminPanel</controlTitle>
+										<controlType>Edit</controlType>
+										<iconFile />
+										<helpUrl />
+										<supportsPopUps>False</supportsPopUps>
+									</moduleControl>
 								</moduleControls>
 							</moduleDefinition>
 						</moduleDefinitions>
