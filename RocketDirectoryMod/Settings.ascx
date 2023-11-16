@@ -11,6 +11,7 @@
     .material-icons { vertical-align: middle; }
 </style>
 
+<asp:PlaceHolder ID="phData2" runat="server"></asp:PlaceHolder>
 <div id="simplisity_startpanel" class="simplisity_panel">
     <asp:PlaceHolder ID="phData" runat="server"></asp:PlaceHolder>
 </div>

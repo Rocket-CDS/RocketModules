@@ -1,6 +1,8 @@
 ﻿using DNNrocketAPI.Components;
 using DotNetNuke.Entities.Modules;
+using DotNetNuke.Security;
 using DotNetNuke.Services.Exceptions;
+using DotNetNuke.Services.Localization;
 using DotNetNuke.UI.UserControls;
 using Newtonsoft.Json;
 using RazorEngine;
@@ -68,6 +70,12 @@ namespace RocketDirectoryMod
                 var lit = new Literal();
                 lit.Text = strOut;
                 phData.Controls.Add(lit);
+
+                // Add link to Admin
+                var lit2 = new Literal();
+                lit2.Text = "<a class='w3-button w3-round w3-theme-action w3-text-white w3-border' href='" + EditUrl("AdminPanel") + "' target='_blank'><span class=\"material-icons\">dataset</span></a>";
+                phData2.Controls.Add(lit2);
+
             }
             catch (Exception exc)
             {

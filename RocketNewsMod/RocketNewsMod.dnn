@@ -5,7 +5,7 @@
 			<friendlyName>RocketNews</friendlyName>
 			<DefinitionName>rocketnewsapi</DefinitionName>
 			<description>Rocket News Module</description>
-			<iconFile>~/DesktopModules/RocketModules/RocketNewsMod/icon.png</iconFile>
+			<iconFile>~/DesktopModules/RocketModules/RocketDirectoryMod/icon.png</iconFile>
 			<owner>
 				<name></name>
 				<organization>RocketCDS</organization>
