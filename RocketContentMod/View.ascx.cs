@@ -125,7 +125,7 @@ namespace RocketContentMod
                 string[] parameters;
                 parameters = new string[1];
                 parameters[0] = string.Format("{0}={1}", "ModuleId", ModuleId.ToString());
-                var redirectUrl = DNNrocketUtils.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", parameters).ToString();
+                var redirectUrl = DNNrocketUtils.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", _sessionParam.CultureCode, parameters).ToString();
                 strOut = strOut.Replace("{redirecturl}", redirectUrl);
                 CacheUtils.ClearAllCache(_moduleRef);
             }
@@ -134,7 +134,7 @@ namespace RocketContentMod
                 string[] parameters;
                 parameters = new string[1];
                 parameters[0] = string.Format("{0}={1}", "ModuleId", ModuleId.ToString());
-                var settingsurl = DNNrocketUtils.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", parameters).ToString();
+                var settingsurl = DNNrocketUtils.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", _sessionParam.CultureCode, parameters).ToString();
 
                 var userParams = new UserParams("ModuleID:" + ModuleId, true);
                 userParams.Set("editurl", EditUrl());
