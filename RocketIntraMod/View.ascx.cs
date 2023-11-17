@@ -49,7 +49,7 @@ namespace RocketIntraMod
                 if (cmd == "recycleapppool" && UserUtils.IsSuperUser())
                 {
                     DNNrocketUtils.RecycleApplicationPool();
-                    Response.Redirect(Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID).ToString(), false);
+                    Response.Redirect(DNNrocketUtils.NavigateURL(this.PortalSettings.ActiveTab.TabID).ToString(), false);
                     Context.ApplicationInstance.CompleteRequest(); // do this to stop iis throwing error
                 }
 
@@ -99,7 +99,7 @@ namespace RocketIntraMod
                 string[] parameters;
                 parameters = new string[1];
                 parameters[0] = string.Format("{0}={1}", "ModuleId", ModuleId.ToString());
-                var settingsurl = Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", parameters).ToString();
+                var settingsurl = DNNrocketUtils.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", parameters).ToString();
                 var userParams = new UserParams("ModuleID:" + ModuleId, true);
                 userParams.Set("adminpanelurl", EditUrl("AdminPanel"));
                 userParams.Set("settingsurl", settingsurl);
@@ -157,7 +157,7 @@ namespace RocketIntraMod
             {
                 var actions = new ModuleActionCollection();
                 actions.Add(GetNextActionID(), Localization.GetString("adminpanel", this.LocalResourceFile), "", "", "edit_app.svg", EditUrl("AdminPanel"), false, SecurityAccessLevel.Edit, true, false);
-                actions.Add(GetNextActionID(), Localization.GetString("recycleapppool", this.LocalResourceFile), "", "", "restart_app.svg", Globals.NavigateURL(this.PortalSettings.ActiveTab.TabID).ToString() + "?action=recycleapppool", false, SecurityAccessLevel.Host, true, false);
+                actions.Add(GetNextActionID(), Localization.GetString("recycleapppool", this.LocalResourceFile), "", "", "restart_app.svg", DNNrocketUtils.NavigateURL(this.PortalSettings.ActiveTab.TabID).ToString() + "?action=recycleapppool", false, SecurityAccessLevel.Host, true, false);
 
                 return actions;
             }

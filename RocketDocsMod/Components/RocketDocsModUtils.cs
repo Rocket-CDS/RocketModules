@@ -46,7 +46,7 @@ namespace RocketDocsMod
         }
         public static string NavigateURL(int tabId, string[] param)
         {
-            return Globals.NavigateURL(tabId, "", param).ToString();
+            return DNNrocketUtils.NavigateURL(tabId, "", param).ToString();
         }
         public static string ReadTemplate(string template)
         {
