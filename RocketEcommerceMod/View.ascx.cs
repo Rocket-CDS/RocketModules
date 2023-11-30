@@ -139,6 +139,15 @@ namespace RocketEcommerceMod
             if (moduleSettings.InjectJQuery) JavaScript.RequestRegistration(CommonJs.jQuery);
             _sessionParam.Set("rtncmd", RequestParam(Context, "cmd")); // check if we have a bank return
 
+            // form fields for return from external systems.
+            if (Request.Form != null)
+            {
+                foreach (string key in Request.Form.AllKeys)
+                {
+                    _paramInfo.SetXmlProperty("genxml/form/" + key.Replace(" ",""), Request.Form[key]);
+                }
+            }
+
             var strOut = RocketEcommerceAPIUtils.DisplayView(PortalId, _systemkey, _moduleRef,  _sessionParam, _paramInfo);
             if (_hasEditAccess)
             {
