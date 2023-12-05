@@ -44,12 +44,12 @@ namespace RocketContentMod
 
                 _moduleRef = PortalId + "_ModuleID_" + ModuleId;
 
+                var moduleid = RequestParam(Context, "moduleid");
                 var cmd = RequestParam(Context, "action");
-                if (cmd == "clearcache" && UserUtils.IsAdministrator())
+                if (cmd == "clearcache" && moduleid == ModuleId.ToString() && UserUtils.IsAdministrator())
                 {
-                    CacheUtils.ClearAllCache(_moduleRef);
                     CacheUtils.ClearAllCache("DNNrocketThumb");
-                    CacheFileUtils.ClearFileCache(PortalId);
+                    CacheFileUtils.ClearAllCache(_moduleRef);
                 }
                 if (cmd == "recycleapppool" && UserUtils.IsSuperUser())
                 {
@@ -187,7 +187,7 @@ namespace RocketContentMod
                 actions.Add(GetNextActionID(), Localization.GetString("EditModule", this.LocalResourceFile), "", "", "edit.svg", EditUrl(), false, SecurityAccessLevel.Edit, true, false);
                 actions.Add(GetNextActionID(), Localization.GetString("apptheme", this.LocalResourceFile), "", "", "edit_app.svg", EditUrl("AppTheme"), false, SecurityAccessLevel.Admin, true, false);
                 actions.Add(GetNextActionID(), Localization.GetString("recyclebin", this.LocalResourceFile), "", "", "recycling.svg", EditUrl("RecycleBin"), false, SecurityAccessLevel.Admin, true, false);
-                actions.Add(GetNextActionID(), Localization.GetString("clearcache", this.LocalResourceFile), "", "", "clear_cache.svg", DNNrocketUtils.NavigateURL(this.PortalSettings.ActiveTab.TabID).ToString() + "?action=clearcache", false, SecurityAccessLevel.Admin, true, false);
+                actions.Add(GetNextActionID(), Localization.GetString("clearcache", this.LocalResourceFile), "", "", "clear_cache.svg", DNNrocketUtils.NavigateURL(this.PortalSettings.ActiveTab.TabID).ToString() + "?action=clearcache&moduleid=" + ModuleId, false, SecurityAccessLevel.Admin, true, false);
                 actions.Add(GetNextActionID(), Localization.GetString("recycleapppool", this.LocalResourceFile), "", "", "restart_app.svg", DNNrocketUtils.NavigateURL(this.PortalSettings.ActiveTab.TabID).ToString() + "?action=recycleapppool", false, SecurityAccessLevel.Host, true, false);
 
                 return actions;

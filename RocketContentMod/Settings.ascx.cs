@@ -55,7 +55,7 @@ namespace RocketContentMod
                 sessionParam.ModuleRef = _moduleRef;
                 sessionParam.CultureCode = DNNrocketUtils.GetCurrentCulture();
 
-                var strOut = RocketContentAPIUtils.DisplaySystemView(PortalId, _moduleRef, sessionParam, "ModuleSettingsLoad.cshtml");
+                var strOut = RocketContentAPIUtils.DisplaySystemView(PortalId, _moduleRef, sessionParam, "ModuleSettingsLoad.cshtml",true,false);
 
                 var lit = new Literal();
                 lit.Text = strOut;

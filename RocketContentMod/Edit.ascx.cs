@@ -48,7 +48,7 @@ namespace RocketContentMod
                 var strHeader2 = RocketContentAPIUtils.DisplayAdminView(PortalId, _moduleRef, "", _sessionParam, "adminlastheader.cshtml");
                 PageIncludes.IncludeTextInHeaderAt(Page, strHeader2, 0);
 
-                var strHeaderAdmin = RocketContentAPIUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "AdminHeader.cshtml");
+                var strHeaderAdmin = RocketContentAPIUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "AdminHeader.cshtml",true,false);
                 PageIncludes.IncludeTextInHeader(Page, strHeaderAdmin);
 
             }
@@ -75,7 +75,7 @@ namespace RocketContentMod
         {
             try
             {
-                var strOut = RocketContentAPIUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "AdminDetailLoad.cshtml");
+                var strOut = RocketContentAPIUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "AdminDetailLoad.cshtml",true,false);
                 var lit = new Literal();
                 lit.Text = strOut;
                 phData.Controls.Add(lit);
