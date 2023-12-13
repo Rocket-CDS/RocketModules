@@ -50,7 +50,6 @@
 						<businessControllerClass>DNNrocketAPI.Components.DNNrocketModuleController,DNNrocketAPI</businessControllerClass>
 						<supportedFeatures>
 							<supportedFeature type="Portable" />
-							<supportedFeature type="Searchable" />
 							<supportedFeature type="Upgradeable" />
             </supportedFeatures>
 						<moduleDefinitions>
