@@ -49,7 +49,7 @@ namespace RocketDirectoryMod
                 _moduleRef = PortalId + "_ModuleID_" + ModuleId;
 
                 var cmd = RequestParam(Context, "action");
-                if (cmd == "clearcache" && UserUtils.IsAdministrator()) CacheFileUtils.ClearAllCache(_systemkey + PortalId);
+                if (cmd == "clearcache" && UserUtils.IsAdministrator()) CacheFileUtils.ClearAllCache(PortalId, _systemkey + PortalId);
                 if (cmd == "recycleapppool" && UserUtils.IsSuperUser())
                 {
                     DNNrocketUtils.RecycleApplicationPool();
@@ -148,7 +148,7 @@ namespace RocketDirectoryMod
                 parameters[0] = string.Format("{0}={1}", "ModuleId", ModuleId.ToString());
                 var redirectUrl = DNNrocketUtils.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", _sessionParam.CultureCode, parameters).ToString();
                 strOut = strOut.Replace("{redirecturl}", redirectUrl);
-                CacheFileUtils.ClearAllCache(_systemkey + PortalId);
+                CacheFileUtils.ClearAllCache(PortalId, _systemkey + PortalId);
             }
             if (_hasEditAccess)
             {

@@ -49,7 +49,7 @@ namespace RocketContentMod
                 if (cmd == "clearcache" && moduleid == ModuleId.ToString() && UserUtils.IsAdministrator())
                 {
                     CacheUtils.ClearAllCache("DNNrocketThumb");
-                    CacheFileUtils.ClearAllCache(_moduleRef);
+                    CacheFileUtils.ClearAllCache(PortalId, _moduleRef);
                 }
                 if (cmd == "recycleapppool" && UserUtils.IsSuperUser())
                 {

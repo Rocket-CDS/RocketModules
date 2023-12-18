@@ -42,7 +42,9 @@
 						<foldername>RocketModules/RocketDirectoryMod</foldername>
 						<businessControllerClass>DNNrocketAPI.Components.DNNrocketModuleController,DNNrocketAPI</businessControllerClass>
 						<supportedFeatures>
+							<supportedFeature type="Portable" />
 							<supportedFeature type="Upgradeable" />
+							<supportedFeature type="Searchable" />
 						</supportedFeatures>
 						<moduleDefinitions>
 							<moduleDefinition>
