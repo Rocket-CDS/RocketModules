@@ -30,7 +30,6 @@ namespace RocketEcommerceMod
     public partial class View : PortalModuleBase, IActionable
     {
         private string _systemkey;
-        //private const string _systemkey = "rocketbusinessapi";
         private bool _hasEditAccess;
         private string _moduleRef;
         private SessionParams _sessionParam;

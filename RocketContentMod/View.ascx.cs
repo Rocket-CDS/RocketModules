@@ -144,7 +144,7 @@ namespace RocketContentMod
                 userParams.Set("recyclebinurl", EditUrl("RecycleBin"));                
                 userParams.Set("viewurl", Context.Request.Url.ToString());
 
-                strOut = RocketContentAPIUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "ViewEditButtons.cshtml") + strOut;
+                strOut = RocketContentAPIUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "ViewEditButtons.cshtml", true, false) + strOut;
 
             }
             var lit = new Literal();
