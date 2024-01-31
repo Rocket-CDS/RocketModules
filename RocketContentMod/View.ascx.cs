@@ -41,7 +41,7 @@ namespace RocketContentMod
             {
 
                 base.OnInit(e);
-
+                LogUtils.LogSystem("RocketContentMod: OnInit START");
                 _moduleRef = PortalId + "_ModuleID_" + ModuleId;
 
                 var moduleid = RequestParam(Context, "moduleid");
@@ -108,14 +108,17 @@ namespace RocketContentMod
                 var strHeader2 = RocketContentAPIUtils.DisplayView(PortalId, _systemkey, _moduleRef, "", _sessionParam, "viewlastheader.cshtml","", _moduleSettings.DisableCache);
                 PageIncludes.IncludeTextInHeader(Page, strHeader2);
 
+                LogUtils.LogSystem("RocketContentMod: OnInit END");
             }
             catch (Exception ex)
             {
                 Exceptions.ProcessModuleLoadException(this, ex);
+                LogUtils.LogSystem("RocketContentMod: ERROR - " + ex.ToString());
             }
         }
         protected override void OnPreRender(EventArgs e)
         {
+            LogUtils.LogSystem("RocketContentMod: OnPreRender START");
             if (_moduleSettings.InjectJQuery) JavaScript.RequestRegistration(CommonJs.jQuery);
 
             var strOut = RocketContentAPIUtils.DisplayView(PortalId, _systemkey, _moduleRef, "", _sessionParam, "view.cshtml", "loadsettings", _moduleSettings.DisableCache);
@@ -150,6 +153,7 @@ namespace RocketContentMod
             var lit = new Literal();
             lit.Text = strOut;
             phData.Controls.Add(lit);
+            LogUtils.LogSystem("RocketContentMod: OnPreRender END");
         }
 
         private static string RequestParam(HttpContext context, string paramName)
