@@ -68,7 +68,7 @@ namespace RocketFormsMod
         {
             try
             {
-                var strOut = RocketContentAPIUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "AppThemeAdmin.cshtml");
+                var strOut = RocketContentAPIUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "AppThemeAdmin.cshtml",true, false);
                 var lit = new Literal();
                 lit.Text = strOut;
                 phData.Controls.Add(lit);

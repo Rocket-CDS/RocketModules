@@ -204,7 +204,12 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>DNNpackager.exe  $(ProjectDir) $(ProjectDir)$(OutDir) $(ConfigurationName)</PostBuildEvent>
+    <PostBuildEvent>REM ** Copy to sub-bin folder of DNNrocket, so install package can be built from them **
+copy "$(ProjectDir)$(OutDir)$(TargetFileName)" "$(ProjectDir)..\..\DNNrocket\bin\$(TargetFileName)"
+copy "$(ProjectDir)$(OutDir)$(AssemblyName).pdb" "$(ProjectDir)..\..\DNNrocket\bin\$(AssemblyName).pdb"
+
+DNNpackager.exe  $(ProjectDir) $(ProjectDir)$(OutDir) $(ConfigurationName)
+</PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
