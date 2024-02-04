@@ -1,27 +1,73 @@
 # RocketModules
 
-This is a collection of modules that use RocketCDS.
+This is a collection of modules that are used as a UI between DNN and RocketCDS.
 
-# RocketContentAPI modules
-
-## RocketContentMod v1.0.1.1
-
-RocketContentMod is a module that connects to the RocketContentAPI.  AppThemes are selected in the module settings.
-
-# RocketDirectoryAPI modules
+## RocketContentMod
+*Dependacy:*  
+**DNNrocketAPI**  
+**RocketContentAPI**  
 
 ## RocketDirectoryMod
+*Dependacy:*  
+**DNNrocketAPI**  
+**RocketDirectoryAPI**  
 
-RocketDirectoryMod is a module that connects to the RocketContentAPI.  AppThemes are selected in the directory admin settings.  
-*Dependant on system:*  
-*RocketDirectoryAPI*  
+## RocketFormsMod
+*Dependacy:*  
+**DNNrocketAPI**  
+**RocketForms**  
+
+## RocketBlogMod
+*Dependacy:*  
+**DNNrocketAPI**  
+**RocketDirectoryAPI**  
+**RocketBlogAPI**  
+**RocketDirectoryMod**  
 
 ## RocketBusinessMod
+*Dependacy:*  
+**DNNrocketAPI**  
+**RocketDirectoryAPI**  
+**RocketBusinessAPI** [-]    
+**RocketDirectoryMod**  
 
-RocketBusinessMod is a shortcut modules that points to the "RocketDirectoryMod".  When using this modules the modules name is used to created the systemkey for RocketCDS.  
-*Dependant on system:*  
-*RocketDirectoryAPI*   
-*RocketBusinessAPI*  
+## RocketDocsMod
+*Dependacy:*  
+**DNNrocketAPI**  
+**RocketDocs**  
+
+## RocketEcommerceMod
+*Dependacy:*  
+**DNNrocketAPI**  
+**RocketEcommerceAPI**  
+
+## RocketEventsMod
+*Dependacy:*  
+**DNNrocketAPI**  
+**RocketDirectoryAPI**  
+**RocketEventsAPI**  
+**RocketDirectoryMod**  
+
+## RocketIntraMod
+*Dependacy:*  
+**DNNrocketAPI**  
+**RocketIntraAPI**  [-]  
+
+## RocketLibraryMod
+*Dependacy:*  
+**DNNrocketAPI**  
+**RocketDirectoryAPI**  
+**RocketLibraryAPI**  [-]  
+**RocketDirectoryMod**  
+
+## RocketNewsMod
+*Dependacy:*  
+**DNNrocketAPI**  
+**RocketDirectoryAPI**  
+**RocketNewsAPI**  
+**RocketDirectoryMod**  
+
+*[-] = Not Open Source*
 
 # Development with RocketDirectoryAPI
 
