@@ -70,7 +70,7 @@ namespace RocketDirectoryMod
                     {
                         var keyValue = context.Request.QueryString[key];
                         paramInfo.SetXmlProperty("genxml/urlparams/" + key.ToLower(), keyValue);
-                        urlparams.Add(key, keyValue);
+                        urlparams.Add(key.ToLower(), keyValue);
                     }
                 }
 
@@ -94,6 +94,9 @@ namespace RocketDirectoryMod
                 _sessionParam.CultureCode = DNNrocketUtils.GetCurrentCulture();
                 _sessionParam.Url = context.Request.Url.ToString();
                 _sessionParam.UrlFriendly = DNNrocketUtils.NavigateURL(TabId, urlparams);
+
+                if (urlparams.ContainsKey("search") && !String.IsNullOrEmpty(urlparams["search"])) _sessionParam.SearchText = urlparams["search"];
+
                 if (urlparams.ContainsKey("page") && GeneralUtils.IsNumeric(urlparams["page"])) _sessionParam.Page = Convert.ToInt32(urlparams["page"]);
 
                 _moduleSettings = new ModuleContentLimpet(PortalId, _moduleRef, _systemkey, _sessionParam.ModuleId, _sessionParam.TabId);
@@ -152,7 +155,7 @@ namespace RocketDirectoryMod
             }
             if (_hasEditAccess)
             {
-                var articleid = RequestParam(Context, "articleid");
+                var articleid = RequestParam(Context, RocketDirectoryAPIUtils.UrlQueryArticleKey(PortalId, _systemkey));
                 string[] parameters;
                 parameters = new string[1];
                 parameters[0] = string.Format("{0}={1}", "ModuleId", ModuleId.ToString());
@@ -161,6 +164,7 @@ namespace RocketDirectoryMod
                 var userParams = new UserParams("ModuleID:" + ModuleId, true);
                 if (GeneralUtils.IsNumeric(articleid))
                 {
+                    _sessionParam.Set("articleid", articleid);
                     userParams.Set("editurl", EditUrl("articleid", articleid, "AdminPanel"));
                 }
                 userParams.Set("settingsurl", settingsurl);
