@@ -24,6 +24,8 @@ using DotNetNuke.Abstractions;
 using RazorEngine.Text;
 using System.Security.Cryptography;
 using System.Text;
+using DotNetNuke.Entities.Tabs;
+using DotNetNuke.UI.Skins;
 
 namespace RocketEcommerceMod
 {
@@ -105,9 +107,16 @@ namespace RocketEcommerceMod
                     var id = dep.GetXmlProperty("genxml/id");
                     var urlstr = dep.GetXmlProperty("genxml/url");
                     var ecofriendly = dep.GetXmlPropertyBool("genxml/ecofriendly");
+                    var skinignore = dep.GetXmlProperty("genxml/skinignore");
                     if (ecofriendly == moduleSettings.ECOMode || moduleSettings.ECOMode == false)
                     {
-                        if (ctrltype == "css") PageIncludes.IncludeCssFile(Page, id, urlstr);
+                        if (ctrltype == "css")
+                        {
+                            if (skinignore == "" || !PortalSettings.ActiveTab.SkinSrc.ToLower().Contains(skinignore.ToLower()))
+                            {
+                                PageIncludes.IncludeCssFile(Page, id, urlstr);
+                            }
+                        }
                         if (ctrltype == "js")
                         {
                             if (urlstr.ToLower() == "{jquery}")

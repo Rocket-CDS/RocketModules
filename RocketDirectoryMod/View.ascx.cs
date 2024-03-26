@@ -110,9 +110,18 @@ namespace RocketDirectoryMod
                     var id = dep.GetXmlProperty("genxml/id");
                     var urlstr = dep.GetXmlProperty("genxml/url");
                     var ecofriendly = dep.GetXmlPropertyBool("genxml/ecofriendly");
+                    var skinignore = dep.GetXmlProperty("genxml/skinignore");
                     if (dep.GetXmlProperty("genxml/ecofriendly") == "") ecofriendly = true; // inject by default.
                     if (dep.GetXmlProperty("genxml/ecofriendly") == "" || ecofriendly == _moduleSettings.ECOMode || _moduleSettings.ECOMode == false)
                     {
+                        if (ctrltype == "css")
+                        {
+                            if (skinignore == "" || !PortalSettings.ActiveTab.SkinSrc.ToLower().Contains(skinignore.ToLower()))
+                            {
+                                PageIncludes.IncludeCssFile(Page, id, urlstr);
+                            }
+                        }
+
                         if (ctrltype == "css") PageIncludes.IncludeCssFile(Page, id, urlstr);
                         if (ctrltype == "js")
                         {

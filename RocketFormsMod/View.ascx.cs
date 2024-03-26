@@ -84,7 +84,14 @@ namespace RocketFormsMod
                     var ctrltype = dep.GetXmlProperty("genxml/ctrltype");
                     var id = dep.GetXmlProperty("genxml/id");
                     var urlstr = dep.GetXmlProperty("genxml/url");
-                    if (ctrltype == "css") PageIncludes.IncludeCssFile(Page, id, urlstr);
+                    var skinignore = dep.GetXmlProperty("genxml/skinignore");
+                    if (ctrltype == "css")
+                    {
+                        if (skinignore == "" || !PortalSettings.ActiveTab.SkinSrc.ToLower().Contains(skinignore.ToLower()))
+                        {
+                            PageIncludes.IncludeCssFile(Page, id, urlstr);
+                        }
+                    }
                     if (ctrltype == "js")
                     {
                         if (urlstr.ToLower() == "{jquery}")
