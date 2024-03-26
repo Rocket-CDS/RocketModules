@@ -91,17 +91,11 @@ namespace RocketContentMod
                     var ctrltype = dep.GetXmlProperty("genxml/ctrltype");
                     var id = dep.GetXmlProperty("genxml/id");
                     var urlstr = dep.GetXmlProperty("genxml/url");
-                    var skinignore = dep.GetXmlProperty("genxml/skinignore");
+                    var skinignore = dep.GetXmlProperty("genxml/ignoreonskin");
                     var ecofriendly = dep.GetXmlPropertyBool("genxml/ecofriendly");
                     if (dep.GetXmlProperty("genxml/ecofriendly") == "" || ecofriendly == _moduleSettings.ECOMode || _moduleSettings.ECOMode == false)
                     {
-                        if (ctrltype == "css")
-                        {
-                            if (skinignore == "" || !PortalSettings.ActiveTab.SkinSrc.ToLower().Contains(skinignore.ToLower()))
-                            {
-                                PageIncludes.IncludeCssFile(Page, id, urlstr);
-                            }
-                        }
+                        if (ctrltype == "css" && !PageIncludes.CssFileIgnoreOnSkin(PortalSettings.ActiveTab.SkinSrc, skinignore)) PageIncludes.IncludeCssFile(Page, id, urlstr);
                         if (ctrltype == "js")
                         {
                             if (urlstr.ToLower() == "{jquery}")
