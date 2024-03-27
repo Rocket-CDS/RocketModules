@@ -95,8 +95,9 @@ namespace RocketContentMod
                     var ecofriendly = dep.GetXmlPropertyBool("genxml/ecofriendly");
                     if (dep.GetXmlProperty("genxml/ecofriendly") == "" || ecofriendly == _moduleSettings.ECOMode || _moduleSettings.ECOMode == false)
                     {
-                        if (ctrltype == "css" && !PageIncludes.CssFileIgnoreOnSkin(PortalSettings.ActiveTab.SkinSrc, skinignore)) PageIncludes.IncludeCssFile(Page, id, urlstr);
-                        if (ctrltype == "js")
+                        var ignoreFile = PageIncludes.IgnoreOnSkin(PortalSettings.ActiveTab.SkinSrc, skinignore);
+                        if (ctrltype == "css" && !ignoreFile) PageIncludes.IncludeCssFile(Page, id, urlstr);
+                        if (ctrltype == "js" && !ignoreFile)
                         {
                             if (urlstr.ToLower() == "{jquery}")
                                 JavaScript.RequestRegistration(CommonJs.jQuery);

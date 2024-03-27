@@ -85,8 +85,9 @@ namespace RocketFormsMod
                     var id = dep.GetXmlProperty("genxml/id");
                     var urlstr = dep.GetXmlProperty("genxml/url");
                     var skinignore = dep.GetXmlProperty("genxml/ignoreonskin");
-                    if (ctrltype == "css" && !PageIncludes.CssFileIgnoreOnSkin(PortalSettings.ActiveTab.SkinSrc, skinignore)) PageIncludes.IncludeCssFile(Page, id, urlstr);
-                    if (ctrltype == "js")
+                    var ignoreFile = PageIncludes.IgnoreOnSkin(PortalSettings.ActiveTab.SkinSrc, skinignore);
+                    if (ctrltype == "css" && !ignoreFile) PageIncludes.IncludeCssFile(Page, id, urlstr);
+                    if (ctrltype == "js" && !ignoreFile)
                     {
                         if (urlstr.ToLower() == "{jquery}")
                             JavaScript.RequestRegistration(CommonJs.jQuery);
