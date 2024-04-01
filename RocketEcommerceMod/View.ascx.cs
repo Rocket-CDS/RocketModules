@@ -151,7 +151,7 @@ namespace RocketEcommerceMod
                 }
             }
 
-            var strOut = RocketEcommerceAPIUtils.DisplayView(PortalId, _systemkey, _moduleRef,  _sessionParam, _paramInfo);
+            var strOut = RocketEcommerceAPIUtils.DisplayView(PortalId, _moduleRef,  _sessionParam, _paramInfo);
             if (_hasEditAccess)
             {
                 var articleid = RequestParam(Context, "pid");
