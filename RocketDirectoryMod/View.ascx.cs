@@ -24,6 +24,7 @@ using DotNetNuke.Abstractions;
 using RazorEngine.Text;
 using System.Security.Cryptography;
 using System.Text;
+using Rocket.AppThemes.Components;
 
 namespace RocketDirectoryMod
 {
@@ -45,17 +46,7 @@ namespace RocketDirectoryMod
                 // Get systemkey from module name. (remove mod, add "API")
                 var moduleName = base.ModuleConfiguration.DesktopModule.ModuleName;
                 _systemkey = moduleName.ToLower().Substring(0, moduleName.Length - 3) + "api";
-
                 _moduleRef = PortalId + "_ModuleID_" + ModuleId;
-
-                var cmd = RequestParam(Context, "action");
-                if (cmd == "clearcache" && UserUtils.IsAdministrator()) CacheUtils.ClearAllCache(_systemkey + PortalId);
-                if (cmd == "recycleapppool" && UserUtils.IsSuperUser())
-                {
-                    DNNrocketUtils.RecycleApplicationPool();
-                    Response.Redirect(DNNrocketUtils.NavigateURL(this.PortalSettings.ActiveTab.TabID).ToString(), false);
-                    Context.ApplicationInstance.CompleteRequest(); // do this to stop iis throwing error
-                }
 
                 _hasEditAccess = false;
                 if (UserId > 0) _hasEditAccess = DotNetNuke.Security.Permissions.ModulePermissionController.CanEditModuleContent(this.ModuleConfiguration);
@@ -101,30 +92,10 @@ namespace RocketDirectoryMod
 
                 _moduleSettings = new ModuleContentLimpet(PortalId, _moduleRef, _systemkey, _sessionParam.ModuleId, _sessionParam.TabId);
 
-                var strHeader1 = RocketDirectoryAPIUtils.ViewHeader(PortalId, _systemkey, _moduleRef, _sessionParam, "viewfirstheader.cshtml");
-                PageIncludes.IncludeTextInHeaderAt(Page, strHeader1, 0);
-
-                foreach (var dep in RocketDirectoryAPIUtils.DependanciesList(PortalId, _systemkey, _moduleRef, _sessionParam))
-                {
-                    var ctrltype = dep.GetXmlProperty("genxml/ctrltype");
-                    var id = dep.GetXmlProperty("genxml/id");
-                    var urlstr = dep.GetXmlProperty("genxml/url");
-                    var ecofriendly = dep.GetXmlPropertyBool("genxml/ecofriendly");
-                    var skinignore = dep.GetXmlProperty("genxml/ignoreonskin");
-                    if (dep.GetXmlProperty("genxml/ecofriendly") == "") ecofriendly = true; // inject by default.
-                    if (dep.GetXmlProperty("genxml/ecofriendly") == "" || ecofriendly == _moduleSettings.ECOMode || _moduleSettings.ECOMode == false)
-                    {
-                        var ignoreFile = PageIncludes.IgnoreOnSkin(PortalSettings.ActiveTab.SkinSrc, skinignore);
-                        if (ctrltype == "css" && !ignoreFile) PageIncludes.IncludeCssFile(Page, id, urlstr);
-                        if (ctrltype == "js" && !ignoreFile)
-                        {
-                            if (urlstr.ToLower() == "{jquery}")
-                                JavaScript.RequestRegistration(CommonJs.jQuery);
-                            else
-                                PageIncludes.IncludeJsFile(Page, id, urlstr);
-                        }
-                    }
-                }
+                var appThemeSystem = AppThemeUtils.AppThemeSystem(PortalId, _systemkey);
+                var portalData = new PortalLimpet(PortalId);
+                var appTheme = new AppThemeLimpet(_moduleSettings.PortalId, _moduleSettings.AppThemeAdminFolder, _moduleSettings.AppThemeAdminVersion, _moduleSettings.ProjectName);
+                DNNrocketUtils.InjectDependacies(_moduleRef, Page, appTheme, _moduleSettings.ECOMode, PortalSettings.ActiveTab.SkinSrc, portalData.EngineUrlWithProtocol, appThemeSystem.AppThemeVersionFolderRel);
 
                 var strHeader2 = RocketDirectoryAPIUtils.ViewHeader(PortalId, _systemkey, _moduleRef, _sessionParam, "viewlastheader.cshtml");
                 PageIncludes.IncludeTextInHeader(Page, strHeader2);
@@ -157,24 +128,30 @@ namespace RocketDirectoryMod
             }
             if (_hasEditAccess)
             {
-                var articleid = RequestParam(Context, RocketDirectoryAPIUtils.UrlQueryArticleKey(PortalId, _systemkey));
-                string[] parameters;
-                parameters = new string[1];
-                parameters[0] = string.Format("{0}={1}", "ModuleId", ModuleId.ToString());
-                var settingsurl = DNNrocketUtils.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", _sessionParam.CultureCode, parameters).ToString();
-
-                var userParams = new UserParams("ModuleID:" + ModuleId, true);
-                if (GeneralUtils.IsNumeric(articleid))
+                var viewButtonsOut = CacheUtils.GetCache("editbuttons" + _moduleRef, _moduleRef);
+                if (viewButtonsOut == null)
                 {
-                    _sessionParam.Set("articleid", articleid);
-                    userParams.Set("editurl", EditUrl("articleid", articleid, "AdminPanel"));
-                }
-                userParams.Set("settingsurl", settingsurl);
-                userParams.Set("appthemeurl", EditUrl("AppTheme"));
-                userParams.Set("adminpanelurl", EditUrl("AdminPanel"));
-                userParams.Set("viewurl", Context.Request.Url.ToString());
+                    var articleid = RequestParam(Context, RocketDirectoryAPIUtils.UrlQueryArticleKey(PortalId, _systemkey));
+                    string[] parameters;
+                    parameters = new string[1];
+                    parameters[0] = string.Format("{0}={1}", "ModuleId", ModuleId.ToString());
+                    var settingsurl = DNNrocketUtils.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", _sessionParam.CultureCode, parameters).ToString();
 
-                strOut = RocketDirectoryAPIUtils.DisplaySystemView(PortalId, _systemkey, _moduleRef, _sessionParam, "ViewEditButtons.cshtml") + strOut;
+                    var userParams = new UserParams("ModuleID:" + ModuleId, true);
+                    if (GeneralUtils.IsNumeric(articleid))
+                    {
+                        _sessionParam.Set("articleid", articleid);
+                        userParams.Set("editurl", EditUrl("articleid", articleid, "AdminPanel"));
+                    }
+                    userParams.Set("settingsurl", settingsurl);
+                    userParams.Set("appthemeurl", EditUrl("AppTheme"));
+                    userParams.Set("adminpanelurl", EditUrl("AdminPanel"));
+                    userParams.Set("viewurl", Context.Request.Url.ToString());
+
+                    viewButtonsOut = RocketDirectoryAPIUtils.DisplaySystemView(PortalId, _systemkey, _moduleRef, _sessionParam, "ViewEditButtons.cshtml");
+                    CacheUtils.SetCache("editbuttons" + _moduleRef, viewButtonsOut, _moduleRef);
+                }
+                strOut = viewButtonsOut + strOut;
             }
             var lit = new Literal();
             lit.Text = strOut;
@@ -216,9 +193,6 @@ namespace RocketDirectoryMod
                 //actions.Add(GetNextActionID(), Localization.GetString("EditModule", this.LocalResourceFile), "", "", "edit.svg", EditUrl(), false, SecurityAccessLevel.Edit, true, false);
                 actions.Add(GetNextActionID(), Localization.GetString("adminpanel", this.LocalResourceFile), "", "", "edit_app.svg", EditUrl("AdminPanel"), false, SecurityAccessLevel.Edit, true, false);
                 actions.Add(GetNextActionID(), Localization.GetString("apptheme", this.LocalResourceFile), "", "", "edit_app.svg", EditUrl("AppTheme"), false, SecurityAccessLevel.Admin, true, false);
-                actions.Add(GetNextActionID(), Localization.GetString("clearcache", this.LocalResourceFile), "", "", "clear_cache.svg", DNNrocketUtils.NavigateURL(this.PortalSettings.ActiveTab.TabID).ToString() + "?action=clearcache", false, SecurityAccessLevel.Admin, true, false);
-                actions.Add(GetNextActionID(), Localization.GetString("recycleapppool", this.LocalResourceFile), "", "", "restart_app.svg", DNNrocketUtils.NavigateURL(this.PortalSettings.ActiveTab.TabID).ToString() + "?action=recycleapppool", false, SecurityAccessLevel.Host, true, false);
-
                 return actions;
             }
         }
