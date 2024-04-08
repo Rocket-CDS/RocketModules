@@ -26,6 +26,7 @@ using System.Security.Cryptography;
 using System.Text;
 using DotNetNuke.Entities.Tabs;
 using DotNetNuke.UI.Skins;
+using Rocket.AppThemes.Components;
 
 namespace RocketEcommerceMod
 {
@@ -36,6 +37,7 @@ namespace RocketEcommerceMod
         private string _moduleRef;
         private SessionParams _sessionParam;
         private SimplisityInfo _paramInfo;
+        private ModuleContentLimpet _moduleSettings;
         protected override void OnInit(EventArgs e)
         {
             try
@@ -48,15 +50,6 @@ namespace RocketEcommerceMod
                 _systemkey = moduleName.ToLower().Substring(0, moduleName.Length - 3) + "api";
 
                 _moduleRef = PortalId + "_ModuleID_" + ModuleId;
-
-                var cmd = RequestParam(Context, "action");
-                if (cmd == "clearcache" && UserUtils.IsAdministrator()) CacheUtils.ClearAllCache("portal" + PortalId);
-                if (cmd == "recycleapppool" && UserUtils.IsSuperUser())
-                {
-                    DNNrocketUtils.RecycleApplicationPool();
-                    Response.Redirect(DNNrocketUtils.NavigateURL(this.PortalSettings.ActiveTab.TabID).ToString(), false);
-                    Context.ApplicationInstance.CompleteRequest(); // do this to stop iis throwing error
-                }
 
                 _hasEditAccess = false;
                 if (UserId > 0) _hasEditAccess = DotNetNuke.Security.Permissions.ModulePermissionController.CanEditModuleContent(this.ModuleConfiguration);
@@ -95,41 +88,27 @@ namespace RocketEcommerceMod
                 _sessionParam.CultureCode = DNNrocketUtils.GetCurrentCulture();
                 _sessionParam.Url = context.Request.Url.ToString();
                 _sessionParam.UrlFriendly = DNNrocketUtils.NavigateURL(TabId, urlparams);
+                if (urlparams.ContainsKey("search") && !String.IsNullOrEmpty(urlparams["search"])) _sessionParam.SearchText = urlparams["search"];
+                if (urlparams.ContainsKey("page") && GeneralUtils.IsNumeric(urlparams["page"])) _sessionParam.Page = Convert.ToInt32(urlparams["page"]);
 
-                var moduleSettings = new ModuleContentLimpet(PortalId, _moduleRef, _sessionParam.ModuleId, _sessionParam.TabId);
+                _moduleSettings = new ModuleContentLimpet(PortalId, _moduleRef, _sessionParam.ModuleId, _sessionParam.TabId);
 
-                var strHeader1 = RocketEcommerceAPIUtils.ViewHeader(PortalId, _systemkey, _moduleRef, _sessionParam, "viewfirstheader.cshtml");
-                PageIncludes.IncludeTextInHeaderAt(Page, strHeader1, 0);
-
-                foreach (var dep in RocketEcommerceAPIUtils.DependanciesList(PortalId, _moduleRef, _sessionParam))
-                {
-                    var ctrltype = dep.GetXmlProperty("genxml/ctrltype");
-                    var id = dep.GetXmlProperty("genxml/id");
-                    var urlstr = dep.GetXmlProperty("genxml/url");
-                    var ecofriendly = dep.GetXmlPropertyBool("genxml/ecofriendly");
-                    var skinignore = dep.GetXmlProperty("genxml/ignoreonskin");
-                    if (ecofriendly == moduleSettings.ECOMode || moduleSettings.ECOMode == false)
-                    {
-                        var ignoreFile = PageIncludes.IgnoreOnSkin(PortalSettings.ActiveTab.SkinSrc, skinignore);
-                        if (ctrltype == "css" && !ignoreFile) PageIncludes.IncludeCssFile(Page, id, urlstr);
-                        if (ctrltype == "js" && !ignoreFile)
-                        {
-                            if (urlstr.ToLower() == "{jquery}")
-                                JavaScript.RequestRegistration(CommonJs.jQuery);
-                            else
-                                PageIncludes.IncludeJsFile(Page, id, urlstr);
-                        }
-                    }
-                }
+                var appThemeSystem = AppThemeUtils.AppThemeSystem(PortalId, _systemkey);
+                var portalData = new PortalLimpet(PortalId);
+                var appTheme = new AppThemeLimpet(_moduleSettings.PortalId, _moduleSettings.AppThemeAdminFolder, _moduleSettings.AppThemeAdminVersion, _moduleSettings.ProjectName);
+                DNNrocketUtils.InjectDependacies(_moduleRef, Page, appTheme, _moduleSettings.ECOMode, PortalSettings.ActiveTab.SkinSrc, portalData.EngineUrlWithProtocol, appThemeSystem.AppThemeVersionFolderRel);
 
                 var strHeader2 = RocketEcommerceAPIUtils.ViewHeader(PortalId, _systemkey, _moduleRef, _sessionParam, "viewlastheader.cshtml");
                 PageIncludes.IncludeTextInHeader(Page, strHeader2);
 
-                // Set langauge, so editing with simplity gets correct language
-                var lang = DNNrocketUtils.GetCurrentCulture();
-                if (HttpContext.Current.Request.QueryString["language"] != null) lang = HttpContext.Current.Request.QueryString["language"];
-                DNNrocketUtils.SetCookieValue("simplisity_language", lang);
-                DNNrocketUtils.SetCookieValue("simplisity_editlanguage", lang);
+                if (_hasEditAccess)
+                {
+                    // Set langauge, so editing with simplity gets correct language
+                    var lang = DNNrocketUtils.GetCurrentCulture();
+                    if (HttpContext.Current.Request.QueryString["language"] != null) lang = HttpContext.Current.Request.QueryString["language"];
+                    DNNrocketUtils.SetCookieValue("simplisity_language", lang);
+                    DNNrocketUtils.SetCookieValue("simplisity_editlanguage", lang);
+                }
             }
             catch (Exception ex)
             {
@@ -138,10 +117,9 @@ namespace RocketEcommerceMod
         }
         protected override void OnPreRender(EventArgs e)
         {
-            var moduleSettings = new ModuleContentLimpet(PortalId, _moduleRef, _sessionParam.ModuleId, _sessionParam.TabId);
-            if (moduleSettings.InjectJQuery) JavaScript.RequestRegistration(CommonJs.jQuery);
-            _sessionParam.Set("rtncmd", RequestParam(Context, "cmd")); // check if we have a bank return
+            if (_moduleSettings.InjectJQuery) JavaScript.RequestRegistration(CommonJs.jQuery);
 
+            _sessionParam.Set("rtncmd", RequestParam(Context, "cmd")); // check if we have a bank return
             // form fields for return from external systems.
             if (Request.Form != null)
             {
@@ -154,7 +132,8 @@ namespace RocketEcommerceMod
             var strOut = RocketEcommerceAPIUtils.DisplayView(PortalId, _moduleRef,  _sessionParam, _paramInfo);
             if (_hasEditAccess)
             {
-                var articleid = RequestParam(Context, "pid");
+                var urlKey = RocketEcommerceAPIUtils.UrlQueryArticleKey(PortalId, _systemkey);
+                var articleid = RequestParam(Context, urlKey);
                 string[] parameters;
                 parameters = new string[1];
                 parameters[0] = string.Format("{0}={1}", "ModuleId", ModuleId.ToString());
@@ -164,7 +143,7 @@ namespace RocketEcommerceMod
                 if (articleid == null || articleid == "")
                     userParams.Set("editurl", EditUrl());
                 else
-                    userParams.Set("editurl", EditUrl("pid", articleid));
+                    userParams.Set("editurl", EditUrl(urlKey, articleid));
                 userParams.Set("settingsurl", settingsurl);
                 userParams.Set("appthemeurl", EditUrl("AppTheme"));
                 userParams.Set("adminpanelurl", EditUrl("AdminPanel"));
@@ -213,8 +192,6 @@ namespace RocketEcommerceMod
                 //actions.Add(GetNextActionID(), Localization.GetString("EditModule", this.LocalResourceFile), "", "", "edit.svg", EditUrl(), false, SecurityAccessLevel.Edit, true, false);
                 actions.Add(GetNextActionID(), Localization.GetString("adminpanel", this.LocalResourceFile), "", "", "edit_app.svg", EditUrl("AdminPanel"), false, SecurityAccessLevel.Edit, true, false);
                 actions.Add(GetNextActionID(), Localization.GetString("apptheme", this.LocalResourceFile), "", "", "edit_app.svg", EditUrl("AppTheme"), false, SecurityAccessLevel.Admin, true, false);
-                actions.Add(GetNextActionID(), Localization.GetString("clearcache", this.LocalResourceFile), "", "", "clear_cache.svg", DNNrocketUtils.NavigateURL(this.PortalSettings.ActiveTab.TabID).ToString() + "?action=clearcache", false, SecurityAccessLevel.Admin, true, false);
-                actions.Add(GetNextActionID(), Localization.GetString("recycleapppool", this.LocalResourceFile), "", "", "restart_app.svg", DNNrocketUtils.NavigateURL(this.PortalSettings.ActiveTab.TabID).ToString() + "?action=recycleapppool", false, SecurityAccessLevel.Host, true, false);
 
                 return actions;
             }

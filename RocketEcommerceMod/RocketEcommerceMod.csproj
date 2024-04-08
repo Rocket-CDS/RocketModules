@@ -96,6 +96,10 @@
       <Project>{2200f6c3-7d4b-4cdf-908f-dca37adfb121}</Project>
       <Name>DNNrocketAPI</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\DNNrocket\RocketAppTheme\AppThemes.csproj">
+      <Project>{3153493A-28E4-4A27-BF87-2E0F6A5314D8}</Project>
+      <Name>AppThemes</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\DNNrocket\RocketPortal\RocketPortal.csproj">
       <Project>{722bc7cd-3d90-41b4-87b1-b8750deaf4c9}</Project>
       <Name>RocketPortal</Name>

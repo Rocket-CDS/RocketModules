@@ -18,7 +18,6 @@ namespace RocketEcommerceMod
     {
         private string _systemkey;
         private string _moduleRef;
-        private string _articleId;
         private SessionParams _sessionParam;
         protected override void OnInit(EventArgs e)
         {
@@ -28,24 +27,11 @@ namespace RocketEcommerceMod
                 // Get systemkey from module name. (remove mod, add "API")
                 var moduleName = base.ModuleConfiguration.DesktopModule.ModuleName;
                 _systemkey = moduleName.ToLower().Substring(0, moduleName.Length - 3) + "api";
-                _articleId = DNNrocketUtils.RequestParam(Context, "pid");
-                string skinSrcAdmin = "?SkinSrc=rocketadmin";
-                if (DNNrocketUtils.RequestParam(Context, "SkinSrc") == "")
-                {
-                    if (_articleId == null || _articleId == "")
-                        Response.Redirect(EditUrl() + skinSrcAdmin, false);
-                    else
-                        Response.Redirect(EditUrl("pid", _articleId) + skinSrcAdmin, false);
-                    Context.ApplicationInstance.CompleteRequest(); // do this to stop iis throwing error
-                }
-
                 _moduleRef = PortalId + "_ModuleID_" + ModuleId;
-
                 _sessionParam = new SessionParams(new SimplisityInfo());
                 _sessionParam.TabId = TabId;
                 _sessionParam.ModuleId = ModuleId;
                 _sessionParam.ModuleRef = _moduleRef;
-                _sessionParam.Set("pid", _articleId);
                 _sessionParam.Set("moduleedit", "True");
 
                 PageIncludes.RemoveCssFile(Page, "skin.css"); //DNN always tries to load a skin.css, even if it does not exists.

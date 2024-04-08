@@ -85,9 +85,7 @@ namespace RocketDirectoryMod
                 _sessionParam.CultureCode = DNNrocketUtils.GetCurrentCulture();
                 _sessionParam.Url = context.Request.Url.ToString();
                 _sessionParam.UrlFriendly = DNNrocketUtils.NavigateURL(TabId, urlparams);
-
                 if (urlparams.ContainsKey("search") && !String.IsNullOrEmpty(urlparams["search"])) _sessionParam.SearchText = urlparams["search"];
-
                 if (urlparams.ContainsKey("page") && GeneralUtils.IsNumeric(urlparams["page"])) _sessionParam.Page = Convert.ToInt32(urlparams["page"]);
 
                 _moduleSettings = new ModuleContentLimpet(PortalId, _moduleRef, _systemkey, _sessionParam.ModuleId, _sessionParam.TabId);
@@ -100,11 +98,14 @@ namespace RocketDirectoryMod
                 var strHeader2 = RocketDirectoryAPIUtils.ViewHeader(PortalId, _systemkey, _moduleRef, _sessionParam, "viewlastheader.cshtml");
                 PageIncludes.IncludeTextInHeader(Page, strHeader2);
 
-                // Set langauge, so editing with simplity gets correct language
-                var lang = DNNrocketUtils.GetCurrentCulture();
-                if (HttpContext.Current.Request.QueryString["language"] != null) lang = HttpContext.Current.Request.QueryString["language"];
-                DNNrocketUtils.SetCookieValue("simplisity_language", lang);
-                DNNrocketUtils.SetCookieValue("simplisity_editlanguage", lang);
+                if (_hasEditAccess)
+                {
+                    // Set langauge, so editing with simplity gets correct language
+                    var lang = DNNrocketUtils.GetCurrentCulture();
+                    if (HttpContext.Current.Request.QueryString["language"] != null) lang = HttpContext.Current.Request.QueryString["language"];
+                    DNNrocketUtils.SetCookieValue("simplisity_language", lang);
+                    DNNrocketUtils.SetCookieValue("simplisity_editlanguage", lang);
+                }
             }
             catch (Exception ex)
             {
