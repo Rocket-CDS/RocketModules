@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Themes\config-w3\1.0\css\rocketdocsmod.css" />
+    <Content Include="Themes\config-w3\1.0\js\showdown.min.js" />
     <Content Include="View.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
