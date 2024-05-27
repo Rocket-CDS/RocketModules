@@ -104,7 +104,8 @@ namespace RocketContentMod
             }
             if (_hasEditAccess)
             {
-                var viewButtonsOut = CacheUtils.GetCache("editbuttons" + _moduleRef, _moduleRef);
+                var editbuttonkey = "editbuttons" + _moduleRef + "_" + UserId;
+                var viewButtonsOut = CacheUtils.GetCache(editbuttonkey, _moduleRef);
                 if (viewButtonsOut == null)
                 {
                     string[] parameters;
@@ -121,7 +122,7 @@ namespace RocketContentMod
                     userParams.Set("viewurl", Context.Request.Url.ToString());
 
                     viewButtonsOut = RocketContentAPIUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "ViewEditButtons.cshtml", true, false);
-                    CacheUtils.SetCache("editbuttons" + _moduleRef, viewButtonsOut, _moduleRef);
+                    CacheUtils.SetCache(editbuttonkey, viewButtonsOut, _moduleRef);
                 }
                 strOut = viewButtonsOut + strOut;                
             }
