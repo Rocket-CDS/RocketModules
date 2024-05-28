@@ -2,18 +2,18 @@
 
 	<packages>
 		<package name="RocketBlogMod" type="Module" version="1.0.0">
-			<friendlyName>RocketBlog</friendlyName>
-			<DefinitionName>rocketblogapi</DefinitionName>
-			<description>Rocket Blog Module</description>
+			<friendlyName>RocketBlog Nevoweb</friendlyName>
+			<DefinitionName>RocketBlog</DefinitionName>
+			<description>An online Blog platform for creation and display of blog posts.</description>
 			<iconFile>~/DesktopModules/RocketModules/RocketBlogMod/icon.png</iconFile>
 			<owner>
-				<name></name>
-				<organization>RocketCDS</organization>
-				<url></url>
-				<email></email>
+				<name>David Lee</name>
+				<organization>Nevoweb</organization>
+				<url>www.nevoweb.com</url>
+				<email>support@nevoweb.com</email>
 			</owner>
 			<license>
-				Copyright (c) 2020, www.rocket-cds.org
+				Copyright (c) 2020, www.nevoweb.com
 				All rights reserved.
 
 				THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
@@ -48,7 +48,8 @@
 						</supportedFeatures>
 						<moduleDefinitions>
 							<moduleDefinition>
-								<friendlyName>RocketBlog</friendlyName>
+								<friendlyName>RocketBlog Nevoweb</friendlyName>
+								<DefinitionName>RocketBlog</DefinitionName>
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>
 									<moduleControl>

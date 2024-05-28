@@ -81,6 +81,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="icon.png" />
     <Content Include="RecycleBin.ascx" />
     <Content Include="AppTheme.ascx" />
     <Content Include="Edit.ascx" />
