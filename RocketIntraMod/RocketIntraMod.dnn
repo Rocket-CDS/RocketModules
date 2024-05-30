@@ -1,7 +1,7 @@
 ﻿<dotnetnuke type="Package" version="5.0">
 	<packages>
 		<package name="RocketIntraMod" type="Module" version="1.0.1">
-			<friendlyName>RocketIntra Nevoweb</friendlyName>
+			<friendlyName>RocketIntra</friendlyName>
 			<DefinitionName>RocketIntra</DefinitionName>
 			<description>An administration system.</description>
 			<iconFile>~/DesktopModules/RocketModules/RocketIntraMod/icon.png</iconFile>
@@ -55,7 +55,7 @@
             </supportedFeatures>
 						<moduleDefinitions>
 							<moduleDefinition>
-								<friendlyName>RocketIntra Nevoweb</friendlyName>
+								<friendlyName>RocketIntra</friendlyName>
 								<DefinitionName>RocketIntra</DefinitionName>
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>

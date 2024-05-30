@@ -2,7 +2,7 @@
 
 	<packages>
 		<package name="RocketLibraryMod" type="Module" version="1.0.0">
-			<friendlyName>RocketLibrary Nevoweb</friendlyName>
+			<friendlyName>RocketLibrary</friendlyName>
 			<DefinitionName>RocketLibrary</DefinitionName>
 			<description>Library system that provides access to a library resources and services over the internet.</description>
 			<iconFile>~/DesktopModules/RocketModules/RocketDirectoryMod/icon.png</iconFile>
@@ -47,7 +47,7 @@
 						</supportedFeatures>
 						<moduleDefinitions>
 							<moduleDefinition>
-								<friendlyName>RocketLibrary Nevoweb</friendlyName>
+								<friendlyName>RocketLibrary</friendlyName>
 								<DefinitionName>RocketLibrary</DefinitionName>
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>

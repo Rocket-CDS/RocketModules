@@ -2,7 +2,7 @@
 
 	<packages>
 		<package name="RocketBusinessMod" type="Module" version="1.0.0">
-			<friendlyName>RocketBusiness Nevoweb</friendlyName>
+			<friendlyName>RocketBusiness</friendlyName>
 			<DefinitionName>RocketBusiness</DefinitionName>
 			<description>List businesses within a particular niche, location, or category.</description>
 			<iconFile>~/DesktopModules/RocketModules/RocketDirectoryMod/icon.png</iconFile>
@@ -47,7 +47,7 @@
 						</supportedFeatures>
 						<moduleDefinitions>
 							<moduleDefinition>
-								<friendlyName>RocketBusiness Nevoweb</friendlyName>
+								<friendlyName>RocketBusiness</friendlyName>
 								<DefinitionName>RocketBusiness</DefinitionName>
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>

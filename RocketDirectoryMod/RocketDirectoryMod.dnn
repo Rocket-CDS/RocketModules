@@ -1,7 +1,7 @@
 ﻿<dotnetnuke type="Package" version="5.0">
 	<packages>
 		<package name="RocketDirectoryMod" type="Module" version="1.0.1">
-			<friendlyName>RocketDirectory Nevoweb</friendlyName>
+			<friendlyName>RocketDirectory</friendlyName>
 			<DefinitionName>RocketDirectory</DefinitionName>
 			<description>A directory system for organizing, storing, and managing information about entities.</description>
 			<iconFile>~/DesktopModules/RocketModules/RocketDirectoryMod/icon.png</iconFile>
@@ -56,7 +56,7 @@
 				        </supportedFeatures>
 						<moduleDefinitions>
 							<moduleDefinition>
-								<friendlyName>RocketDirectory Nevoweb</friendlyName>
+								<friendlyName>RocketDirectory</friendlyName>
 								<DefinitionName>RocketDirectory</DefinitionName>
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>

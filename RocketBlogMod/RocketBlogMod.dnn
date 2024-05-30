@@ -2,7 +2,7 @@
 
 	<packages>
 		<package name="RocketBlogMod" type="Module" version="1.0.0">
-			<friendlyName>RocketBlog Nevoweb</friendlyName>
+			<friendlyName>RocketBlog</friendlyName>
 			<DefinitionName>RocketBlog</DefinitionName>
 			<description>An online Blog platform for creation and display of blog posts.</description>
 			<iconFile>~/DesktopModules/RocketModules/RocketBlogMod/icon.png</iconFile>
@@ -48,7 +48,7 @@
 						</supportedFeatures>
 						<moduleDefinitions>
 							<moduleDefinition>
-								<friendlyName>RocketBlog Nevoweb</friendlyName>
+								<friendlyName>RocketBlog</friendlyName>
 								<DefinitionName>RocketBlog</DefinitionName>
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>
