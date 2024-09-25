@@ -129,7 +129,8 @@ namespace RocketDirectoryMod
             }
             if (_hasEditAccess)
             {
-                var viewButtonsOut = CacheUtils.GetCache("editbuttons" + _moduleRef, _moduleRef);
+                var editbuttonkey = "editbuttons" + _moduleRef + "_" + UserId + "_" + _sessionParam.CultureCode;
+                var viewButtonsOut = CacheUtils.GetCache(editbuttonkey, _moduleRef);
                 if (viewButtonsOut == null)
                 {
                     var articleid = RequestParam(Context, RocketDirectoryAPIUtils.UrlQueryArticleKey(PortalId, _systemkey));
@@ -147,7 +148,8 @@ namespace RocketDirectoryMod
                     userParams.Set("settingsurl", settingsurl);
                     userParams.Set("appthemeurl", EditUrl("AppTheme"));
                     userParams.Set("adminpanelurl", EditUrl("AdminPanel"));
-                    userParams.Set("viewurl", Context.Request.Url.ToString());
+                    userParams.Set("viewurl", Context.Request.Url.ToString()); // Legacy
+                    userParams.Set("viewtabid", this.PortalSettings.ActiveTab.TabID.ToString());
 
                     viewButtonsOut = RocketDirectoryAPIUtils.DisplaySystemView(PortalId, _systemkey, _moduleRef, _sessionParam, "ViewEditButtons.cshtml");
                     CacheUtils.SetCache("editbuttons" + _moduleRef, viewButtonsOut, _moduleRef);
