@@ -20,6 +20,7 @@ using RazorEngine.Templating;
 using System.Runtime.InteropServices.ComTypes;
 using RocketDocs.Components;
 using System.Collections.Generic;
+using System.Web;
 
 namespace RocketDocsMod
 {
@@ -87,19 +88,31 @@ namespace RocketDocsMod
         }
         protected override void OnPreRender(EventArgs e)
         {
+            string editFlag = Request.QueryString["edit"];
             var portalContent = new PortalContentLimpet(PortalId, DNNrocketUtils.GetCurrentCulture());             
             var strOut = "";
             var articleData = new ArticleLimpet(PortalId, ModuleId.ToString(), DNNrocketUtils.GetCurrentCulture());
             var razorTempl = RocketDocsModUtils.ReadTemplate("view.cshtml");
+            if (_hasEditAccess && editFlag == "1")
+            {
+                razorTempl = RocketDocsModUtils.ReadTemplate("viewedit.cshtml");
+            }
+
             var passSettings = new Dictionary<string, string>();
             passSettings.Add("hasedit", _hasEditAccess.ToString());
             passSettings.Add("moduleid", ModuleId.ToString());
+            var param = new string[] { "edit", "1" };
+            passSettings.Add("editurl", DNNrocketUtils.NavigateURL(TabId, param));
+            var param2 = new string[] { "edit", "0" };
+            passSettings.Add("viewurl", DNNrocketUtils.NavigateURL(TabId, param2));
 
-            if (!UserUtils.IsEditor())
+
+            if (editFlag != "1")
             {
                 var mdtext = articleData.Info.GetXmlProperty("genxml/lang/genxml/textbox/summarykbase");
                 mdtext = RocketDocsUtils.ReplaceInjectTokens(mdtext);
                 mdtext = RocketDocsUtils.ReplaceInjectRazorTokens(mdtext);
+                mdtext = RocketDocsUtils.ReplaceClassUrlTokens(mdtext);
                 // Don't save summaykbase, only display
                 articleData.Info.SetXmlProperty("genxml/lang/genxml/textbox/summarykbase", mdtext);
             }

@@ -91,6 +91,10 @@
       <Project>{2200F6C3-7D4B-4CDF-908F-DCA37ADFB121}</Project>
       <Name>DNNrocketAPI</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\DNNrocket\RocketPortal\RocketPortal.csproj">
+      <Project>{d4a7dcf0-1097-456b-83c0-c42d50d97698}</Project>
+      <Name>RocketPortal</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\DNNrocket\Simplisity\Simplisity.csproj">
       <Project>{3375ee09-5417-44de-941f-f85d156a355a}</Project>
       <Name>Simplisity</Name>
@@ -102,6 +106,7 @@
     <None Include="packages.config" />
     <None Include="README.md" />
     <None Include="RocketDocsMod.dnn" />
+    <None Include="Themes\config-w3\1.0\default\ViewEdit.cshtml" />
     <None Include="Themes\config-w3\1.0\default\View.cshtml" />
     <None Include="Themes\config-w3\1.0\default\ViewLastHeader.cshtml" />
     <None Include="Themes\config-w3\1.0\default\ViewFirstHeader.cshtml" />

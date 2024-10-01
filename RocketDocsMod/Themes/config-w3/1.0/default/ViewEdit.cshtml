@@ -1,0 +1,167 @@
+﻿@inherits RocketDocs.Components.RocketDocsTokens<Simplisity.SimplisityRazor>
+@using DNNrocketAPI;
+@using DNNrocketAPI.Components;
+@using Simplisity;
+@using RocketDocs.Components;
+@using DNNrocketAPI.Components;
+
+@{
+    var articleData = (ArticleLimpet)Model.List.First();
+    var info = articleData.Info;
+
+    AddProcessData("resourcepath", "/DesktopModules/DNNrocket/api/App_LocalResources/");
+    AddProcessData("resourcepath", "/DesktopModules/DNNrocketModules/RocketDocs/App_LocalResources/");
+
+}
+
+
+<div id="articleedit" class="w3-display-container simplisity_panel">
+
+    <div id="a-articledata" class='w3-animate-opacity w3-margin-bottom'>
+
+        @if (UserUtils.IsEditor())
+        {
+
+            <div class="w3-row w3-padding">
+
+                <a href="@Model.GetSetting("viewurl")" class="w3-padding w3-button w3-black a-returntowebsite">@ButtonText(ButtonTypes.back)</a>
+                <span class="w3-padding w3-button w3-green a-savebutton simplisity_click" s-before="summarykbaseSave" s-after="returnToWebsite" s-cmd="remote_editsave" s-post="#a-articledata" s-fields='{"moduleref":"@Model.GetSetting("moduleid")"}' s-index="0">
+                    @ButtonText(ButtonTypes.save)
+                </span>
+                <span class="w3-padding w3-button w3-grey a-savebutton simplisity_click" s-reload="true" s-cmd="remote_clearcache" s-index="0">
+                    @ButtonIcon(ButtonTypes.refresh)
+                </span>
+                <span class="w3-padding w3-button" onclick="$('#summarykbase').toggle(); $('.ck-editor').toggle(); $('#markdowntext').toggle();">
+                    <span class="material-icons editicon">
+                        chrome_reader_mode
+                    </span>
+                </span>
+
+                <div class="w3-button w3-right w3-margin-left w3-red deletebutton simplisity_confirmclick" s-reload="true" s-confirm="@ResourceKey("DNNrocket.delete", "", "confirm")" s-cmd="remote_delete" s-fields='{"moduleref":"@Model.GetSetting("moduleid")"}' style="">@ButtonText(ButtonTypes.delete)</div>
+
+            </div>
+
+            <!--Website Detail fields-->
+
+            <div class="w3-padding">
+                <div class="w3-row">
+                    <div class="w3-row ">
+                        <div class="w3-threequarter w3-padding-small">
+                            @TextBox(info, "genxml/lang/genxml/textbox/subjectkbase", " class='w3-input w3-border' autocomplete='off' placeholder='" + ResourceKey("DNNrocket.title") + "....' ", "", false, 0)
+                        </div>
+                        <div class="w3-quarter w3-padding-small">
+                            @CheckBox(info, "genxml/textbox/hidesubject", "&nbsp;" + ResourceKey("DNNrocket.hidden"), " class='w3-check '")
+                        </div>
+                    </div>
+                    <div class="w3-row">
+                        <div class="w3-threequarter w3-padding-small">
+                            @TextArea(info, "genxml/lang/genxml/textbox/summarysearch", "  class='w3-input w3-border' placeholder='" + ResourceKey("DNNrocket.summary") + "...'  ")
+                        </div>
+                        <div class="w3-quarter w3-padding-small">
+                            @CheckBox(info, "genxml/textbox/hidesummary", "&nbsp;" + ResourceKey("DNNrocket.hidden"), " class='w3-check '")
+                        </div>
+                    </div>
+                    <div class="w3-row w3-padding-small">
+                        <div id="markdowntext" style="display:none;" class="w3-large">Markdown Text (Tables are not supported)</div>
+                        @TextArea(info, "genxml/lang/genxml/textbox/summarykbase", "  style='width:100%;height: 100vh;display:none;' ")
+                        @TextArea(info, "genxml/lang/genxml/textbox/summarykbasehtml", "  style='display:none;' ")
+                    </div>
+                </div>
+            </div>
+
+
+            <div>
+                @if (UserUtils.IsInRole("Administrator"))
+                {
+                    <div class="w3-container">
+                        <div class="w3-right">
+                            @RenderXml(info)
+                        </div>
+                    </div>
+                }
+                <i>ID: </i> @info.ItemID <i> GuidKey:</i> @info.GUIDKey
+            </div>
+
+            <script>
+                $(document).ready(function () {
+
+
+                    ClassicEditor
+                        .create(document.querySelector('#summarykbase'), {
+                            toolbar: {
+                                items: [
+                                    'heading',
+                                    '|',
+                                    'bold',
+                                    'italic',
+                                    'link',
+                                    'bulletedList',
+                                    'numberedList',
+                                    'todoList',
+                                    'insertTable',
+                                    '|',
+                                    'outdent',
+                                    'indent',
+                                    'alignment',
+                                    'fontSize',
+                                    '|',
+                                    'codeBlock',
+                                    'htmlEmbed',
+                                    'code',
+                                    'imageUpload',
+                                    'undo',
+                                    'redo'
+                                ]
+                            },
+                            language: 'en',
+                            image: {
+                                toolbar: [
+                                    'imageTextAlternative',
+                                    'imageStyle:full',
+                                    'imageStyle:side'
+                                ]
+                            },
+                            language: 'en',
+                            licenseKey: '',
+                        })
+                        .then(editorsummarykbase => {
+                            window.editorsummarykbase = editorsummarykbase;
+                        })
+                        .catch(error => {
+                            console.error('Oops, something went wrong!');
+                            console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
+                            console.warn('Build id: vwi2ciweh9em-142866l7j12v');
+                            console.error(error);
+                        });
+
+
+                    $(document).simplisityStartUp('/Desktopmodules/dnnrocket/api/rocket/action', { systemkey: 'rocketdocs', debug: false });
+
+                    $('.simplisity_loader').hide();
+                });
+
+                // This function needs to be called on the s-before cmd class, so the data is saved on the API post.
+                function summarykbaseSave() {
+                    if ($('#summarykbase').is(":hidden")) {
+                        editorsummarykbase.updateSourceElement();
+
+                        var converter = new showdown.Converter(),
+                            text = $('#summarykbase').text(),
+                            html = converter.makeHtml(text);
+
+                        $('#summarykbasehtml').val(html);
+
+                    }
+                }
+                function returnToWebsite() {
+                    $('.simplisity_loader').show();
+                    window.location.href = '@Model.GetSetting("viewurl")';
+                }
+
+            </script>
+        }
+
+    </div>
+</div>
+
+
