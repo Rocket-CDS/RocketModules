@@ -116,25 +116,25 @@ namespace RocketDocsMod
                 mdtext = RocketDocsUtils.ReplaceClassUrlTokens(mdtext);
                 // Don't save summaykbase, only display
                 articleData.Info.SetXmlProperty("genxml/lang/genxml/textbox/summarykbase", mdtext);
-            }
 
-            if (String.IsNullOrEmpty(articleData.Info.GetXmlProperty("genxml/lang/genxml/textbox/summarykbase")))
-            {
-                //var gitTree = GitHubUtils.GetGitHubTree("https://api.github.com/repos/Rocket-CDS/Documentation/git/trees/main?recursive=1");
-
-                var tabInfo = DNNrocketUtils.GetTabInfo(PortalId, TabId);
-                var tabName = tabInfo.TabName;
-                var parentTabName = tabName;
-                if (tabInfo.ParentId > 0)
+                if (String.IsNullOrEmpty(articleData.Info.GetXmlProperty("genxml/lang/genxml/textbox/summarykbase")))
                 {
-                    var parentTabInfo = DNNrocketUtils.GetTabInfo(PortalId, tabInfo.ParentId);
-                    parentTabName = parentTabInfo.TabName;
-                }
+                    //var gitTree = GitHubUtils.GetGitHubTree("https://api.github.com/repos/Rocket-CDS/Documentation/git/trees/main?recursive=1");
 
-                var tokenUrl = portalContent.GitRawUserContentUrl + portalContent.GitHubRepo.TrimEnd('/') + "/refs/heads/main/" + parentTabName.Replace(" ", "") + "/" + tabName.Replace(" ", "").Replace(".md","") + ".md";
-                var mdtext2 = RocketDocsUtils.GetGitHubMarkdown(tokenUrl);
-                if (mdtext2 == "FAIL") mdtext2 = "";
-                articleData.Info.SetXmlProperty("genxml/lang/genxml/textbox/summarykbase", mdtext2);
+                    var tabInfo = DNNrocketUtils.GetTabInfo(PortalId, TabId);
+                    var tabName = tabInfo.TabName;
+                    var parentTabName = tabName;
+                    if (tabInfo.ParentId > 0)
+                    {
+                        var parentTabInfo = DNNrocketUtils.GetTabInfo(PortalId, tabInfo.ParentId);
+                        parentTabName = parentTabInfo.TabName;
+                    }
+
+                    var tokenUrl = portalContent.GitRawUserContentUrl + portalContent.GitHubRepo.TrimEnd('/') + "/refs/heads/main/" + parentTabName.Replace(" ", "") + "/" + tabName.Replace(" ", "").Replace(".md", "") + ".md";
+                    var mdtext2 = RocketDocsUtils.GetGitHubMarkdown(tokenUrl);
+                    if (mdtext2 == "FAIL") mdtext2 = "";
+                    articleData.Info.SetXmlProperty("genxml/lang/genxml/textbox/summarykbase", mdtext2);
+                }
             }
 
             var pr = RenderRazorUtils.RazorProcessData(razorTempl, articleData, null, passSettings, null, true);
