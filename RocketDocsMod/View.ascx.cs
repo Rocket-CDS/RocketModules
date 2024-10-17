@@ -123,14 +123,27 @@ namespace RocketDocsMod
 
                     var tabInfo = DNNrocketUtils.GetTabInfo(PortalId, TabId);
                     var tabName = tabInfo.TabName;
-                    var parentTabName = tabName;
+                    var urlTabName = tabName;
                     if (tabInfo.ParentId > 0)
                     {
                         var parentTabInfo = DNNrocketUtils.GetTabInfo(PortalId, tabInfo.ParentId);
-                        parentTabName = parentTabInfo.TabName;
+                        var parentTabName = parentTabInfo.TabName;
+                        urlTabName = parentTabName.Replace(" ", "");
+                        if (parentTabInfo.ParentId > 0)
+                        {
+                            var parentTabInfo2 = DNNrocketUtils.GetTabInfo(PortalId, parentTabInfo.ParentId);
+                            var parentTabName2 = parentTabInfo2.TabName;
+                            urlTabName = parentTabName2.Replace(" ", "") + "/" + parentTabName.Replace(" ", "");
+                            if (parentTabInfo2.ParentId > 0)
+                            {
+                                var parentTabInfo3 = DNNrocketUtils.GetTabInfo(PortalId, parentTabInfo2.ParentId);
+                                var parentTabName3 = parentTabInfo3.TabName;
+                                urlTabName = parentTabName3.Replace(" ", "") + "/" + parentTabName2.Replace(" ", "") + "/" + parentTabName.Replace(" ", "");
+                            }
+                        }
                     }
 
-                    var tokenUrl = portalContent.GitRawUserContentUrl + portalContent.GitHubRepo.TrimEnd('/') + "/refs/heads/main/" + parentTabName.Replace(" ", "") + "/" + tabName.Replace(" ", "").Replace(".md", "") + ".md";
+                    var tokenUrl = portalContent.GitRawUserContentUrl + portalContent.GitHubRepo.TrimEnd('/') + "/refs/heads/main/" + urlTabName + "/" + tabName.Replace(" ", "").Replace(".md", "") + ".md";
                     var mdtext2 = RocketDocsUtils.GetGitHubMarkdown(tokenUrl);
                     if (mdtext2 == "FAIL") mdtext2 = "";
                     articleData.Info.SetXmlProperty("genxml/lang/genxml/textbox/summarykbase", mdtext2);
