@@ -1,7 +1,7 @@
 ﻿<dotnetnuke type="Package" version="5.0">
 	<packages>
 		<package name="RocketEcommerceMod" type="Module" version="1.0.1">
-			<friendlyName>RocketEcommerce</friendlyName>
+			<friendlyName>RocketEcommerce by Nevoweb</friendlyName>
 			<DefinitionName>RocketEcommerce</DefinitionName>
 			<description>An online e-commerce solution.</description>
 			<iconFile>~/DesktopModules/RocketModules/RocketEcommerceMod/icon.png</iconFile>
@@ -56,7 +56,7 @@
 			            </supportedFeatures>
 						<moduleDefinitions>
 							<moduleDefinition>
-								<friendlyName>RocketEcommerce</friendlyName>
+								<friendlyName>RocketEcommerce by Nevoweb</friendlyName>
 								<DefinitionName>RocketEcommerce</DefinitionName>
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>

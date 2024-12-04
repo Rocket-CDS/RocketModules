@@ -2,7 +2,7 @@
 
 	<packages>
 		<package name="RocketNewsMod" type="Module" version="1.0.0">
-			<friendlyName>RocketNews</friendlyName>
+			<friendlyName>RocketNews by Nevoweb</friendlyName>
 			<DefinitionName>RocketNews</DefinitionName>
 			<description>An online news system that provides users with access to news articles, reports, videos, and other forms of content.</description>
 			<iconFile>~/DesktopModules/RocketModules/RocketDirectoryMod/icon.png</iconFile>
@@ -38,7 +38,7 @@
 						</supportedFeatures>
 						<moduleDefinitions>
 							<moduleDefinition>
-								<friendlyName>RocketNews</friendlyName>
+								<friendlyName>RocketNews by Nevoweb</friendlyName>
 								<DefinitionName>RocketNews</DefinitionName>
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>

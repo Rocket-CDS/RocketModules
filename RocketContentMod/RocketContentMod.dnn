@@ -1,7 +1,7 @@
 ﻿<dotnetnuke type="Package" version="5.0">
 	<packages>
 		<package name="RocketContentMod" type="Module" version="1.0.2">
-			<friendlyName>RocketContent</friendlyName>
+			<friendlyName>RocketContent by Nevoweb</friendlyName>
 			<DefinitionName>RocketContent</DefinitionName>
 			<description>A complete website content editor with built-in AI and language translation.</description>
 			<iconFile>~/DesktopModules/RocketModules/RocketContentMod/icon.png</iconFile>
@@ -56,7 +56,7 @@
 			            </supportedFeatures>
 						<moduleDefinitions>
 							<moduleDefinition>
-								<friendlyName>RocketContent</friendlyName>
+								<friendlyName>RocketContent by Nevoweb</friendlyName>
 								<DefinitionName>RocketContent</DefinitionName>
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>
