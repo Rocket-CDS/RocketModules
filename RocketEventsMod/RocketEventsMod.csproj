@@ -11,8 +11,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RocketDirectoryMod</RootNamespace>
-    <AssemblyName>RocketDirectoryMod</AssemblyName>
+    <RootNamespace>RocketEventsMod</RootNamespace>
+    <AssemblyName>RocketEventsMod</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -44,6 +44,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View.ascx.cs">
+      <DependentUpon>View.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View.ascx.designer.cs">
+      <DependentUpon>View.ascx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\DNNrocketModules\RocketDirectoryAPI\RocketDirectoryAPI.csproj">
@@ -53,6 +60,10 @@
     <ProjectReference Include="..\..\DNNrocket\API\DNNrocketAPI.csproj">
       <Project>{2200f6c3-7d4b-4cdf-908f-dca37adfb121}</Project>
       <Name>DNNrocketAPI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DNNrocket\RocketAppTheme\AppThemes.csproj">
+      <Project>{41e56861-c0c6-476f-a769-65211aee9ac2}</Project>
+      <Name>AppThemes</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\DNNrocket\RocketPortal\RocketPortal.csproj">
       <Project>{722bc7cd-3d90-41b4-87b1-b8750deaf4c9}</Project>
@@ -129,6 +140,7 @@
     <Content Include="RocketEventsMod.dnn" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="View.ascx" />
     <Content Include="web.config" />
     <None Include="packages.config" />
     <None Include="web.Debug.config">

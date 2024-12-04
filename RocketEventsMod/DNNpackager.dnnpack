@@ -25,5 +25,7 @@
 	<value>icon.png</value>
   </file>
   <assembly>
+	  <value>RocketEventsMod.dll</value>
+	  <value>RocketEventsMod.pdb</value>
   </assembly>
 </root>

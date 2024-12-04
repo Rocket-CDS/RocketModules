@@ -2,7 +2,7 @@
 
 	<packages>
 		<package name="RocketEventsMod" type="Module" version="1.0.0">
-			<friendlyName>RocketEvents</friendlyName>
+			<friendlyName>RocketEvents by Nevoweb</friendlyName>
 			<DefinitionName>RocketEvents</DefinitionName>
 			<description>Events system designed to facilitate the organization, promotion, management, and execution of events over the internet.</description>
 			<iconFile>~/DesktopModules/RocketModules/RocketEventsMod/icon.png</iconFile>
@@ -48,13 +48,13 @@
 						</supportedFeatures>
 						<moduleDefinitions>
 							<moduleDefinition>
-								<friendlyName>RocketEvents</friendlyName>
+								<friendlyName>RocketEvents by Nevoweb</friendlyName>
 								<DefinitionName>RocketEvents</DefinitionName>
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>
 									<moduleControl>
 										<controlKey />
-										<controlSrc>DesktopModules/RocketModules/RocketDirectoryMod/View.ascx</controlSrc>
+										<controlSrc>DesktopModules/RocketModules/RocketEventsMod/View.ascx</controlSrc>
 										<supportsPartialRendering>False</supportsPartialRendering>
 										<controlTitle />
 										<controlType>View</controlType>
