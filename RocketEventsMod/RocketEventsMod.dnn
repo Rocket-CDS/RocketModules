@@ -1,7 +1,7 @@
 ﻿<dotnetnuke type="Package" version="5.0">
 
 	<packages>
-		<package name="RocketEventsMod" type="Module" version="1.0.0">
+		<package name="RocketEventsMod" type="Module" version="1.1.0">
 			<friendlyName>RocketEvents by Nevoweb</friendlyName>
 			<DefinitionName>RocketEvents</DefinitionName>
 			<description>Events system designed to facilitate the organization, promotion, management, and execution of events over the internet.</description>
@@ -23,6 +23,7 @@
 			<dependencies>
 				<dependency type="CoreVersion">09.00.00</dependency>
 				<dependency type="managedPackage" version="1.0.0">RocketDirectoryMod</dependency>
+				<dependency type="managedPackage" version="1.2.3">RocketDirectoryAPI</dependency>
 			</dependencies>
 			<components>
 
