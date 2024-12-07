@@ -152,9 +152,10 @@ namespace RocketEventsMod
                 {
                     // Set langauge, so editing with simplity gets correct language
                     var lang = DNNrocketUtils.GetCurrentCulture();
-                    if (HttpContext.Current.Request.QueryString["language"] != null) lang = HttpContext.Current.Request.QueryString["language"];
-                    DNNrocketUtils.SetCookieValue("simplisity_language", lang);
                     DNNrocketUtils.SetCookieValue("simplisity_editlanguage", lang);
+                    var qlang = HttpContext.Current.Request.QueryString["language"];
+                    if (qlang != null && DNNrocketUtils.ValidCulture(qlang)) lang = qlang;
+                    DNNrocketUtils.SetCookieValue("simplisity_language", lang);
                 }
             }
             catch (Exception ex)
