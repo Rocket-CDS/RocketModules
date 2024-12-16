@@ -47,7 +47,7 @@
 						</supportedFeatures>
 						<moduleDefinitions>
 							<moduleDefinition>
-								<friendlyName>RocketLibrary by Nevoweb</friendlyName>
+								<friendlyName>RocketLibrary</friendlyName>
 								<DefinitionName>RocketLibrary</DefinitionName>
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>

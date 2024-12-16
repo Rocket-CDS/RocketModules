@@ -55,7 +55,7 @@
             </supportedFeatures>
 						<moduleDefinitions>
 							<moduleDefinition>
-								<friendlyName>RocketForm by Nevoweb</friendlyName>
+								<friendlyName>RocketForm</friendlyName>
 								<DefinitionName>RocketForm</DefinitionName>
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>

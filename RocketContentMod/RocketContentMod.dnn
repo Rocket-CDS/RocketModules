@@ -56,7 +56,7 @@
 			            </supportedFeatures>
 						<moduleDefinitions>
 							<moduleDefinition>
-								<friendlyName>RocketContent by Nevoweb</friendlyName>
+								<friendlyName>RocketContent</friendlyName>
 								<DefinitionName>RocketContent</DefinitionName>
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>

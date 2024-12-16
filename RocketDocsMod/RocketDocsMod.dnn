@@ -56,7 +56,7 @@
 						</supportedFeatures>
 						<moduleDefinitions>
 							<moduleDefinition>
-								<friendlyName>RocketDocsMod by Nevoweb</friendlyName>
+								<friendlyName>RocketDocsMod</friendlyName>
 								<DefinitionName>RocketDocsMod</DefinitionName>
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>

@@ -38,7 +38,7 @@
 						</supportedFeatures>
 						<moduleDefinitions>
 							<moduleDefinition>
-								<friendlyName>RocketNews by Nevoweb</friendlyName>
+								<friendlyName>RocketNews</friendlyName>
 								<DefinitionName>RocketNews</DefinitionName>
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>

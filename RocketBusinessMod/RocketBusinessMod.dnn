@@ -47,7 +47,7 @@
 						</supportedFeatures>
 						<moduleDefinitions>
 							<moduleDefinition>
-								<friendlyName>RocketBusiness by Nevoweb</friendlyName>
+								<friendlyName>RocketBusiness</friendlyName>
 								<DefinitionName>RocketBusiness</DefinitionName>
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>

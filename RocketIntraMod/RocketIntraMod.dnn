@@ -55,7 +55,7 @@
             </supportedFeatures>
 						<moduleDefinitions>
 							<moduleDefinition>
-								<friendlyName>RocketIntra by Nevoweb</friendlyName>
+								<friendlyName>RocketIntra</friendlyName>
 								<DefinitionName>RocketIntra</DefinitionName>
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>

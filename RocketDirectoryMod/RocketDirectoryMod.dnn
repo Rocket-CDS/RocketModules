@@ -56,7 +56,7 @@
 				        </supportedFeatures>
 						<moduleDefinitions>
 							<moduleDefinition>
-								<friendlyName>RocketDirectory by Nevoweb</friendlyName>
+								<friendlyName>RocketDirectory</friendlyName>
 								<DefinitionName>RocketDirectory</DefinitionName>
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>
