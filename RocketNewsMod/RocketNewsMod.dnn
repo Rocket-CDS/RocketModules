@@ -2,9 +2,9 @@
 
 	<packages>
 		<package name="RocketNewsMod" type="Module" version="1.0.0">
-			<friendlyName>RocketNews by Nevoweb</friendlyName>
+			<friendlyName> RocketNews</friendlyName>
 			<DefinitionName>RocketNews</DefinitionName>
-			<description>An online news system that provides users with access to news articles, reports, videos, and other forms of content.</description>
+			<description>By Nevoweb - An online news system that provides users with access to news articles, reports, videos, and other forms of content.</description>
 			<iconFile>~/DesktopModules/RocketModules/RocketDirectoryMod/icon.png</iconFile>
 			<owner>
 				<name>David Lee</name>

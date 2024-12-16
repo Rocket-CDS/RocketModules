@@ -1,9 +1,9 @@
 ﻿<dotnetnuke type="Package" version="5.0">
 	<packages>
 		<package name="RocketDocsMod" type="Module" version="1.0.0">
-			<friendlyName>RocketDocsMod by Nevoweb</friendlyName>
+			<friendlyName> RocketDocsMod</friendlyName>
 			<DefinitionName>RocketDocsMod</DefinitionName>
-			<description>A module to display documentation made in html or Markdown, with file url injection.</description>
+			<description>By Nevoweb - A module to display documentation made in html or Markdown, with file url injection.</description>
 			<iconFile>~/DesktopModules/RocketModules/RocketContentMod/icon.png</iconFile>
 			<owner>
 				<name>David Lee</name>

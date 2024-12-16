@@ -2,9 +2,9 @@
 
 	<packages>
 		<package name="RocketBusinessMod" type="Module" version="1.0.0">
-			<friendlyName>RocketBusiness by Nevoweb</friendlyName>
+			<friendlyName> RocketBusiness</friendlyName>
 			<DefinitionName>RocketBusiness</DefinitionName>
-			<description>List businesses within a particular niche, location, or category.</description>
+			<description>By Nevoweb - List businesses within a particular niche, location, or category.</description>
 			<iconFile>~/DesktopModules/RocketModules/RocketDirectoryMod/icon.png</iconFile>
 			<owner>
 				<name>David Lee</name>

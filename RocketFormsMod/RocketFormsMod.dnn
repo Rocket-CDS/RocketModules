@@ -1,9 +1,9 @@
 ﻿<dotnetnuke type="Package" version="5.0">
 	<packages>
 		<package name="RocketFormsMod" type="Module" version="1.0.0">
-			<friendlyName>RocketForm by Nevoweb</friendlyName>
+			<friendlyName> RocketForm</friendlyName>
 			<DefinitionName>RocketForm</DefinitionName>
-			<description>An online form system that is used to collect data from users over the internet.</description>
+			<description>By Nevoweb - An online form system that is used to collect data from users over the internet.</description>
 			<iconFile>~/DesktopModules/RocketModules/RocketFormsMod/icon.png</iconFile>
 			<owner>
 				<name>David Lee</name>

@@ -1,9 +1,9 @@
 ﻿<dotnetnuke type="Package" version="5.0">
 	<packages>
 		<package name="RocketDirectoryMod" type="Module" version="1.0.1">
-			<friendlyName>RocketDirectory by Nevoweb</friendlyName>
+			<friendlyName> RocketDirectory</friendlyName>
 			<DefinitionName>RocketDirectory</DefinitionName>
-			<description>A directory system for organizing, storing, and managing information about entities.</description>
+			<description>By Nevoweb - A directory system for organizing, storing, and managing information about entities.</description>
 			<iconFile>~/DesktopModules/RocketModules/RocketDirectoryMod/icon.png</iconFile>
 			<owner>
 				<name>David Lee</name>

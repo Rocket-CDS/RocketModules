@@ -1,9 +1,9 @@
 ﻿<dotnetnuke type="Package" version="5.0">
 	<packages>
 		<package name="RocketEcommerceMod" type="Module" version="1.0.1">
-			<friendlyName>RocketEcommerce by Nevoweb</friendlyName>
+			<friendlyName> RocketEcommerce</friendlyName>
 			<DefinitionName>RocketEcommerce</DefinitionName>
-			<description>An online e-commerce solution.</description>
+			<description>By Nevoweb - An online e-commerce solution.</description>
 			<iconFile>~/DesktopModules/RocketModules/RocketEcommerceMod/icon.png</iconFile>
 			<owner>
 				<name>David Lee</name>

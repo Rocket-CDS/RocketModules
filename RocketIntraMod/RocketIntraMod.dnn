@@ -1,9 +1,9 @@
 ﻿<dotnetnuke type="Package" version="5.0">
 	<packages>
 		<package name="RocketIntraMod" type="Module" version="1.0.1">
-			<friendlyName>RocketIntra by Nevoweb</friendlyName>
+			<friendlyName> RocketIntra</friendlyName>
 			<DefinitionName>RocketIntra</DefinitionName>
-			<description>An administration system.</description>
+			<description>By Nevoweb - An administration system.</description>
 			<iconFile>~/DesktopModules/RocketModules/RocketIntraMod/icon.png</iconFile>
 			<owner>
 				<name>David Lee</name>

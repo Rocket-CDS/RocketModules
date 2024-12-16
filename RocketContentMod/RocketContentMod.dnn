@@ -1,9 +1,9 @@
 ﻿<dotnetnuke type="Package" version="5.0">
 	<packages>
 		<package name="RocketContentMod" type="Module" version="1.0.2">
-			<friendlyName>RocketContent by Nevoweb</friendlyName>
+			<friendlyName>  RocketContent</friendlyName>
 			<DefinitionName>RocketContent</DefinitionName>
-			<description>A complete website content editor with built-in AI and language translation.</description>
+			<description>By Nevoweb - A complete website content editor with built-in AI and language translation.</description>
 			<iconFile>~/DesktopModules/RocketModules/RocketContentMod/icon.png</iconFile>
 			<owner>
 				<name>David Lee</name>
