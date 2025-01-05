@@ -115,8 +115,6 @@ namespace RocketDirectoryMod
         }
         protected override void OnPreRender(EventArgs e)
         {
-            if (_moduleSettings.InjectJQuery) JavaScript.RequestRegistration(CommonJs.jQuery);
-
             var strOut = RocketDirectoryAPIUtils.DisplayView(PortalId, _systemkey, _moduleRef,  _sessionParam,"", "loadsettings");
             if (strOut == "loadsettings")
             {
