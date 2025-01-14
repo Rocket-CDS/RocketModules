@@ -36,6 +36,15 @@
 					</resourceFiles>
 				</component>
 
+				<component type="Assembly">
+					<assemblies>
+						<assembly>
+							<path>bin</path>
+							<name>RocketEventsMod.dll</name>
+							<sourceFileName>RocketEventsMod.dll</sourceFileName>
+						</assembly>
+					</assemblies>
+				</component>				
 
 				<component type="Module">
 					<desktopModule>
