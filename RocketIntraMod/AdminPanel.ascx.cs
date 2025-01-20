@@ -6,11 +6,13 @@ using RocketPortal.Components;
 using Simplisity;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using static DotNetNuke.Entities.Portals.PortalSettings;
 
 namespace RocketIntraMod
 {
@@ -45,8 +47,29 @@ namespace RocketIntraMod
                 DNNrocketUtils.SetCookieValue("simplisity_language", _sessionParam.CultureCode);
 
                 PageIncludes.RemoveCssFile(Page, "skin.css"); //DNN always tries to load a skin.css, even if it does not exists.
-                var strHeader1 = RocketIntraUtils.DisplaySystemView(PortalId, _systemkey, _moduleRef, _sessionParam, "AdminPanelheader.cshtml");
+
+                var strHeader1 = (string)CacheUtils.GetCache("rocketintra*headtext", PortalId.ToString());
+                if (String.IsNullOrEmpty(strHeader1))
+                {
+                    var sysList = new List<string>();
+                    sysList.Add(_systemkey.ToLower());
+                    strHeader1 = RocketIntraUtils.DisplaySystemView(PortalId, _systemkey, _moduleRef, _sessionParam, "AdminPanelheader.cshtml");
+                    var systemData = SystemSingleton.Instance("rocketintra");
+                    var portalContent = new PortalContentLimpet(PortalId, _sessionParam.CultureCode);
+                    var interfacelist = portalContent.PluginActveInterface(systemData);
+                    foreach (var ri in interfacelist)
+                    {
+                        var sysKey = Path.GetFileNameWithoutExtension(ri.TemplateRelPath).ToLower();
+                        if (!sysList.Contains(sysKey))
+                        {
+                            strHeader1 += RocketIntraUtils.DisplaySystemView(PortalId, sysKey, _moduleRef, _sessionParam, "AdminPanelheader.cshtml");
+                            sysList.Add(sysKey);
+                        }
+                    }
+                    CacheUtils.SetCache("rocketintra*headtext", strHeader1, PortalId.ToString());
+                }
                 PageIncludes.IncludeTextInHeader(Page, strHeader1);
+
             }
             catch (Exception ex)
             {
