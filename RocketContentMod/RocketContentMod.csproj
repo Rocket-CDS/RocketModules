@@ -211,7 +211,6 @@
   <PropertyGroup>
     <PostBuildEvent>REM ** Copy to sub-bin folder of DNNrocket, so install package can be built from them **
 copy "$(ProjectDir)$(OutDir)$(TargetFileName)" "$(ProjectDir)..\..\DNNrocket\bin\$(TargetFileName)"
-copy "$(ProjectDir)$(OutDir)$(AssemblyName).pdb" "$(ProjectDir)..\..\DNNrocket\bin\$(AssemblyName).pdb"
 
 DNNpackager.exe  $(ProjectDir) $(ProjectDir)$(OutDir) $(ConfigurationName)
 </PostBuildEvent>
