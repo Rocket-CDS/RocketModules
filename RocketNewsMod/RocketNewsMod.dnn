@@ -21,7 +21,7 @@
 			<releaseNotes>
 			</releaseNotes>
 			<dependencies>
-				<dependency type="CoreVersion">09.00.00</dependency>
+				<dependency type="CoreVersion">09.11.00</dependency>
 				<dependency type="managedPackage" version="1.0.0">RocketDirectoryMod</dependency>
 			</dependencies>
 			<components>

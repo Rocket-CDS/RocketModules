@@ -98,6 +98,7 @@ namespace RocketEcommerceMod
                 var portalShop = new PortalShopLimpet(PortalId, _sessionParam.CultureCode);
                 var appTheme = new AppThemeLimpet(PortalId, portalShop.AppThemeFolder , portalShop.AppThemeVersion, portalShop.ProjectName);
                 DNNrocketUtils.InjectDependacies(_moduleRef, Page, appTheme, _moduleSettings.ECOMode, PortalSettings.ActiveTab.SkinSrc, portalData.EngineUrlWithProtocol, appThemeSystem.AppThemeVersionFolderRel);
+                //DNNrocketUtils.InjectDependencies(_moduleRef, appTheme, _moduleSettings.ECOMode, PortalSettings.ActiveTab.SkinSrc, portalData.EngineUrlWithProtocol, appThemeSystem.AppThemeVersionFolderRel);
 
                 var strHeader2 = RocketEcommerceAPIUtils.ViewHeader(PortalId, _systemkey, _moduleRef, _sessionParam, "viewlastheader.cshtml");
                 PageIncludes.IncludeTextInHeader(Page, strHeader2);
