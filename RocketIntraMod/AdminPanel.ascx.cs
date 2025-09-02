@@ -53,7 +53,7 @@ namespace RocketIntraMod
                 {
                     var sysList = new List<string>();
                     sysList.Add(_systemkey.ToLower());
-                    strHeader1 = RocketIntraUtils.DisplaySystemView(PortalId, _systemkey, _moduleRef, _sessionParam, "AdminPanelheader.cshtml");
+                    strHeader1 = RocketIntraUtils.AdminPanelHeader(PortalId, _systemkey, _moduleRef, _sessionParam);
                     var systemData = SystemSingleton.Instance("rocketintra");
                     var portalContent = new PortalContentLimpet(PortalId, _sessionParam.CultureCode);
                     var interfacelist = portalContent.PluginActveInterface(systemData);
