@@ -132,13 +132,16 @@ namespace RocketEventsMod
                     _sessionParam.Set("searchdate2", monthEndDate.ToString("O"));
                 }
 
-                // Add default searchdates
-                var viewdays = _moduleSettings.Record.GetXmlPropertyInt("genxml/settings/viewdays");
-                var searchdate1 = DateTime.Now.AddYears(-2).Date.ToString("O");
-                var searchdate2 = DateTime.Now.AddDays(viewdays).Date.ToString("O");
-                if (_sessionParam.Get("searchdate1") == "") _sessionParam.Set("searchdate1", searchdate1);
-                if (_sessionParam.Get("searchdate2") == "") _sessionParam.Set("searchdate2", searchdate2);
-
+                var catid = paramInfo.GetXmlPropertyInt("genxml/urlparams/" + RocketDirectoryAPIUtils.UrlQueryCategoryKey(PortalId, _systemkey));
+                if (catid == 0) // no default date if category selected.
+                {
+                    // Add default searchdates
+                    var viewdays = _moduleSettings.Record.GetXmlPropertyInt("genxml/settings/viewdays");
+                    var searchdate1 = DateTime.Now.AddYears(-2).Date.ToString("O");
+                    var searchdate2 = DateTime.Now.AddDays(viewdays).Date.ToString("O");
+                    if (_sessionParam.Get("searchdate1") == "") _sessionParam.Set("searchdate1", searchdate1);
+                    if (_sessionParam.Get("searchdate2") == "") _sessionParam.Set("searchdate2", searchdate2);
+                }
 
                 var appThemeSystem = AppThemeUtils.AppThemeSystem(PortalId, _systemkey);
                 var portalData = new PortalLimpet(PortalId);
