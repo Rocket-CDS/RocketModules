@@ -56,7 +56,7 @@
 						</supportedFeatures>
 						<moduleDefinitions>
 							<moduleDefinition>
-								<friendlyName>RocketIntra</friendlyName>
+								<friendlyName>Account Login</friendlyName>
 								<DefinitionName>RocketIntra</DefinitionName>
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>

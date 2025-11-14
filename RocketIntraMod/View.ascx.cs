@@ -35,6 +35,7 @@ namespace RocketIntraMod
         private string _moduleRef;
         private SessionParams _sessionParam;
         private ModuleContentLimpet _moduleSettings;
+        private SimplisityInfo _paramInfo;
 
         protected override void OnInit(EventArgs e)
         {
@@ -54,14 +55,27 @@ namespace RocketIntraMod
                 }
 
                 var context = HttpContext.Current;
-                var paramInfo = new SimplisityInfo();
-                _sessionParam = new SessionParams(paramInfo);
+                _paramInfo = new SimplisityInfo();
+                // get all query string params
+                foreach (string key in context.Request.QueryString.AllKeys)
+                {
+                    if (key != null)
+                    {
+                        var keyValue = context.Request.QueryString[key];
+                        _paramInfo.SetXmlProperty("genxml/urlparams/urlparam" + key.ToLower(), keyValue);
+                    }
+                }
+                _sessionParam = new SessionParams(_paramInfo);
                 _sessionParam.TabId = TabId;
                 _sessionParam.ModuleId = ModuleId;
                 _sessionParam.ModuleRef = _moduleRef;
                 _sessionParam.CultureCode = DNNrocketUtils.GetCurrentCulture();
                 _sessionParam.Url = context.Request.Url.ToString();
                 _sessionParam.UrlFriendly = DNNrocketUtils.NavigateURL(TabId);
+
+                _paramInfo.SetXmlProperty("genxml/hidden/moduleref", _moduleRef);
+                _paramInfo.SetXmlProperty("genxml/hidden/moduleid", ModuleId.ToString());
+                _paramInfo.SetXmlProperty("genxml/hidden/tabid", TabId.ToString());
 
                 var strHeader1 = RocketIntraUtils.DisplaySystemView(PortalId, _systemkey, _moduleRef, _sessionParam, "viewfirstheader.cshtml");
                 PageIncludes.IncludeTextInHeaderAt(Page, strHeader1, 0);
@@ -118,7 +132,8 @@ namespace RocketIntraMod
             if (_moduleSettings.GetSettingInt("displaytype") == 2)
             {
                 var paramCmd = _moduleSettings.GetSetting("cmd");
-                strOut = RocketIntraUtils.CallProviderAPI(paramCmd, _moduleRef, ModuleId, TabId);
+                if (_sessionParam.Get("urlparamcmd") != "") paramCmd = _sessionParam.Get("urlparamcmd");
+                strOut = RocketIntraUtils.CallProviderAPI(paramCmd, _paramInfo);
             }
 
             var lit = new Literal();
