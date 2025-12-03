@@ -28,7 +28,7 @@ using RocketForms.Components;
 
 namespace RocketFormsMod
 {
-    public partial class View : PortalModuleBase, IActionable
+    public partial class View : RocketPortalModuleBase, IActionable
     {
         private const string _systemkey = "rocketcontentapi";
         private bool _hasEditAccess;
@@ -41,6 +41,12 @@ namespace RocketFormsMod
             {
 
                 base.OnInit(e);
+
+                // Ensure normal skin in view mode
+                if (HasAdminSkinCookie())
+                {
+                    RemoveAdminSkinCookie();
+                }
 
                 _moduleRef = PortalId + "_ModuleID_" + ModuleId;
 
@@ -108,7 +114,6 @@ namespace RocketFormsMod
         protected override void OnPreRender(EventArgs e)
         {
             var moduleSettings = new ModuleContentLimpet(PortalId, _moduleRef, _systemkey, _sessionParam.ModuleId, _sessionParam.TabId);
-            if (moduleSettings.InjectJQuery) JavaScript.RequestRegistration(CommonJs.jQuery);
 
             var strOut = RocketFormsUtils.DisplayView(PortalId, _systemkey, _moduleRef, "", _sessionParam, "view.cshtml", "loadsettings");
             if (strOut == "loadsettings")

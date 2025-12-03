@@ -1,21 +1,14 @@
-﻿using DotNetNuke.Entities.Modules;
+﻿using DNNrocketAPI.Components;
 using DotNetNuke.Services.Exceptions;
-using DotNetNuke.UI.UserControls;
-using Newtonsoft.Json;
 using RocketForms.Components;
-using RocketPortal.Components;
 using Simplisity;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace RocketFormsMod
 {
-    public partial class Settings : ModuleSettingsBase
+    public partial class Settings : RocketModuleSettingsBase
     {
         private string _moduleRef;
         protected override void OnInit(EventArgs e)
@@ -38,6 +31,11 @@ namespace RocketFormsMod
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+            // Apply admin skin when entering edit mode
+            if (!HasAdminSkinCookie())
+            {
+                ApplyAdminSkinCookie();
+            }
             if (Page.IsPostBack == false)
             {
                 PageLoad();

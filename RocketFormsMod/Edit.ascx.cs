@@ -1,20 +1,14 @@
 ﻿using DNNrocketAPI.Components;
-using DotNetNuke.Entities.Modules;
 using DotNetNuke.Services.Exceptions;
 using RocketForms.Components;
-using RocketPortal.Components;
 using Simplisity;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace RocketFormsMod
 {
-    public partial class Edit : ModuleSettingsBase
+    public partial class Edit : RocketModuleSettingsBase
     {
         private string _moduleRef;
         private SessionParams _sessionParam;
@@ -23,13 +17,6 @@ namespace RocketFormsMod
             try
             {
                 base.OnInit(e);
-
-                string skinSrcAdmin = "?SkinSrc=rocketedit";
-                if (DNNrocketUtils.RequestParam(Context, "SkinSrc") == "")
-                {
-                    Response.Redirect(EditUrl() + skinSrcAdmin, false);
-                    Context.ApplicationInstance.CompleteRequest(); // do this to stop iis throwing error
-                }
 
                 _moduleRef = PortalId + "_ModuleID_" + ModuleId;
 
@@ -57,6 +44,11 @@ namespace RocketFormsMod
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+            // Apply admin skin when entering edit mode
+            if (!HasAdminSkinCookie())
+            {
+                ApplyAdminSkinCookie();
+            }
             if (Page.IsPostBack == false)
             {
                 PageLoad();

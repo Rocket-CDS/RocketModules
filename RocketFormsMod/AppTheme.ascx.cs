@@ -14,7 +14,7 @@ using System.Web.UI.WebControls;
 
 namespace RocketFormsMod
 {
-    public partial class AppTheme : ModuleSettingsBase
+    public partial class AppTheme : RocketModuleSettingsBase
     {
         private string _moduleRef;
         private SessionParams _sessionParam;
@@ -23,13 +23,6 @@ namespace RocketFormsMod
             try
             {
                 base.OnInit(e);
-
-                string skinSrcAdmin = "?SkinSrc=rocketedit";
-                if (DNNrocketUtils.RequestParam(Context, "SkinSrc") == "")
-                {
-                    Response.Redirect(EditUrl(DNNrocketUtils.RequestParam(Context, "ctl")) + skinSrcAdmin, false);
-                    Context.ApplicationInstance.CompleteRequest(); // do this to stop iis throwing error
-                }
 
                 _moduleRef = PortalId + "_ModuleID_" + ModuleId;
 
@@ -58,6 +51,11 @@ namespace RocketFormsMod
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+            // Apply admin skin when entering edit mode
+            if (!HasAdminSkinCookie())
+            {
+                ApplyAdminSkinCookie();
+            }
             if (Page.IsPostBack == false)
             {
                 PageLoad();
