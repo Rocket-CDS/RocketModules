@@ -28,7 +28,7 @@ using Rocket.AppThemes.Components;
 
 namespace RocketDirectoryMod
 {
-    public partial class View : PortalModuleBase, IActionable
+    public partial class View : RocketPortalModuleBase, IActionable
     {
         private string _systemkey;
         private bool _hasEditAccess;
@@ -42,6 +42,12 @@ namespace RocketDirectoryMod
             {
 
                 base.OnInit(e);
+
+                // Ensure normal skin in view mode
+                if (HasAdminSkinCookie())
+                {
+                    RemoveAdminSkinCookie();
+                }
 
                 // Get systemkey from module name. (remove mod, add "API")
                 var moduleName = base.ModuleConfiguration.DesktopModule.ModuleName;

@@ -14,7 +14,7 @@ using System.Web.UI.WebControls;
 
 namespace RocketDirectoryMod
 {
-    public partial class AppTheme : ModuleSettingsBase
+    public partial class AppTheme : RocketModuleSettingsBase
     {
         private string _systemkey;
         private string _moduleRef;
@@ -24,13 +24,6 @@ namespace RocketDirectoryMod
             try
             {
                 base.OnInit(e);
-
-                string skinSrcAdmin = "?SkinSrc=rocketedit";
-                if (DNNrocketUtils.RequestParam(Context, "SkinSrc") == "")
-                {
-                    Response.Redirect(EditUrl(DNNrocketUtils.RequestParam(Context, "ctl")) + skinSrcAdmin, false);
-                    Context.ApplicationInstance.CompleteRequest(); // do this to stop iis throwing error
-                }
 
                 // Get systemkey from module name. (remove mod, add "API")
                 var moduleName = base.ModuleConfiguration.DesktopModule.ModuleName;
@@ -62,6 +55,11 @@ namespace RocketDirectoryMod
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+            // Apply admin skin when entering edit mode
+            if (!HasAdminSkinCookie())
+            {
+                ApplyAdminSkinCookie();
+            }
             if (Page.IsPostBack == false)
             {
                 PageLoad();
