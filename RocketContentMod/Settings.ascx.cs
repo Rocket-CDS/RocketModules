@@ -16,7 +16,7 @@ using System.Web.UI.WebControls;
 
 namespace RocketContentMod
 {
-    public partial class Settings : ModuleSettingsBase
+    public partial class Settings : RocketModuleSettingsBase
     {
         private string _moduleRef;
         protected override void OnInit(EventArgs e)
@@ -39,6 +39,11 @@ namespace RocketContentMod
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+            // Apply admin skin when entering edit mode
+            if (!HasAdminSkinCookie())
+            {
+                ApplyAdminSkinCookie();
+            }
             if (Page.IsPostBack == false)
             {
                 PageLoad();

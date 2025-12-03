@@ -28,7 +28,7 @@ using Rocket.AppThemes.Components;
 
 namespace RocketContentMod
 {
-    public partial class View : PortalModuleBase, IActionable
+    public partial class View : RocketPortalModuleBase, IActionable
     {
         private const string _systemkey = "rocketcontentapi";
         private bool _hasEditAccess;
@@ -42,6 +42,13 @@ namespace RocketContentMod
             {
 
                 base.OnInit(e);
+
+                // Ensure normal skin in view mode
+                if (HasAdminSkinCookie())
+                {
+                    RemoveAdminSkinCookie();
+                }
+
                 //LogUtils.LogSystem("RocketContentMod: OnInit START");
                 _moduleRef = PortalId + "_ModuleID_" + ModuleId;
 
@@ -89,7 +96,6 @@ namespace RocketContentMod
         protected override void OnPreRender(EventArgs e)
         {
             LogUtils.LogSystem("RocketContentMod: OnPreRender START");
-            if (_moduleSettings.InjectJQuery) JavaScript.RequestRegistration(CommonJs.jQuery);
 
             var strOut = RocketContentAPIUtils.DisplayView(PortalId, _systemkey, _moduleRef, "", _sessionParam, "view.cshtml", "loadsettings", _moduleSettings.DisableCache);
             if (strOut == "loadsettings")
