@@ -81,6 +81,7 @@ namespace RocketFormsMod
                 _sessionParam.ModuleId = ModuleId;
                 _sessionParam.ModuleRef = _moduleRef;
                 _sessionParam.CultureCode = DNNrocketUtils.GetCurrentCulture();
+                DNNrocketUtils.SetCookieValue("simplisity_language", _sessionParam.CultureCode);
 
                 var strHeader1 = RocketFormsUtils.DisplayView(PortalId, _systemkey, _moduleRef, "", _sessionParam, "viewfirstheader.cshtml");
                 PageIncludes.IncludeTextInHeaderAt(Page, strHeader1, 0);
