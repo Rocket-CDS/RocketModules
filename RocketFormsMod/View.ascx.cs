@@ -96,7 +96,7 @@ namespace RocketFormsMod
                     if (ctrltype == "js" && !ignoreFile)
                     {
                         if (urlstr.ToLower() == "{jquery}")
-                            JavaScript.RequestRegistration(CommonJs.jQuery);
+                            PageIncludes.IncludeJsFile(Page, id, "/Resources/Shared/scripts/jquery/jquery.js");
                         else
                             PageIncludes.IncludeJsFile(Page, id, urlstr);
                     }
