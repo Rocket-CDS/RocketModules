@@ -154,9 +154,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\DNNrocket\API\_external\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="RazorEngine, Version=3.10.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\DNNrocket\API\_external\RazorEngine.dll</HintPath>
+    <Reference Include="RazorEngine">
+      <HintPath>..\..\DNNrocket\RocketEndInstall\_external\RazorEngine.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
