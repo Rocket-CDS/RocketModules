@@ -1,31 +1,15 @@
 ﻿using DNNrocketAPI.Components;
-using DotNetNuke.Common;
 using DotNetNuke.Entities.Modules;
 using DotNetNuke.Entities.Modules.Actions;
 using DotNetNuke.Framework.JavaScriptLibraries;
 using DotNetNuke.Security;
 using DotNetNuke.Services.Exceptions;
 using DotNetNuke.Services.Localization;
-using Newtonsoft.Json;
 using RocketIntra.Components;
-using RocketPortal.Components;
 using Simplisity;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Runtime.Serialization.Json;
 using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using Microsoft.Extensions.DependencyInjection;
-using DotNetNuke.Abstractions;
-using RazorEngine.Text;
-using System.Security.Cryptography;
-using System.Text;
-using System.Reflection;
-using DotNetNuke.Common.Lists;
 
 namespace RocketIntraMod
 {
