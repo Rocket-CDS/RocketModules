@@ -25,6 +25,7 @@ using RazorEngine.Text;
 using System.Security.Cryptography;
 using System.Runtime.Remoting.Contexts;
 using RocketForms.Components;
+using Rocket.AppThemes.Components;
 
 namespace RocketFormsMod
 {
@@ -34,6 +35,7 @@ namespace RocketFormsMod
         private bool _hasEditAccess;
         private string _moduleRef;
         private SessionParams _sessionParam;
+        private ModuleContentLimpet _moduleSettings;
 
         protected override void OnInit(EventArgs e)
         {
@@ -49,15 +51,6 @@ namespace RocketFormsMod
                 }
 
                 _moduleRef = PortalId + "_ModuleID_" + ModuleId;
-
-                var cmd = RequestParam(Context, "action");
-                if (cmd == "clearcache" && UserUtils.IsAdministrator()) CacheUtils.ClearAllCache(_moduleRef);
-                if (cmd == "recycleapppool" && UserUtils.IsSuperUser())
-                {
-                    DNNrocketUtils.RecycleApplicationPool();
-                    Response.Redirect(DNNrocketUtils.NavigateURL(this.PortalSettings.ActiveTab.TabID).ToString(), false);
-                    Context.ApplicationInstance.CompleteRequest(); // do this to stop iis throwing error
-                }
 
                 _hasEditAccess = false;
                 if (UserId > 0) _hasEditAccess = DotNetNuke.Security.Permissions.ModulePermissionController.CanEditModuleContent(this.ModuleConfiguration);
@@ -81,27 +74,16 @@ namespace RocketFormsMod
                 _sessionParam.ModuleId = ModuleId;
                 _sessionParam.ModuleRef = _moduleRef;
                 _sessionParam.CultureCode = DNNrocketUtils.GetCurrentCulture();
-                DNNrocketUtils.SetCookieValue("simplisity_language", _sessionParam.CultureCode);
+
+                _moduleSettings = new ModuleContentLimpet(PortalId, _moduleRef, _systemkey, _sessionParam.ModuleId, _sessionParam.TabId);
 
                 var strHeader1 = RocketFormsUtils.DisplayView(PortalId, _systemkey, _moduleRef, "", _sessionParam, "viewfirstheader.cshtml");
                 PageIncludes.IncludeTextInHeaderAt(Page, strHeader1, 0);
 
-                foreach (var dep in RocketFormsUtils.DependanciesList(PortalId, _moduleRef, _sessionParam))
-                {
-                    var ctrltype = dep.GetXmlProperty("genxml/ctrltype");
-                    var id = dep.GetXmlProperty("genxml/id");
-                    var urlstr = dep.GetXmlProperty("genxml/url");
-                    var skinignore = dep.GetXmlProperty("genxml/ignoreonskin");
-                    var ignoreFile = PageIncludes.IgnoreOnSkin(PortalSettings.ActiveTab.SkinSrc, skinignore);
-                    if (ctrltype == "css" && !ignoreFile) PageIncludes.IncludeCssFile(Page, id, urlstr);
-                    if (ctrltype == "js" && !ignoreFile)
-                    {
-                        if (urlstr.ToLower() == "{jquery}")
-                            PageIncludes.IncludeJsFile(Page, id, "/Resources/Shared/scripts/jquery/jquery.js");
-                        else
-                            PageIncludes.IncludeJsFile(Page, id, urlstr);
-                    }
-                }
+                var appThemeSystem = AppThemeUtils.AppThemeSystem(PortalId, _systemkey);
+                var portalData = new PortalLimpet(PortalId);
+                var appTheme = new AppThemeLimpet(_moduleSettings.PortalId, _moduleSettings.AppThemeAdminFolder, _moduleSettings.AppThemeAdminVersion, _moduleSettings.ProjectName);
+                DNNrocketUtils.InjectDependacies(_moduleRef, Page, appTheme, _moduleSettings.ECOMode, PortalSettings.ActiveTab.SkinSrc, portalData.EngineUrlWithProtocol, appThemeSystem.AppThemeVersionFolderRel);
 
                 var strHeader2 = RocketFormsUtils.DisplayView(PortalId, _systemkey, _moduleRef, "", _sessionParam, "viewlastheader.cshtml");
                 PageIncludes.IncludeTextInHeader(Page, strHeader2);
@@ -114,8 +96,6 @@ namespace RocketFormsMod
         }
         protected override void OnPreRender(EventArgs e)
         {
-            var moduleSettings = new ModuleContentLimpet(PortalId, _moduleRef, _systemkey, _sessionParam.ModuleId, _sessionParam.TabId);
-
             var strOut = RocketFormsUtils.DisplayView(PortalId, _systemkey, _moduleRef, "", _sessionParam, "view.cshtml", "loadsettings");
             if (strOut == "loadsettings")
             {
@@ -148,26 +128,6 @@ namespace RocketFormsMod
             phData.Controls.Add(lit);
         }
 
-        private static string RequestParam(HttpContext context, string paramName)
-        {
-            string result = null;
-
-            if (context.Request.Form.Count != 0)
-            {
-                result = Convert.ToString(context.Request.Form[paramName]);
-            }
-
-            if (result == null)
-            {
-                if (context.Request.QueryString.Count != 0)
-                {
-                    result = Convert.ToString(context.Request.QueryString[paramName]);
-                }
-            }
-
-            return (result == null) ? String.Empty : result.Trim();
-        }
-
         #region Optional Interfaces
 
         /// <summary>
@@ -182,8 +142,6 @@ namespace RocketFormsMod
                 var actions = new ModuleActionCollection();
                 actions.Add(GetNextActionID(), Localization.GetString("EditModule", this.LocalResourceFile), "", "", "edit.svg", EditUrl(), false, SecurityAccessLevel.Edit, true, false);
                 actions.Add(GetNextActionID(), Localization.GetString("apptheme", this.LocalResourceFile), "", "", "edit_app.svg", EditUrl("AppTheme"), false, SecurityAccessLevel.Admin, true, false);
-                actions.Add(GetNextActionID(), Localization.GetString("clearcache", this.LocalResourceFile), "", "", "clear_cache.svg", DNNrocketUtils.NavigateURL(this.PortalSettings.ActiveTab.TabID).ToString() + "?action=clearcache", false, SecurityAccessLevel.Admin, true, false);
-                actions.Add(GetNextActionID(), Localization.GetString("recycleapppool", this.LocalResourceFile), "", "", "restart_app.svg", DNNrocketUtils.NavigateURL(this.PortalSettings.ActiveTab.TabID).ToString() + "?action=recycleapppool", false, SecurityAccessLevel.Host, true, false);
 
                 return actions;
             }
