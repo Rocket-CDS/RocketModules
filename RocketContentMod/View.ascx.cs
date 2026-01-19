@@ -79,7 +79,7 @@ namespace RocketContentMod
                 var appThemeSystem = AppThemeUtils.AppThemeSystem(PortalId, _systemkey);
                 var portalData = new PortalLimpet(PortalId);
                 var appTheme = new AppThemeLimpet(_moduleSettings.PortalId, _moduleSettings.AppThemeAdminFolder, _moduleSettings.AppThemeAdminVersion, _moduleSettings.ProjectName);
-                DNNrocketUtils.InjectDependacies(_moduleRef, Page, appTheme, _moduleSettings.ECOMode, PortalSettings.ActiveTab.SkinSrc, portalData.EngineUrlWithProtocol, appThemeSystem.AppThemeVersionFolderRel);
+                DNNrocketUtils.InjectDependacies(_moduleRef, Page, appTheme, _moduleSettings.ECOMode, PortalSettings.ActiveTab.SkinSrc, portalData.EngineUrlWithProtocol, appThemeSystem.AppThemeVersionFolderRel, _moduleSettings.DisplayTemplate);
 
                 var strHeader2 = RocketContentAPIUtils.DisplayView(PortalId, _systemkey, _moduleRef, "", _sessionParam, "viewlastheader.cshtml", "", _moduleSettings.DisableCache);
                 PageIncludes.IncludeTextInHeader(Page, strHeader2);
