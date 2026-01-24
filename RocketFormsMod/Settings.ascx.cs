@@ -31,11 +31,6 @@ namespace RocketFormsMod
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            // Apply admin skin when entering edit mode
-            if (!HasAdminSkinCookie())
-            {
-                ApplyAdminSkinCookie();
-            }
             if (Page.IsPostBack == false)
             {
                 PageLoad();

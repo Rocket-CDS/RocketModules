@@ -44,12 +44,6 @@ namespace RocketFormsMod
 
                 base.OnInit(e);
 
-                // Ensure normal skin in view mode
-                if (HasAdminSkinCookie())
-                {
-                    RemoveAdminSkinCookie();
-                }
-
                 _moduleRef = PortalId + "_ModuleID_" + ModuleId;
 
                 _hasEditAccess = false;

@@ -45,12 +45,6 @@ namespace RocketEcommerceMod
 
                 base.OnInit(e);
 
-                // Ensure normal skin in view mode
-                if (HasAdminSkinCookie())
-                {
-                    RemoveAdminSkinCookie();
-                }
-
                 // Get systemkey from module name. (remove mod, add "API")
                 var moduleName = base.ModuleConfiguration.DesktopModule.ModuleName;
                 _systemkey = moduleName.ToLower().Substring(0, moduleName.Length - 3) + "api";

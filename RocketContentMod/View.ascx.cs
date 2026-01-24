@@ -42,11 +42,6 @@ namespace RocketContentMod
 
                 base.OnInit(e);
 
-                // Ensure normal skin in view mode
-                if (HasAdminSkinCookie())
-                {
-                    RemoveAdminSkinCookie();
-                }
 
                 //LogUtils.LogSystem("RocketContentMod: OnInit START");
                 _moduleRef = PortalId + "_ModuleID_" + ModuleId;
