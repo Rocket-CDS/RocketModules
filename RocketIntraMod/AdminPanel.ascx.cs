@@ -28,13 +28,6 @@ namespace RocketIntraMod
             {
                 base.OnInit(e);
                 var articleid = DNNrocketUtils.RequestParam(Context, "articleid");
-                string skinSrcAdmin = "?SkinSrc=rocketadmin";
-                string skinparm = DNNrocketUtils.RequestParam(Context, "SkinSrc");
-                if (skinparm == "")
-                {
-                    Response.Redirect(EditUrl(DNNrocketUtils.RequestParam(Context, "ctl")) + skinSrcAdmin, false);
-                    Context.ApplicationInstance.CompleteRequest(); // do this to stop iis throwing error
-                }
 
                 _systemkey = "rocketintra";
                 _moduleRef = PortalId + "_ModuleID_" + ModuleId;

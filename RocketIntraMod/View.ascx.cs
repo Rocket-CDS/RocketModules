@@ -30,13 +30,6 @@ namespace RocketIntraMod
 
                 _systemkey = "rocketintra";
                 _moduleRef = PortalId + "_ModuleID_" + ModuleId;
-                var cmd = RequestParam(Context, "action");
-                if (cmd == "recycleapppool" && UserUtils.IsSuperUser())
-                {
-                    DNNrocketUtils.RecycleApplicationPool();
-                    Response.Redirect(DNNrocketUtils.NavigateURL(this.PortalSettings.ActiveTab.TabID).ToString(), false);
-                    Context.ApplicationInstance.CompleteRequest(); // do this to stop iis throwing error
-                }
 
                 var context = HttpContext.Current;
                 _paramInfo = new SimplisityInfo();
