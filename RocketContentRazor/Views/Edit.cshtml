@@ -1,0 +1,66 @@
+@model RocketContentRazor.Models.ArticleViewModel
+@using DNNrocketAPI.Components
+@using RocketContentAPI.Components
+
+@{
+    var returnUrl = Url.Action("Index", "Home");
+}
+
+<div class="rocketcontentrazor-edit" data-moduleid="@Model.ModuleId">
+    
+    <div class="rocket-admin-header">
+        <h2>Edit Rocket Content</h2>
+        <div class="admin-actions">
+            <a href="@Model.EditUrl" class="btn btn-secondary">
+                <i class="fa fa-arrow-left"></i> Back to View
+            </a>
+        </div>
+    </div>
+    
+    <div class="rocket-admin-content">
+        @Html.Raw(Model.RenderedContent)
+    </div>
+    
+</div>
+
+<style>
+    .rocketcontentrazor-edit {
+        position: relative;
+        padding: 20px;
+    }
+    
+    .rocket-admin-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #ddd;
+    }
+    
+    .rocket-admin-header h2 {
+        margin: 0;
+    }
+    
+    .admin-actions .btn {
+        margin-left: 5px;
+    }
+    
+    .rocket-admin-content {
+        /* Admin content styles will be handled by AppThemes */
+    }
+</style>
+
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        // Initialize the admin interface
+        if (typeof simplisityStartUp !== 'undefined') {
+            $(document).simplisityStartUp('/Desktopmodules/dnnrocket/api/rocket/action', { 
+                systemkey: 'rocketcontentapi', 
+                debug: false 
+            });
+        }
+        
+        $('.simplisity_loader').hide();
+    });
+</script>

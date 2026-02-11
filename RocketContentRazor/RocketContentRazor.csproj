@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RocketContentRazor</RootNamespace>
+    <AssemblyName>RocketContentRazor</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!-- REFERENCE SECTION - This matches RocketContentMod paths -->
+  <ItemGroup>
+    <Reference Include="DotNetNuke">
+      <HintPath>_external\DotNetNuke.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke.Abstractions">
+      <HintPath>_external\DotNetNuke.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke.DependencyInjection">
+      <HintPath>_external\DotNetNuke.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke.Web">
+      <HintPath>_external\DotNetNuke.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke.Web.Mvc">
+      <HintPath>_external\DotNetNuke.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetNuke.Web.MvcPipeline">
+      <HintPath>_external\DotNetNuke.Web.MvcPipeline.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http">
+      <HintPath>_external\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>_external\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>_external\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+      <HintPath>_external\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\\..\\DNNrocket\\API\\_external\\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <!-- PROJECT REFERENCES - Matching RocketContentMod GUIDs -->
+  <ItemGroup>
+    <ProjectReference Include="..\\..\\DNNrocketModules\\RocketContentAPI\\RocketContentAPI.csproj">
+      <Project>{f21c301c-6f9b-44d2-8fdd-ef8d4c95065c}</Project>
+      <Name>RocketContentAPI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\\..\\DNNrocket\\API\\DNNrocketAPI.csproj">
+      <Project>{2200f6c3-7d4b-4cdf-908f-dca37adfb121}</Project>
+      <Name>DNNrocketAPI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\\..\\DNNrocket\\RocketAppTheme\\AppThemes.csproj">
+      <Project>{009C21B4-25FE-4BCD-81FF-9221CE121130}</Project>
+      <Name>AppThemes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\\..\\DNNrocket\\RocketPortal\\RocketPortal.csproj">
+      <Project>{722bc7cd-3d90-41b4-87b1-b8750deaf4c9}</Project>
+      <Name>RocketPortal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\\..\\DNNrocket\\Simplisity\\Simplisity.csproj">
+      <Project>{3375ee09-5417-44de-941f-f85d156a355a}</Project>
+      <Name>Simplisity</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <!-- COMPILE FILES -->
+  <ItemGroup>
+    <Compile Include="Controls\\ViewControl.cs" />
+    <Compile Include="Controls\\EditControl.cs" />
+    <Compile Include="Models\ContentViewModel.cs" />
+    <Compile Include="Models\\ArticleViewModel.cs" />
+    <Compile Include="Services\\ServiceRouteMapper.cs" />
+    <Compile Include="Services\\ContentController.cs" />
+    <Compile Include="Properties\\AssemblyInfo.cs" />
+  </ItemGroup>
+  <!-- CONTENT FILES -->
+  <ItemGroup>
+    <Content Include="Views\\View.cshtml" />
+    <Content Include="Views\\Edit.cshtml" />
+    <Content Include="Views\\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DNNpackager.dnnpack" />
+    <None Include="RocketContentRazor.dnn" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Installation\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>REM ** Copy to sub-bin folder of DNNrocket, so install package can be built from them **
+copy "$(ProjectDir)$(OutDir)$(TargetFileName)" "$(ProjectDir)..\..\DNNrocket\bin\$(TargetFileName)"
+
+DNNpackager.exe  $(ProjectDir) $(ProjectDir)$(OutDir) $(ConfigurationName)
+</PostBuildEvent>
+  </PropertyGroup>
+</Project>

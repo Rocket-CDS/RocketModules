@@ -1,0 +1,94 @@
+<dotnetnuke type="Package" version="5.0">
+	<packages>
+		<package name="RocketContentRazor" type="Module" version="01.00.00">
+			<friendlyName> RocketContent [Razor]</friendlyName>
+			<DefinitionName>RocketContentRazor</DefinitionName>
+			<description>By Nevoweb - A complete website content editor with built-in AI and language translation.</description>
+			<iconFile>~/DesktopModules/RocketModules/RocketContentRazor/icon.png</iconFile>
+			<owner>
+				<name>David Lee</name>
+				<organization>Nevoweb</organization>
+				<url>www.nevoweb.com</url>
+				<email>support@nevoweb.com</email>
+			</owner>
+			<license>
+				Copyright (c) 2020, www.nevoweb.com
+				All rights reserved.
+
+				THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+			</license>
+			<releaseNotes>
+			</releaseNotes>
+			<azureCompatible>true</azureCompatible>
+			<dependencies>
+				<dependency type="CoreVersion">10.02.01</dependency>
+			</dependencies>
+			<components>
+
+				<component type="ResourceFile">
+					<resourceFiles>
+						<basePath>DesktopModules/RocketModules/RocketContentRazor</basePath>
+						<resourceFile>
+							<name>Resource.zip</name>
+						</resourceFile>
+					</resourceFiles>
+				</component>
+
+				<component type="Assembly">
+					<assemblies>
+						<assembly>
+							<path>bin</path>
+							<name>RocketContentRazor.dll</name>
+							<sourceFileName>RocketContentRazor.dll</sourceFileName>
+						</assembly>
+					</assemblies>
+				</component>
+
+				<component type="Module">
+					<desktopModule>
+						<moduleName>RocketContentRazor</moduleName>
+						<foldername>RocketModules/RocketContentRazor</foldername>
+						<businessControllerClass>DNNrocketAPI.Components.DNNrocketModuleController,DNNrocketAPI</businessControllerClass>
+						<supportedFeatures>
+							<supportedFeature type="Portable" />
+							<supportedFeature type="Searchable" />
+							<supportedFeature type="Upgradeable" />
+						</supportedFeatures>
+						<moduleDefinitions>
+							<moduleDefinition>
+								<friendlyName>RocketContentRazor</friendlyName>
+								<DefinitionName>RocketContentRazor</DefinitionName>
+								<defaultCacheTime>0</defaultCacheTime>
+								<moduleControls>
+									<moduleControl>
+										<controlKey />
+										<controlSrc>DotNetNuke.Web.MvcPipeline.ModuleControl.WebForms.WrapperModule, DotNetNuke.Web.MvcPipeline</controlSrc>
+										<mvcControlClass>RocketContentRazor.Controls.ViewControl, RocketContentRazor</mvcControlClass>
+										<supportsPartialRendering>True</supportsPartialRendering>
+										<controlTitle />
+										<controlType>View</controlType>
+										<iconFile />
+										<helpUrl/>
+										<viewOrder>0</viewOrder>
+									</moduleControl>
+									<moduleControl>
+										<controlKey>Edit</controlKey>
+										<controlSrc>DotNetNuke.Web.MvcPipeline.ModuleControl.WebForms.WrapperModule, DotNetNuke.Web.MvcPipeline</controlSrc>
+										<mvcControlClass>RocketContentRazor.Controls.EditControl, RocketContentRazor</mvcControlClass>
+										<supportsPartialRendering>True</supportsPartialRendering>
+										<controlTitle>Edit Rocket Content</controlTitle>
+										<controlType>Edit</controlType>
+										<iconFile />
+										<helpUrl/>
+										<supportsPopUps>True</supportsPopUps>
+										<viewOrder>0</viewOrder>
+									</moduleControl>
+								</moduleControls>
+							</moduleDefinition>
+						</moduleDefinitions>
+					</desktopModule>
+				</component>
+			</components>
+		</package>
+	</packages>
+</dotnetnuke>
