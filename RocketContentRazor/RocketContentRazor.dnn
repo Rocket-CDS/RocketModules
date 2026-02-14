@@ -83,6 +83,41 @@
 										<supportsPopUps>True</supportsPopUps>
 										<viewOrder>0</viewOrder>
 									</moduleControl>
+									<moduleControl>
+										<controlKey>Settings</controlKey>
+										<controlSrc>DotNetNuke.Web.MvcPipeline.ModuleControl.WebForms.WrapperModule, DotNetNuke.Web.MvcPipeline</controlSrc>
+										<mvcControlClass>RocketContentRazor.Controls.SettingsControl, RocketContentRazor</mvcControlClass>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle>RocketContent Settings</controlTitle>
+										<controlType>Edit</controlType>
+										<iconFile />
+										<helpUrl/>
+										<viewOrder>0</viewOrder>
+									</moduleControl>
+									<moduleControl>
+										<controlKey>AppTheme</controlKey>
+										<controlSrc>DotNetNuke.Web.MvcPipeline.ModuleControl.WebForms.WrapperModule, DotNetNuke.Web.MvcPipeline</controlSrc>
+										<mvcControlClass>RocketContentRazor.Controls.AppThemeControl, RocketContentRazor</mvcControlClass>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle>RocketContent App Theme</controlTitle>
+										<controlType>Edit</controlType>
+										<iconFile />
+										<helpUrl/>
+										<supportsPopUps>True</supportsPopUps>
+										<viewOrder>0</viewOrder>
+									</moduleControl>
+									<moduleControl>
+										<controlKey>RecycleBin</controlKey>
+										<controlSrc>DotNetNuke.Web.MvcPipeline.ModuleControl.WebForms.WrapperModule, DotNetNuke.Web.MvcPipeline</controlSrc>
+										<mvcControlClass>RocketContentRazor.Controls.RecycleBinControl, RocketContentRazor</mvcControlClass>
+										<supportsPartialRendering>False</supportsPartialRendering>
+										<controlTitle>RocketContent Recycle Bin</controlTitle>
+										<controlType>Edit</controlType>
+										<iconFile />
+										<helpUrl/>
+										<supportsPopUps>True</supportsPopUps>
+										<viewOrder>0</viewOrder>
+									</moduleControl>
 								</moduleControls>
 							</moduleDefinition>
 						</moduleDefinitions>

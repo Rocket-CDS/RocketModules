@@ -103,6 +103,9 @@
   </ItemGroup>
   <!-- COMPILE FILES -->
   <ItemGroup>
+    <Compile Include="Controls\AppThemeControl.cs" />
+    <Compile Include="Controls\RecycleBinControl.cs" />
+    <Compile Include="Controls\SettingsControl.cs" />
     <Compile Include="Controls\\ViewControl.cs" />
     <Compile Include="Controls\\EditControl.cs" />
     <Compile Include="Models\ContentViewModel.cs" />
@@ -119,7 +122,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DNNpackager.dnnpack" />
+    <None Include="Docs\AI_RocketContentRazor.md" />
+    <None Include="Docs\DNN_MVC_Dynamic_Skin_Solution.md" />
+    <None Include="Docs\DNN_Platform_HttpModule_Skin_Override.md" />
     <None Include="RocketContentRazor.dnn" />
+    <None Include="Views\AppTheme.cshtml" />
+    <None Include="Views\RecycleBin.cshtml" />
+    <None Include="Views\Settings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Installation\" />

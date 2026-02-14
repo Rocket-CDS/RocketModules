@@ -1,6 +1,7 @@
 using DNNrocketAPI.Components;
 using DotNetNuke.Collections;
 using DotNetNuke.Common;
+using DotNetNuke.Security.Permissions;
 using DotNetNuke.Web.MvcPipeline.ModuleControl;
 using DotNetNuke.Web.MvcPipeline.ModuleControl.Page;
 using DotNetNuke.Web.MvcPipeline.ModuleControl.Razor;
@@ -11,6 +12,8 @@ using RocketPortal.Components;
 using Simplisity;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Contexts;
+using System.Security.Policy;
 
 namespace RocketContentRazor.Controls
 {
@@ -20,6 +23,8 @@ namespace RocketContentRazor.Controls
         private string _moduleRef;
         private SessionParams _sessionParam;
         private ModuleContentLimpet _moduleSettings;
+        private bool _hasEditAccess;
+
 
         public ViewControl()
         {
@@ -28,11 +33,27 @@ namespace RocketContentRazor.Controls
 
         public override string ControlName => "View";
 
+        private bool CanUserEditModule()
+        {
+            if (UserId <= 0) return false;
+
+            // Get the module info from ModuleContext
+            var moduleInfo = ModuleContext.Configuration;
+            if (moduleInfo != null)
+            {
+                // Use ModulePermissionController to check edit permissions
+                return ModulePermissionController.CanEditModuleContent(moduleInfo);
+            }
+
+            return false;
+        }
+
         public void ConfigurePage(PageConfigurationContext context)
         {
             try
             {
                 _moduleRef = PortalSettings.PortalId + "_ModuleID_" + ModuleContext.ModuleId;
+                _hasEditAccess = CanUserEditModule();
 
                 var paramInfo = new SimplisityInfo();
                 _sessionParam = new SessionParams(paramInfo);
@@ -69,6 +90,7 @@ namespace RocketContentRazor.Controls
             try
             {
                 _moduleRef = PortalSettings.PortalId + "_ModuleID_" + ModuleContext.ModuleId;
+                _hasEditAccess = CanUserEditModule();
 
                 var paramInfo = new SimplisityInfo();
                 _sessionParam = new SessionParams(paramInfo);
@@ -84,8 +106,37 @@ namespace RocketContentRazor.Controls
 
                 if (strOut == "loadsettings")
                 {
-                    strOut = RocketContentAPIUtils.DisplaySystemView(PortalSettings.PortalId, _moduleRef, _sessionParam, "ModuleSettingsMsg.cshtml");
+                    strOut = RocketContentAPIUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "ModuleSettingsMsg.cshtml");
+                    string[] parameters;
+                    parameters = new string[1];
+                    parameters[0] = string.Format("{0}={1}", "ModuleId", ModuleId.ToString());
+                    var redirectUrl = DNNrocketUtils.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", _sessionParam.CultureCode, parameters).ToString();
+                    strOut = strOut.Replace("{redirecturl}", redirectUrl);
                     CacheUtils.ClearAllCache(_moduleRef);
+                }
+                if (_hasEditAccess)
+                {
+                    var editbuttonkey = "editbuttons" + _moduleRef + "_" + UserId + "_" + _sessionParam.CultureCode;
+                    var viewButtonsOut = CacheUtils.GetCache(editbuttonkey, _moduleRef);
+                    if (viewButtonsOut == null)
+                    {
+                        string[] parameters;
+                        parameters = new string[1];
+                        parameters[0] = string.Format("{0}={1}", "ModuleId", ModuleId.ToString());
+                        var settingsurl = DNNrocketUtils.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", _sessionParam.CultureCode, parameters).ToString();
+
+                        var userParams = new UserParams("ModuleID:" + ModuleId, true);
+                        userParams.Set("editurl", this.EditUrl());
+                        userParams.Set("settingsurl", this.EditUrl("Settings"));
+                        userParams.Set("appthemeurl", this.EditUrl("AppTheme"));
+                        userParams.Set("adminpanelurl", this.EditUrl("AdminPanel"));
+                        userParams.Set("recyclebinurl", this.EditUrl("RecycleBin"));
+                        userParams.Set("viewtabid", this.PortalSettings.ActiveTab.TabID.ToString());
+
+                        viewButtonsOut = RocketContentAPIUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "ViewEditButtons.cshtml", true, false);
+                        CacheUtils.SetCache(editbuttonkey, viewButtonsOut, _moduleRef);
+                    }
+                    strOut = viewButtonsOut + strOut;
                 }
 
                 // Create simple view model with just the rendered HTML
