@@ -1,7 +1,11 @@
 using DNNrocketAPI.Components;
+using DotNetNuke.Abstractions.ClientResources;
+using DotNetNuke.Abstractions.Pages;
 using DotNetNuke.Collections;
 using DotNetNuke.Common;
+using DotNetNuke.Framework.JavaScriptLibraries;
 using DotNetNuke.Security.Permissions;
+using DotNetNuke.Services.ClientDependency;
 using DotNetNuke.Web.MvcPipeline.ModuleControl;
 using DotNetNuke.Web.MvcPipeline.ModuleControl.Page;
 using DotNetNuke.Web.MvcPipeline.ModuleControl.Razor;
@@ -24,6 +28,7 @@ namespace RocketContentRazor.Controls
         private SessionParams _sessionParam;
         private ModuleContentLimpet _moduleSettings;
         private bool _hasEditAccess;
+        private int _portalId => PortalSettings.PortalId;
 
 
         public ViewControl()
@@ -52,7 +57,7 @@ namespace RocketContentRazor.Controls
         {
             try
             {
-                _moduleRef = PortalSettings.PortalId + "_ModuleID_" + ModuleContext.ModuleId;
+                _moduleRef = _portalId + "_ModuleID_" + ModuleContext.ModuleId;
                 _hasEditAccess = CanUserEditModule();
 
                 var paramInfo = new SimplisityInfo();
@@ -62,7 +67,7 @@ namespace RocketContentRazor.Controls
                 _sessionParam.ModuleRef = _moduleRef;
                 _sessionParam.CultureCode = DNNrocketUtils.GetCurrentCulture();
 
-                _moduleSettings = new ModuleContentLimpet(PortalSettings.PortalId, _moduleRef, _systemkey, _sessionParam.ModuleId, _sessionParam.TabId);
+                _moduleSettings = new ModuleContentLimpet(_portalId, _moduleRef, _systemkey, _sessionParam.ModuleId, _sessionParam.TabId);
 
                 // Set page title and meta if article has data
                 var articleData = RocketContentAPIUtils.GetArticleData(_moduleSettings, _sessionParam.CultureCode);
@@ -78,6 +83,34 @@ namespace RocketContentRazor.Controls
                         }
                     }
                 }
+
+                var appThemeSystem = AppThemeUtils.AppThemeSystem(_portalId, _systemkey);
+                var portalData = new PortalLimpet(_portalId);
+                var appTheme = new AppThemeLimpet(_moduleSettings.PortalId, _moduleSettings.AppThemeAdminFolder, _moduleSettings.AppThemeAdminVersion, _moduleSettings.ProjectName);
+
+                var dependencyLists = DNNrocketUtils.InjectDependencies(_moduleRef, appTheme, _moduleSettings.ECOMode, PortalSettings.ActiveTab.SkinSrc, portalData.EngineUrlWithProtocol, appThemeSystem.AppThemeVersionFolderRel);
+
+                foreach (var dep in dependencyLists)
+                {
+                    if (dep.ctrltype == "css")
+                    {
+                        context.ClientResourceController.RegisterStylesheet(dep.url, FileOrder.Css.ModuleCss);
+                    }
+                    else if (dep.ctrltype == "js")
+                    {
+                        if (dep.url == "{jquery}")
+                        {
+                            JavaScript.RequestRegistration(CommonJs.jQuery);
+                        }
+                        else
+                        {
+                            context.ClientResourceController.RegisterScript(dep.url, FileOrder.Js.DefaultPriority, true);
+                        }
+                    }
+                }
+                var strHeader2 = RocketContentAPIUtils.DisplayView(_portalId, _systemkey, _moduleRef, "", _sessionParam, "viewheader.cshtml", "", _moduleSettings.DisableCache);
+                if (!string.IsNullOrWhiteSpace(strHeader2)) context.PageService.AddToHead(new PageTag(strHeader2, 999));
+
             }
             catch (Exception ex)
             {
