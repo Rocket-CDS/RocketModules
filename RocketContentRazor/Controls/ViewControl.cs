@@ -67,6 +67,17 @@ namespace RocketContentRazor.Controls
                 _sessionParam.ModuleRef = _moduleRef;
                 _sessionParam.CultureCode = DNNrocketUtils.GetCurrentCulture();
 
+
+                // get all query string params
+                foreach (string key in Request.QueryString.AllKeys)
+                {
+                    if (key != null)
+                    {
+                        var keyValue = Request.QueryString[key];
+                        paramInfo.SetXmlProperty("genxml/urlparams/" + key.ToLower(), keyValue);
+                    }
+                }
+
                 _moduleSettings = new ModuleContentLimpet(_portalId, _moduleRef, _systemkey, _sessionParam.ModuleId, _sessionParam.TabId);
 
                 // Set page title and meta if article has data
