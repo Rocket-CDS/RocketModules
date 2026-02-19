@@ -1,10 +1,10 @@
 <dotnetnuke type="Package" version="5.0">
 	<packages>
-		<package name="RocketContentRazor" type="Module" version="01.00.00">
-			<friendlyName> RocketContent [Razor]</friendlyName>
-			<DefinitionName>RocketContentRazor</DefinitionName>
+		<package name="RocketDirectoryRazor" type="Module" version="01.00.00">
+			<friendlyName> RocketDirectory [Razor]</friendlyName>
+			<DefinitionName>RocketDirectoryRazor</DefinitionName>
 			<description>By Nevoweb - A complete website content editor with built-in AI and language translation.</description>
-			<iconFile>~/DesktopModules/RocketModules/RocketContentRazor/icon.png</iconFile>
+			<iconFile>~/DesktopModules/RocketModules/RocketDirectoryRazor/icon.png</iconFile>
 			<owner>
 				<name>David Lee</name>
 				<organization>Nevoweb</organization>
@@ -27,7 +27,7 @@
 
 				<component type="ResourceFile">
 					<resourceFiles>
-						<basePath>DesktopModules/RocketModules/RocketContentRazor</basePath>
+						<basePath>DesktopModules/RocketModules/RocketDirectoryRazor</basePath>
 						<resourceFile>
 							<name>Resource.zip</name>
 						</resourceFile>
@@ -38,16 +38,16 @@
 					<assemblies>
 						<assembly>
 							<path>bin</path>
-							<name>RocketContentRazor.dll</name>
-							<sourceFileName>RocketContentRazor.dll</sourceFileName>
+							<name>RocketDirectoryRazor.dll</name>
+							<sourceFileName>RocketDirectoryRazor.dll</sourceFileName>
 						</assembly>
 					</assemblies>
 				</component>
 
 				<component type="Module">
 					<desktopModule>
-						<moduleName>RocketContentRazor</moduleName>
-						<foldername>RocketModules/RocketContentRazor</foldername>
+						<moduleName>RocketDirectoryRazor</moduleName>
+						<foldername>RocketModules/RocketDirectoryRazor</foldername>
 						<businessControllerClass>DNNrocketAPI.Components.DNNrocketModuleController,DNNrocketAPI</businessControllerClass>
 						<supportedFeatures>
 							<supportedFeature type="Portable" />
@@ -56,14 +56,14 @@
 						</supportedFeatures>
 						<moduleDefinitions>
 							<moduleDefinition>
-								<friendlyName>RocketContentRazor</friendlyName>
-								<DefinitionName>RocketContentRazor</DefinitionName>
+								<friendlyName>RocketDirectoryRazor</friendlyName>
+								<DefinitionName>RocketDirectoryRazor</DefinitionName>
 								<defaultCacheTime>0</defaultCacheTime>
 								<moduleControls>
 									<moduleControl>
 										<controlKey />
 										<controlSrc>DotNetNuke.Web.MvcPipeline.ModuleControl.WebForms.WrapperModule, DotNetNuke.Web.MvcPipeline</controlSrc>
-										<mvcControlClass>RocketContentRazor.Controls.ViewControl, RocketContentRazor</mvcControlClass>
+										<mvcControlClass>RocketDirectoryRazor.Controls.ViewControl, RocketDirectoryRazor</mvcControlClass>
 										<supportsPartialRendering>True</supportsPartialRendering>
 										<controlTitle />
 										<controlType>View</controlType>
@@ -74,9 +74,9 @@
 									<moduleControl>
 										<controlKey>Edit</controlKey>
 										<controlSrc>DotNetNuke.Web.MvcPipeline.ModuleControl.WebForms.WrapperModule, DotNetNuke.Web.MvcPipeline</controlSrc>
-										<mvcControlClass>RocketContentRazor.Controls.EditControl, RocketContentRazor</mvcControlClass>
+										<mvcControlClass>RocketDirectoryRazor.Controls.EditControl, RocketDirectoryRazor</mvcControlClass>
 										<supportsPartialRendering>True</supportsPartialRendering>
-										<controlTitle>Edit Rocket Content</controlTitle>
+										<controlTitle>Edit Rocket Directory</controlTitle>
 										<controlType>Edit</controlType>
 										<iconFile />
 										<helpUrl/>
@@ -84,11 +84,23 @@
 										<viewOrder>0</viewOrder>
 									</moduleControl>
 									<moduleControl>
+										<controlKey>AdminPanel</controlKey>
+										<controlSrc>DotNetNuke.Web.MvcPipeline.ModuleControl.WebForms.WrapperModule, DotNetNuke.Web.MvcPipeline</controlSrc>
+										<mvcControlClass>RocketDirectoryRazor.Controls.AdminPanelControl, RocketDirectoryRazor</mvcControlClass>
+										<supportsPartialRendering>True</supportsPartialRendering>
+										<controlTitle>Admin Rocket Directory</controlTitle>
+										<controlType>Edit</controlType>
+										<iconFile />
+										<helpUrl/>
+										<supportsPopUps>False</supportsPopUps>
+										<viewOrder>0</viewOrder>
+									</moduleControl>
+									<moduleControl>
 										<controlKey>Settings</controlKey>
 										<controlSrc>DotNetNuke.Web.MvcPipeline.ModuleControl.WebForms.WrapperModule, DotNetNuke.Web.MvcPipeline</controlSrc>
-										<mvcControlClass>RocketContentRazor.Controls.SettingsControl, RocketContentRazor</mvcControlClass>
+										<mvcControlClass>RocketDirectoryRazor.Controls.SettingsControl, RocketDirectoryRazor</mvcControlClass>
 										<supportsPartialRendering>False</supportsPartialRendering>
-										<controlTitle>RocketContent Settings</controlTitle>
+										<controlTitle>RocketDirectory Settings</controlTitle>
 										<controlType>Edit</controlType>
 										<iconFile />
 										<helpUrl/>
@@ -98,21 +110,9 @@
 									<moduleControl>
 										<controlKey>AppTheme</controlKey>
 										<controlSrc>DotNetNuke.Web.MvcPipeline.ModuleControl.WebForms.WrapperModule, DotNetNuke.Web.MvcPipeline</controlSrc>
-										<mvcControlClass>RocketContentRazor.Controls.AppThemeControl, RocketContentRazor</mvcControlClass>
+										<mvcControlClass>RocketDirectoryRazor.Controls.AppThemeControl, RocketDirectoryRazor</mvcControlClass>
 										<supportsPartialRendering>False</supportsPartialRendering>
-										<controlTitle>RocketContent App Theme</controlTitle>
-										<controlType>Edit</controlType>
-										<iconFile />
-										<helpUrl/>
-										<supportsPopUps>True</supportsPopUps>
-										<viewOrder>0</viewOrder>
-									</moduleControl>
-									<moduleControl>
-										<controlKey>RecycleBin</controlKey>
-										<controlSrc>DotNetNuke.Web.MvcPipeline.ModuleControl.WebForms.WrapperModule, DotNetNuke.Web.MvcPipeline</controlSrc>
-										<mvcControlClass>RocketContentRazor.Controls.RecycleBinControl, RocketContentRazor</mvcControlClass>
-										<supportsPartialRendering>False</supportsPartialRendering>
-										<controlTitle>RocketContent Recycle Bin</controlTitle>
+										<controlTitle>RocketDirectory App Theme</controlTitle>
 										<controlType>Edit</controlType>
 										<iconFile />
 										<helpUrl/>

@@ -11,7 +11,7 @@ using DotNetNuke.Abstractions.ClientResources;
 using DotNetNuke.Abstractions.Pages;
 using DotNetNuke.Entities.Portals;
 
-namespace RocketContentRazor
+namespace RocketDirectoryRazor
 {
     /// <summary>
     /// Extended SkinModelFactory that applies Rocket-specific skins for MVC requests.
@@ -143,11 +143,11 @@ namespace RocketContentRazor
             switch (ctlValue.ToLower())
             {
                 case "adminpanel":
-                    return "[G]Skins/rocketadmin/rocketadmin.ascx";
+                    return "[G]Skins/rocketedit/rocketadmin.ascx";
 
                 case "edit":
                 case "rocketedit":
-                case "rocketcontentrazor":
+                case "RocketDirectoryRazor":
                 case "apptheme":
                 case "module":
                 case "recyclebin":
