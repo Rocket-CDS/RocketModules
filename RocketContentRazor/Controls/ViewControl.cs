@@ -147,16 +147,15 @@ namespace RocketContentRazor.Controls
 
                 // Get rendered content from RocketContentAPI - this does ALL the model/rendering work
                 var strOut = RocketContentAPIUtils.DisplayView(PortalSettings.PortalId, _systemkey, _moduleRef, "", _sessionParam, "view.cshtml", "loadsettings", _moduleSettings.DisableCache);
-
                 if (strOut == "loadsettings")
                 {
-                    strOut = RocketContentAPIUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "ModuleSettingsMsg.cshtml");
-                    string[] parameters;
-                    parameters = new string[1];
-                    parameters[0] = string.Format("{0}={1}", "ModuleId", ModuleId.ToString());
-                    var redirectUrl = DNNrocketUtils.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", _sessionParam.CultureCode, parameters).ToString();
-                    strOut = strOut.Replace("{redirecturl}", redirectUrl);
-                    CacheUtils.ClearAllCache(_moduleRef);
+                    strOut = "";
+                    if (_hasEditAccess)
+                    {
+                        strOut = RocketContentAPIUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "ModuleSettingsMsg.cshtml");
+                        strOut = strOut.Replace("{redirecturl}", this.EditUrl("Settings"));
+                        CacheUtils.ClearAllCache(_moduleRef);
+                    }
                 }
                 if (_hasEditAccess)
                 {
@@ -170,12 +169,14 @@ namespace RocketContentRazor.Controls
                         var settingsurl = DNNrocketUtils.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", _sessionParam.CultureCode, parameters).ToString();
 
                         var userParams = new UserParams("ModuleID:" + ModuleId, true);
+                        userParams.Set("settingsurl", settingsurl);
                         userParams.Set("editurl", this.EditUrl());
-                        userParams.Set("settingsurl", this.EditUrl("Settings"));
+                        userParams.Set("rocketconfigurl", this.EditUrl("Settings"));
                         userParams.Set("appthemeurl", this.EditUrl("AppTheme"));
                         userParams.Set("adminpanelurl", this.EditUrl("AdminPanel"));
                         userParams.Set("recyclebinurl", this.EditUrl("RecycleBin"));
-                        userParams.Set("viewtabid", this.PortalSettings.ActiveTab.TabID.ToString());
+                        userParams.Set("viewtabid", _sessionParam.TabId.ToString());
+
 
                         viewButtonsOut = RocketContentAPIUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "ViewEditButtons.cshtml", true, false);
                         CacheUtils.SetCache(editbuttonkey, viewButtonsOut, _moduleRef);

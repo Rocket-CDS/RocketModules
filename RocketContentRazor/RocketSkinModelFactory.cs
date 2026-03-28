@@ -10,6 +10,7 @@ using System.Web;
 using DotNetNuke.Abstractions.ClientResources;
 using DotNetNuke.Abstractions.Pages;
 using DotNetNuke.Entities.Portals;
+using DNNrocketAPI.Components;
 
 namespace RocketContentRazor
 {
@@ -45,6 +46,9 @@ namespace RocketContentRazor
 
         public SkinModel CreateSkinModel(DnnPageController pageController)
         {
+            var globalData = new SystemGlobalData();
+            if (globalData.TurnOffSkinOverride) return _baseSkinModelFactory.CreateSkinModel(pageController);
+
             var cookieName = "_SkinSrc" + pageController.PortalSettings.PortalId;
 
             // Check if we should override the skin for Rocket modules
@@ -143,13 +147,14 @@ namespace RocketContentRazor
             switch (ctlValue.ToLower())
             {
                 case "adminpanel":
-                    return "[G]Skins/rocketadmin/rocketadmin.ascx";
+                    return "[G]Skins/rocketedit/rocketadmin.ascx";
 
                 case "edit":
                 case "rocketedit":
                 case "rocketcontentrazor":
                 case "apptheme":
                 case "module":
+                case "settings":
                 case "recyclebin":
                     return "[G]Skins/rocketedit/rocketedit.ascx";
 

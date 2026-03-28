@@ -1,6 +1,6 @@
 <root>
 	<version>1.0.0</version>
-  <websitedestrelpath>/DesktopModules/RocketModules/RocketContentRazor</websitedestrelpath>
+  <websitedestrelpath>/DesktopModules/RocketModules/RocketDirectoryRazor</websitedestrelpath>
   <websitedestbinrelpath>\bin</websitedestbinrelpath>
   <!-- Include only files that match the regular expression -->
 	<regexpr>(\.cshtml|\.html|\.resx|\.dnn|\.png|\.jpg|\.gif|\.css|.\svg|\.js|\.xml|\.txt|\.md|\.aspx|\.ascx|\.ashx|\.woff|\.woff2|\.ttf|\.config)$</regexpr>

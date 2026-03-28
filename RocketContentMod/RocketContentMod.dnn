@@ -54,6 +54,7 @@
 							<supportedFeature type="Searchable" />
 							<supportedFeature type="Upgradeable" />
 			            </supportedFeatures>
+						<category>Common</category>
 						<moduleDefinitions>
 							<moduleDefinition>
 								<friendlyName>RocketContent</friendlyName>

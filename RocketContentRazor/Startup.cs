@@ -16,6 +16,7 @@ namespace RocketContentRazor
         {
             // Replace the default ISkinModelFactory with our decorator
             // Our decorator wraps the original SkinModelFactory and adds Rocket skin logic
+            // NOTE: This chnages the skin options for all of DNN.
             services.Replace(ServiceDescriptor.Transient<ISkinModelFactory, RocketSkinModelFactory>());
         }
     }

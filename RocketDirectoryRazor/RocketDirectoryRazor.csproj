@@ -113,9 +113,7 @@
     <Compile Include="Controls\\EditControl.cs" />
     <Compile Include="Models\DirectoryViewModel.cs" />
     <Compile Include="Models\\ArticleViewModel.cs" />
-    <Compile Include="RocketSkinModelFactory.cs" />
     <Compile Include="Properties\\AssemblyInfo.cs" />
-    <Compile Include="Startup.cs" />
   </ItemGroup>
   <!-- CONTENT FILES -->
   <ItemGroup>
@@ -127,8 +125,6 @@
   <ItemGroup>
     <Content Include="DNNpackager.dnnpack" />
     <None Include="Docs\AI_RocketDirectoryRazor.md" />
-    <None Include="Docs\DNN_MVC_Dynamic_Skin_Solution.md" />
-    <None Include="Docs\DNN_Platform_HttpModule_Skin_Override.md" />
     <None Include="README.md" />
     <None Include="RocketDirectoryRazor.dnn" />
     <None Include="Views\AppTheme.cshtml" />

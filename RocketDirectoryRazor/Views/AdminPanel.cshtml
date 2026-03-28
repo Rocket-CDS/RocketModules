@@ -1,3 +1,4 @@
+@using RocketDirectoryRazor.Models;
 @model ArticleViewModel
 
 <script type="text/javascript" src="/DesktopModules/DNNrocket/Simplisity/js/simplisity.js"></script>
@@ -7,14 +8,5 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-<style>
-    .material-icons { vertical-align: middle; }
-</style>
 
-<div id="simplisity_startpanel" class="simplisity_panel">
-    @Html.Raw(Model.RenderedContent)
-</div>
-
-<div class="simplisity_loader" style="display: none;">
-    <div class="simplisity_loader_inner"></div>
-</div>
+@Html.Raw(Model.RenderedContent)

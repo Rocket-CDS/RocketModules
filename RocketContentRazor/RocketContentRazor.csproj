@@ -127,8 +127,6 @@
   <ItemGroup>
     <Content Include="DNNpackager.dnnpack" />
     <None Include="Docs\AI_RocketContentRazor.md" />
-    <None Include="Docs\DNN_MVC_Dynamic_Skin_Solution.md" />
-    <None Include="Docs\DNN_Platform_HttpModule_Skin_Override.md" />
     <None Include="README.md" />
     <None Include="RocketContentRazor.dnn" />
     <None Include="Views\AppTheme.cshtml" />

@@ -57,7 +57,7 @@ namespace RocketDirectoryRazor.Controls
 
                 var strHeader2 = RocketDirectoryAPIUtils.ViewHeader(PortalId, _systemkey, _moduleRef, _sessionParam, "AdminPanelheader.cshtml");
                 if (!string.IsNullOrWhiteSpace(strHeader2)) context.PageService.AddToHead(new PageTag(strHeader2, 999));
-              
+
                 // Set page title
                 context.PageService.SetTitle("Edit " + moduleName);
 
