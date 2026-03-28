@@ -212,46 +212,19 @@ namespace RocketDirectoryRazor.Controls
             }
 
             var metaPageData = PagesUtils.GetMetaData(PortalSettings.ActiveTab.TabID, Request.Url, urlParams);
-
-            if (metaPageData.Redirect404)
-            {
-                return;
-            }
-
-            if (!String.IsNullOrEmpty(metaPageData.Title))
-            {
-                context.PageService.SetTitle(HttpUtility.HtmlEncode(metaPageData.Title));
-            }
-
-            if (!String.IsNullOrEmpty(metaPageData.Description))
-            {
-                context.PageService.AddToHead(new PageTag(BuildMetaTag("description", metaPageData.Description), 2));
-            }
-
-            if (!String.IsNullOrEmpty(metaPageData.KeyWords))
-            {
-                context.PageService.AddToHead(new PageTag(BuildMetaTag("keywords", metaPageData.KeyWords), 3));
-            }
-
-            if (!String.IsNullOrEmpty(metaPageData.CanonicalLinkUrl))
-            {
-                context.PageService.AddToHead(new PageTag("<link rel=\"canonical\" href=\"" + HttpUtility.HtmlAttributeEncode(metaPageData.CanonicalLinkUrl) + "\" />", 4));
-            }
-
-            if (!String.IsNullOrEmpty(metaPageData.AlternateLinkHtml))
-            {
-                context.PageService.AddToHead(new PageTag(metaPageData.AlternateLinkHtml, 5));
-            }
+            if (metaPageData.Redirect404) return;
+            if (!String.IsNullOrEmpty(metaPageData.Title)) context.PageService.SetTitle(HttpUtility.HtmlEncode(metaPageData.Title));
+            if (!String.IsNullOrEmpty(metaPageData.Description)) context.PageService.SetDescription(HttpUtility.HtmlEncode(metaPageData.Description));
+            if (!String.IsNullOrEmpty(metaPageData.KeyWords)) context.PageService.SetKeyWords(HttpUtility.HtmlEncode(metaPageData.KeyWords));
+            if (!String.IsNullOrEmpty(metaPageData.CanonicalLinkUrl)) context.PageService.SetCanonicalLinkUrl(HttpUtility.HtmlEncode(metaPageData.CanonicalLinkUrl));
+            if (!String.IsNullOrEmpty(metaPageData.AlternateLinkHtml)) context.PageService.AddToHead(new PageTag(metaPageData.AlternateLinkHtml,999));
 
             foreach (var metaDict in metaPageData.HtmlMeta)
             {
-                context.PageService.AddToHead(new PageTag(BuildPropertyMetaTag(metaDict.Key, metaDict.Value), 6));
+                context.PageService.AddToHead(new PageTag(BuildPropertyMetaTag(metaDict.Key, metaDict.Value), 999));
             }
 
-            if (!String.IsNullOrEmpty(metaPageData.JsonLd))
-            {
-                context.PageService.AddToHead(new PageTag("<script type=\"application/ld+json\">" + metaPageData.JsonLd + "</script>", 7));
-            }
+            if (!String.IsNullOrEmpty(metaPageData.JsonLd)) context.PageService.AddToHead(new PageTag("<script type=\"application/ld+json\">" + metaPageData.JsonLd + "</script>", 999));
         }
 
         private string BuildMetaTag(string name, string content)
