@@ -11,42 +11,41 @@ using DotNetNuke.Web.MvcPipeline.ModuleControl.Page;
 using DotNetNuke.Web.MvcPipeline.ModuleControl.Razor;
 using Rocket.AppThemes.Components;
 using RocketContentAPI.Components;
-using RocketContentRazor.Models;
+using RocketFormsRazor.Models;
+using RocketForms.Components;
 using RocketPortal.Components;
 using Simplisity;
 using System;
-using System.Collections.Generic;
 using System.Runtime.Remoting.Contexts;
-using System.Security.Policy;
 
-namespace RocketContentRazor.Controls
+namespace RocketFormsRazor.Controls
 {
     public class ViewControl : RazorModuleControlBase, IPageContributor
     {
         private const string _systemkey = "rocketcontentapi";
+
+        private bool _hasEditAccess;
         private string _moduleRef;
         private SessionParams _sessionParam;
         private ModuleContentLimpet _moduleSettings;
-        private bool _hasEditAccess;
-        private int _portalId => PortalSettings.PortalId;
-
 
         public ViewControl()
         {
-            LocalResourceFile = "~/DesktopModules/RocketModules/RocketContentRazor/App_LocalResources/RocketContent.resx";
+            LocalResourceFile = "~/DesktopModules/RocketModules/RocketFormsRazor/App_LocalResources/RocketForm.resx";
         }
 
         public override string ControlName => "View";
 
         private bool CanUserEditModule()
         {
-            if (UserId <= 0) return false;
+            if (UserId <= 0)
+            {
+                return false;
+            }
 
-            // Get the module info from ModuleContext
             var moduleInfo = ModuleContext.Configuration;
             if (moduleInfo != null)
             {
-                // Use ModulePermissionController to check edit permissions
                 return ModulePermissionController.CanEditModuleContent(moduleInfo);
             }
 
@@ -57,18 +56,16 @@ namespace RocketContentRazor.Controls
         {
             try
             {
-                _moduleRef = _portalId + "_ModuleID_" + ModuleContext.ModuleId;
+                _moduleRef = PortalId + "_ModuleID_" + ModuleId;
                 _hasEditAccess = CanUserEditModule();
 
                 var paramInfo = new SimplisityInfo();
                 _sessionParam = new SessionParams(paramInfo);
-                _sessionParam.TabId = ModuleContext.TabId;
-                _sessionParam.ModuleId = ModuleContext.ModuleId;
+                _sessionParam.TabId = TabId;
+                _sessionParam.ModuleId = ModuleId;
                 _sessionParam.ModuleRef = _moduleRef;
                 _sessionParam.CultureCode = DNNrocketUtils.GetCurrentCulture();
 
-
-                // get all query string params
                 foreach (string key in Request.QueryString.AllKeys)
                 {
                     if (key != null)
@@ -78,27 +75,17 @@ namespace RocketContentRazor.Controls
                     }
                 }
 
-                _moduleSettings = new ModuleContentLimpet(_portalId, _moduleRef, _systemkey, _sessionParam.ModuleId, _sessionParam.TabId);
+                _moduleSettings = new ModuleContentLimpet(PortalId, _moduleRef, _systemkey, _sessionParam.ModuleId, _sessionParam.TabId);
 
-                // Set page title and meta if article has data
-                var articleData = RocketContentAPIUtils.GetArticleData(_moduleSettings, _sessionParam.CultureCode);
-                if (articleData != null && articleData.Exists)
+                var strHeader1 = RocketFormsUtils.DisplayView(PortalId, _systemkey, _moduleRef, "", _sessionParam, "viewfirstheader.cshtml");
+                if (!string.IsNullOrWhiteSpace(strHeader1))
                 {
-                    var firstRow = articleData.GetRow(0);
-                    if (firstRow != null)
-                    {
-                        var title = firstRow.Get("genxml/lang/genxml/textbox/title");
-                        if (!string.IsNullOrEmpty(title))
-                        {
-                            context.PageService.SetTitle(title);
-                        }
-                    }
+                    context.PageService.AddToHead(new PageTag(strHeader1, 0));
                 }
 
-                var appThemeSystem = AppThemeUtils.AppThemeSystem(_portalId, _systemkey);
-                var portalData = new PortalLimpet(_portalId);
+                var appThemeSystem = AppThemeUtils.AppThemeSystem(PortalId, _systemkey);
+                var portalData = new PortalLimpet(PortalId);
                 var appTheme = new AppThemeLimpet(_moduleSettings.PortalId, _moduleSettings.AppThemeAdminFolder, _moduleSettings.AppThemeAdminVersion, _moduleSettings.ProjectName);
-
                 var dependencyLists = DNNrocketUtils.InjectDependencies(_moduleRef, appTheme, _moduleSettings.ECOMode, PortalSettings.ActiveTab.SkinSrc, portalData.EngineUrlWithProtocol, appThemeSystem.AppThemeVersionFolderRel, _moduleSettings.DisplayTemplate);
 
                 foreach (var dep in dependencyLists)
@@ -119,9 +106,12 @@ namespace RocketContentRazor.Controls
                         }
                     }
                 }
-                var strHeader2 = RocketContentAPIUtils.DisplayView(_portalId, _systemkey, _moduleRef, "", _sessionParam, "viewheader.cshtml", "", _moduleSettings.DisableCache);
-                if (!string.IsNullOrWhiteSpace(strHeader2)) context.PageService.AddToHead(new PageTag(strHeader2, 999));
 
+                var strHeader2 = RocketFormsUtils.DisplayView(PortalId, _systemkey, _moduleRef, "", _sessionParam, "viewlastheader.cshtml");
+                if (!string.IsNullOrWhiteSpace(strHeader2))
+                {
+                    context.PageService.AddToHead(new PageTag(strHeader2, 999));
+                }
             }
             catch (Exception ex)
             {
@@ -133,23 +123,20 @@ namespace RocketContentRazor.Controls
         {
             try
             {
-                _moduleRef = PortalSettings.PortalId + "_ModuleID_" + ModuleContext.ModuleId;
+                _moduleRef = PortalId + "_ModuleID_" + ModuleId;
                 _hasEditAccess = CanUserEditModule();
 
                 var paramInfo = new SimplisityInfo();
                 _sessionParam = new SessionParams(paramInfo);
-                _sessionParam.TabId = ModuleContext.TabId;
-                _sessionParam.ModuleId = ModuleContext.ModuleId;
+                _sessionParam.TabId = TabId;
+                _sessionParam.ModuleId = ModuleId;
                 _sessionParam.ModuleRef = _moduleRef;
                 _sessionParam.CultureCode = DNNrocketUtils.GetCurrentCulture();
 
-                _moduleSettings = new ModuleContentLimpet(PortalSettings.PortalId, _moduleRef, _systemkey, _sessionParam.ModuleId, _sessionParam.TabId);
-
-                // Get rendered content from RocketContentAPI - this does ALL the model/rendering work
-                var strOut = RocketContentAPIUtils.DisplayView(PortalSettings.PortalId, _systemkey, _moduleRef, "", _sessionParam, "view.cshtml", "loadsettings", _moduleSettings.DisableCache);
+                var strOut = RocketFormsUtils.DisplayView(PortalId, _systemkey, _moduleRef, "", _sessionParam, "view.cshtml", "loadsettings");
                 if (strOut == "loadsettings")
                 {
-                    strOut = "";
+                    strOut = string.Empty;
                     if (_hasEditAccess)
                     {
                         strOut = RocketContentAPIUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "ModuleSettingsMsg.cshtml");
@@ -157,6 +144,7 @@ namespace RocketContentRazor.Controls
                         CacheUtils.ClearAllCache(_moduleRef);
                     }
                 }
+
                 if (_hasEditAccess)
                 {
                     var editbuttonkey = "editbuttons" + _moduleRef + "_" + UserId + "_" + _sessionParam.CultureCode;
@@ -169,23 +157,19 @@ namespace RocketContentRazor.Controls
                         var settingsurl = DNNrocketUtils.NavigateURL(this.PortalSettings.ActiveTab.TabID, "Module", _sessionParam.CultureCode, parameters).ToString();
 
                         var userParams = new UserParams("ModuleID:" + ModuleId, true);
-                        userParams.Set("settingsurl", settingsurl);
                         userParams.Set("editurl", this.EditUrl());
+                        userParams.Set("settingsurl", settingsurl);
                         userParams.Set("rocketconfigurl", this.EditUrl("Settings"));
                         userParams.Set("appthemeurl", this.EditUrl("AppTheme"));
                         userParams.Set("adminpanelurl", this.EditUrl("AdminPanel"));
-                        userParams.Set("recyclebinurl", this.EditUrl("RecycleBin"));
                         userParams.Set("viewtabid", _sessionParam.TabId.ToString());
 
-
-                        viewButtonsOut = RocketContentAPIUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "ViewEditButtons.cshtml", true, false);
+                        viewButtonsOut = RocketFormsUtils.DisplaySystemView(PortalId, _moduleRef, _sessionParam, "ViewEditButtons.cshtml");
                         CacheUtils.SetCache(editbuttonkey, viewButtonsOut, _moduleRef);
                     }
                     strOut = viewButtonsOut + strOut;
                 }
-
-                // Create simple view model with just the rendered HTML
-                var model = new ContentViewModel
+                var model = new FormViewModel
                 {
                     RenderedContent = strOut
                 };
@@ -195,7 +179,7 @@ namespace RocketContentRazor.Controls
             catch (Exception ex)
             {
                 DNNrocketAPI.Components.LogUtils.LogException(ex);
-                return Error("RocketContentRazor Error", ex.Message);
+                return Error("RocketFormsRazor Error", ex.Message);
             }
         }
     }

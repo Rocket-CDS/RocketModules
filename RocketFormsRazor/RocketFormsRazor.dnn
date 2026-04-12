@@ -1,0 +1,116 @@
+<dotnetnuke type="Package" version="5.0">
+  <packages>
+    <package name="RocketFormsRazor" type="Module" version="01.00.00">
+      <friendlyName> RocketForm [Razor]</friendlyName>
+      <DefinitionName>RocketFormsRazor</DefinitionName>
+      <description>By Nevoweb - An online form system that is used to collect data from users over the internet.</description>
+      <iconFile>~/DesktopModules/RocketModules/RocketFormsRazor/icon.png</iconFile>
+      <owner>
+        <name>David Lee</name>
+        <organization>Nevoweb</organization>
+        <url>www.nevoweb.com</url>
+        <email>support@nevoweb.com</email>
+      </owner>
+      <license>
+        Copyright (c) 2020, www.nevoweb.com
+        All rights reserved.
+
+        THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+      </license>
+      <releaseNotes>
+      </releaseNotes>
+      <azureCompatible>true</azureCompatible>
+      <dependencies>
+        <dependency type="CoreVersion">10.02.01</dependency>
+      </dependencies>
+      <components>
+        <component type="ResourceFile">
+          <resourceFiles>
+            <basePath>DesktopModules/RocketModules/RocketFormsRazor</basePath>
+            <resourceFile>
+              <name>Resource.zip</name>
+            </resourceFile>
+          </resourceFiles>
+        </component>
+
+        <component type="Assembly">
+          <assemblies>
+            <assembly>
+              <path>bin</path>
+              <name>RocketFormsRazor.dll</name>
+              <sourceFileName>RocketFormsRazor.dll</sourceFileName>
+            </assembly>
+          </assemblies>
+        </component>
+
+        <component type="Module">
+          <desktopModule>
+            <moduleName>RocketFormsRazor</moduleName>
+            <foldername>RocketModules/RocketFormsRazor</foldername>
+            <businessControllerClass>DNNrocketAPI.Components.DNNrocketModuleController,DNNrocketAPI</businessControllerClass>
+            <supportedFeatures>
+              <supportedFeature type="Portable" />
+              <supportedFeature type="Upgradeable" />
+            </supportedFeatures>
+            <moduleDefinitions>
+              <moduleDefinition>
+                <friendlyName>RocketFormsRazor</friendlyName>
+                <DefinitionName>RocketFormsRazor</DefinitionName>
+                <defaultCacheTime>0</defaultCacheTime>
+                <moduleControls>
+                  <moduleControl>
+                    <controlKey />
+                    <controlSrc>DotNetNuke.Web.MvcPipeline.ModuleControl.WebForms.WrapperModule, DotNetNuke.Web.MvcPipeline</controlSrc>
+                    <mvcControlClass>RocketFormsRazor.Controls.ViewControl, RocketFormsRazor</mvcControlClass>
+                    <supportsPartialRendering>True</supportsPartialRendering>
+                    <controlTitle />
+                    <controlType>View</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>Edit</controlKey>
+                    <controlSrc>DotNetNuke.Web.MvcPipeline.ModuleControl.WebForms.WrapperModule, DotNetNuke.Web.MvcPipeline</controlSrc>
+                    <mvcControlClass>RocketFormsRazor.Controls.EditControl, RocketFormsRazor</mvcControlClass>
+                    <supportsPartialRendering>True</supportsPartialRendering>
+                    <controlTitle>Edit Rocket Form</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <supportsPopUps>True</supportsPopUps>
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>Settings</controlKey>
+                    <controlSrc>DotNetNuke.Web.MvcPipeline.ModuleControl.WebForms.WrapperModule, DotNetNuke.Web.MvcPipeline</controlSrc>
+                    <mvcControlClass>RocketFormsRazor.Controls.SettingsControl, RocketFormsRazor</mvcControlClass>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>RocketForm Settings</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <supportsPopUps>True</supportsPopUps>
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>AppTheme</controlKey>
+                    <controlSrc>DotNetNuke.Web.MvcPipeline.ModuleControl.WebForms.WrapperModule, DotNetNuke.Web.MvcPipeline</controlSrc>
+                    <mvcControlClass>RocketFormsRazor.Controls.AppThemeControl, RocketFormsRazor</mvcControlClass>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>RocketForm App Theme</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <supportsPopUps>True</supportsPopUps>
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                </moduleControls>
+              </moduleDefinition>
+            </moduleDefinitions>
+          </desktopModule>
+        </component>
+      </components>
+    </package>
+  </packages>
+</dotnetnuke>

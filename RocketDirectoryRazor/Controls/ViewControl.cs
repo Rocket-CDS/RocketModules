@@ -69,7 +69,7 @@ namespace RocketDirectoryRazor.Controls
                 var appThemeSystem = AppThemeUtils.AppThemeSystem(PortalId, _systemkey);
                 var portalData = new PortalLimpet(PortalId);
                 var appTheme = new AppThemeLimpet(_moduleSettings.PortalId, _moduleSettings.AppThemeAdminFolder, _moduleSettings.AppThemeAdminVersion, _moduleSettings.ProjectName);
-                var dependencyLists = DNNrocketUtils.InjectDependencies(_moduleRef, appTheme, _moduleSettings.ECOMode, PortalSettings.ActiveTab.SkinSrc, portalData.EngineUrlWithProtocol, appThemeSystem.AppThemeVersionFolderRel);
+                var dependencyLists = DNNrocketUtils.InjectDependencies(_moduleRef, appTheme, _moduleSettings.ECOMode, PortalSettings.ActiveTab.SkinSrc, portalData.EngineUrlWithProtocol, appThemeSystem.AppThemeVersionFolderRel, _moduleSettings.DisplayTemplate);
                 foreach (var dep in dependencyLists)
                 {
                     if (dep.ctrltype == "css")
