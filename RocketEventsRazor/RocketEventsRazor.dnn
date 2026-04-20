@@ -1,0 +1,120 @@
+<dotnetnuke type="Package" version="5.0">
+  <packages>
+    <package name="RocketEventsRazor" type="Module" version="01.00.00">
+      <friendlyName> RocketEvents [Razor]</friendlyName>
+      <DefinitionName>RocketEventsRazor</DefinitionName>
+      <description>By Nevoweb - Events system designed to facilitate the organization, promotion, management, and execution of events over the internet.</description>
+      <iconFile>~/DesktopModules/RocketModules/RocketEventsRazor/icon.png</iconFile>
+      <owner>
+        <name>David Lee</name>
+        <organization>Nevoweb</organization>
+        <url>www.nevoweb.com</url>
+        <email>support@nevoweb.com</email>
+      </owner>
+      <license>
+        Copyright (c) 2020, www.nevoweb.com
+        All rights reserved.
+
+        THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+      </license>
+      <releaseNotes>
+      </releaseNotes>
+      <azureCompatible>true</azureCompatible>
+      <dependencies>
+        <dependency type="CoreVersion">10.02.01</dependency>
+        <dependency type="managedPackage" version="01.00.00">RocketDirectoryRazor</dependency>
+      </dependencies>
+      <components>
+        <component type="ResourceFile">
+          <resourceFiles>
+            <basePath>DesktopModules/RocketModules/RocketEventsRazor</basePath>
+            <resourceFile>
+              <name>Resource.zip</name>
+            </resourceFile>
+          </resourceFiles>
+        </component>
+
+        <component type="Module">
+          <desktopModule>
+            <moduleName>RocketEventsRazor</moduleName>
+            <foldername>RocketModules/RocketDirectoryRazor</foldername>
+            <businessControllerClass>DNNrocketAPI.Components.DNNrocketModuleController,DNNrocketAPI</businessControllerClass>
+            <supportedFeatures>
+              <supportedFeature type="Portable" />
+              <supportedFeature type="Upgradeable" />
+              <supportedFeature type="Searchable" />
+            </supportedFeatures>
+            <moduleDefinitions>
+              <moduleDefinition>
+                <friendlyName>RocketEventsRazor</friendlyName>
+                <DefinitionName>RocketEventsRazor</DefinitionName>
+                <defaultCacheTime>0</defaultCacheTime>
+                <moduleControls>
+                  <moduleControl>
+                    <controlKey />
+                    <controlSrc>DotNetNuke.Web.MvcPipeline.ModuleControl.WebForms.WrapperModule, DotNetNuke.Web.MvcPipeline</controlSrc>
+                    <mvcControlClass>RocketDirectoryRazor.Controls.ViewControl, RocketDirectoryRazor</mvcControlClass>
+                    <supportsPartialRendering>True</supportsPartialRendering>
+                    <controlTitle />
+                    <controlType>View</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>Edit</controlKey>
+                    <controlSrc>DotNetNuke.Web.MvcPipeline.ModuleControl.WebForms.WrapperModule, DotNetNuke.Web.MvcPipeline</controlSrc>
+                    <mvcControlClass>RocketDirectoryRazor.Controls.EditControl, RocketDirectoryRazor</mvcControlClass>
+                    <supportsPartialRendering>True</supportsPartialRendering>
+                    <controlTitle>Edit Rocket Events</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <supportsPopUps>True</supportsPopUps>
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>AdminPanel</controlKey>
+                    <controlSrc>DotNetNuke.Web.MvcPipeline.ModuleControl.WebForms.WrapperModule, DotNetNuke.Web.MvcPipeline</controlSrc>
+                    <mvcControlClass>RocketDirectoryRazor.Controls.AdminPanelControl, RocketDirectoryRazor</mvcControlClass>
+                    <supportsPartialRendering>True</supportsPartialRendering>
+                    <controlTitle>Admin Rocket Events</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <supportsPopUps>False</supportsPopUps>
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>Settings</controlKey>
+                    <controlSrc>DotNetNuke.Web.MvcPipeline.ModuleControl.WebForms.WrapperModule, DotNetNuke.Web.MvcPipeline</controlSrc>
+                    <mvcControlClass>RocketDirectoryRazor.Controls.SettingsControl, RocketDirectoryRazor</mvcControlClass>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>RocketEvents Settings</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <supportsPopUps>True</supportsPopUps>
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                  <moduleControl>
+                    <controlKey>AppTheme</controlKey>
+                    <controlSrc>DotNetNuke.Web.MvcPipeline.ModuleControl.WebForms.WrapperModule, DotNetNuke.Web.MvcPipeline</controlSrc>
+                    <mvcControlClass>RocketDirectoryRazor.Controls.AppThemeControl, RocketDirectoryRazor</mvcControlClass>
+                    <supportsPartialRendering>False</supportsPartialRendering>
+                    <controlTitle>RocketEvents App Theme</controlTitle>
+                    <controlType>Edit</controlType>
+                    <iconFile />
+                    <helpUrl />
+                    <supportsPopUps>True</supportsPopUps>
+                    <viewOrder>0</viewOrder>
+                  </moduleControl>
+                </moduleControls>
+              </moduleDefinition>
+            </moduleDefinitions>
+          </desktopModule>
+        </component>
+      </components>
+    </package>
+  </packages>
+</dotnetnuke>
