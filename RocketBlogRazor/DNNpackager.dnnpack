@@ -1,0 +1,27 @@
+<root>
+  <version>1.3.7</version>
+  <websitedestrelpath>\DesktopModules\RocketModules\RocketBlogRazor</websitedestrelpath>
+  <websitedestbinrelpath>\bin</websitedestbinrelpath>
+  <regexpr>(\.cshtml|\.html|\.resx|\.dnn|\.png|\.jpg|\.gif|\.css|\.svg|\.js|\.xml|\.txt|\.md|\.aspx|\.ascx|\.ashx|\.woff|\.woff2|\.ttf|\.rules|\.json)$</regexpr>
+  <directory include='false'>
+    <value>\.git</value>
+    <value>\.vs</value>
+    <value>\bin</value>
+    <value>\Components</value>
+    <value>\Installation</value>
+    <value>\Interfaces</value>
+    <value>\obj</value>
+    <value>\packages</value>
+    <value>\Providers</value>
+    <value>\render</value>
+    <value>\SqlDataProvider</value>
+    <value>\_external</value>
+    <value>\ApiControllers</value>
+  </directory>
+  <file include='false'>
+  </file>
+  <assembly>
+    <value>RocketBlogRazor.dll</value>
+    <value>RocketBlogRazor.pdb</value>
+  </assembly>
+</root>

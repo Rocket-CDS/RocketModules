@@ -26,8 +26,7 @@ namespace RocketDirectoryRazor.Controls
 {
     public class ViewControl : RazorModuleControlBase, IPageContributor
     {
-        private const string _systemkey = "RocketDirectoryAPI";
-
+        private string _systemkey = "RocketDirectoryAPI";
         private string _moduleRef;
         private SessionParams _sessionParam;
         private ModuleContentLimpet _moduleSettings;
@@ -244,6 +243,8 @@ namespace RocketDirectoryRazor.Controls
 
         private void SetRocketContext()
         {
+            var moduleName = base.ModuleConfiguration.DesktopModule.ModuleName;
+            _systemkey = moduleName.ToLower().Substring(0, moduleName.Length - 5) + "api";
             _moduleRef = PortalSettings.PortalId + "_ModuleID_" + ModuleContext.ModuleId;
             _hasEditAccess = CanUserEditModule();
 

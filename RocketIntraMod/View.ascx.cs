@@ -54,9 +54,7 @@ namespace RocketIntraMod
                 _paramInfo.SetXmlProperty("genxml/hidden/moduleid", ModuleId.ToString());
                 _paramInfo.SetXmlProperty("genxml/hidden/tabid", TabId.ToString());
 
-                var strHeader1 = RocketIntraUtils.DisplaySystemView(PortalId, _systemkey, _moduleRef, _sessionParam, "viewfirstheader.cshtml");
-                PageIncludes.IncludeTextInHeaderAt(Page, strHeader1, 0);
-                var strHeader2 = RocketIntraUtils.DisplaySystemView(PortalId, _systemkey, _moduleRef, _sessionParam, "viewlastheader.cshtml");
+                var strHeader2 = RocketIntraUtils.DisplaySystemView(PortalId, _systemkey, _moduleRef, _sessionParam, "AdminPanelHeader.cshtml");
                 PageIncludes.IncludeTextInHeader(Page, strHeader2);
 
                 // Set langauge, so editing with simplity gets correct language

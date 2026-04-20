@@ -11,7 +11,7 @@ namespace RocketDirectoryRazor.Controls
 {
     public class AppThemeControl : RazorModuleControlBase, IPageContributor
     {
-        private const string _systemkey = "RocketDirectoryAPI";
+        private string _systemkey = "RocketDirectoryAPI";
         private string _moduleRef;
         private SessionParams _sessionParam;
 
@@ -40,6 +40,8 @@ namespace RocketDirectoryRazor.Controls
         {
             try
             {
+                var moduleName = base.ModuleConfiguration.DesktopModule.ModuleName;
+                _systemkey = moduleName.ToLower().Substring(0, moduleName.Length - 5) + "api";
                 _moduleRef = PortalSettings.PortalId + "_ModuleID_" + ModuleContext.ModuleId;
 
                 var paramInfo = new SimplisityInfo();
