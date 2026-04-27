@@ -33,7 +33,7 @@
 DECLARE @OldModuleDefID_Content INT
 DECLARE @NewModuleDefID_Content INT
 
-SELECT @OldModuleDefID_Content = ModuleDefID FROM dbo.ModuleDefinitions WHERE DefinitionName = 'RocketContentMod'
+SELECT @OldModuleDefID_Content = ModuleDefID FROM dbo.ModuleDefinitions WHERE DefinitionName = 'RocketContent'
 SELECT @NewModuleDefID_Content = ModuleDefID FROM dbo.ModuleDefinitions WHERE DefinitionName = 'RocketContentRazor'
 
 PRINT 'RocketContent Migration:'
@@ -61,7 +61,7 @@ PRINT 'Modules updated: ' + CAST(@@ROWCOUNT AS VARCHAR) + CHAR(10)
 DECLARE @OldModuleDefID_Forms INT
 DECLARE @NewModuleDefID_Forms INT
 
-SELECT @OldModuleDefID_Forms = ModuleDefID FROM dbo.ModuleDefinitions WHERE DefinitionName = 'RocketForms'
+SELECT @OldModuleDefID_Forms = ModuleDefID FROM dbo.ModuleDefinitions WHERE DefinitionName = 'RocketForm'
 SELECT @NewModuleDefID_Forms = ModuleDefID FROM dbo.ModuleDefinitions WHERE DefinitionName = 'RocketFormsRazor'
 
 PRINT 'RocketForms Migration:'
