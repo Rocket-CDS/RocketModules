@@ -120,6 +120,7 @@
   <!-- CONTENT FILES -->
   <ItemGroup>
     <Content Include="icon.png" />
+    <Content Include="Installation\changemodules.sql" />
     <Content Include="Views\\View.cshtml" />
     <Content Include="Views\\Edit.cshtml" />
     <Content Include="Views\\Web.config" />
@@ -133,9 +134,7 @@
     <None Include="Views\RecycleBin.cshtml" />
     <None Include="Views\Settings.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Installation\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>REM ** Copy to sub-bin folder of DNNrocket, so install package can be built from them **

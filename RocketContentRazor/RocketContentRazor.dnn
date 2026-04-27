@@ -29,7 +29,7 @@
 					<resourceFiles>
 						<basePath>DesktopModules/RocketModules/RocketContentRazor</basePath>
 						<resourceFile>
-							<name>Resource.zip</name>
+							<name>ResourceRocketContentRazor.zip</name>
 						</resourceFile>
 					</resourceFiles>
 				</component>
