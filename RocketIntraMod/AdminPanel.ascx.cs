@@ -38,6 +38,31 @@ namespace RocketIntraMod
                 _sessionParam.Set("articleid", articleid);
                 _sessionParam.CultureCode = DNNrocketUtils.GetCurrentCulture();
                 DNNrocketUtils.SetCookieValue("simplisity_language", _sessionParam.CultureCode);
+            }
+            catch (Exception ex)
+            {
+                Exceptions.ProcessModuleLoadException(this, ex);
+            }
+        }
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            if (Page.IsPostBack == false)
+            {
+                PageLoad();
+            }
+        }
+
+        protected override void OnPreRender(EventArgs e)
+        {
+            try
+            {
+                base.OnPreRender(e);
 
                 PageIncludes.RemoveCssFile(Page, "skin.css"); //DNN always tries to load a skin.css, even if it does not exists.
 
@@ -62,24 +87,10 @@ namespace RocketIntraMod
                     CacheUtils.SetCache("rocketintra*headtext", strHeader1, PortalId.ToString());
                 }
                 PageIncludes.IncludeTextInHeader(Page, strHeader1);
-
             }
             catch (Exception ex)
             {
                 Exceptions.ProcessModuleLoadException(this, ex);
-            }
-        }
-
-        protected void Page_Load(object sender, EventArgs e)
-        {
-
-        }
-        protected override void OnLoad(EventArgs e)
-        {
-            base.OnLoad(e);
-            if (Page.IsPostBack == false)
-            {
-                PageLoad();
             }
         }
 
