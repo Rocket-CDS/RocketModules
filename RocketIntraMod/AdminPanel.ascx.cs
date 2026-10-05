@@ -22,31 +22,27 @@ namespace RocketIntraMod
         private string _moduleRef;
         private SessionParams _sessionParam;
 
-        protected override void OnInit(EventArgs e)
+        protected void Page_Load(object sender, EventArgs e)
         {
-            try
+            if (!IsPostBack)
             {
-                base.OnInit(e);
-                var articleid = DNNrocketUtils.RequestParam(Context, "articleid");
-
-                _systemkey = "rocketintra";
-                _moduleRef = PortalId + "_ModuleID_" + ModuleId;
-                _sessionParam = new SessionParams(new SimplisityInfo());
-                _sessionParam.TabId = TabId;
-                _sessionParam.ModuleId = ModuleId;
-                _sessionParam.ModuleRef = _moduleRef;
-                _sessionParam.Set("articleid", articleid);
-                _sessionParam.CultureCode = DNNrocketUtils.GetCurrentCulture();
-                DNNrocketUtils.SetCookieValue("simplisity_language", _sessionParam.CultureCode);
-            }
-            catch (Exception ex)
-            {
-                Exceptions.ProcessModuleLoadException(this, ex);
+                // Your initialization code here - only runs once on first load
+                InitializeSession();
             }
         }
 
-        protected void Page_Load(object sender, EventArgs e)
+        private void InitializeSession()
         {
+            var articleid = DNNrocketUtils.RequestParam(Context, "articleid");
+            _systemkey = "rocketintra";
+            _moduleRef = PortalId + "_ModuleID_" + ModuleId;
+            _sessionParam = new SessionParams(new SimplisityInfo());
+            _sessionParam.TabId = TabId;
+            _sessionParam.ModuleId = ModuleId;
+            _sessionParam.ModuleRef = _moduleRef;
+            _sessionParam.Set("articleid", articleid);
+            _sessionParam.CultureCode = DNNrocketUtils.GetCurrentCulture();
+            DNNrocketUtils.SetCookieValue("simplisity_language", _sessionParam.CultureCode);
         }
 
         protected override void OnLoad(EventArgs e)
